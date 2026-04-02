@@ -1,0 +1,43 @@
+# --- Binários e Arquivos de Compilação ---
+*.exe
+*.dll
+*.bpl
+*.dcp
+*.dcu
+*.dres
+*.rsm
+*.map
+*.o
+*.obj
+
+# --- Arquivos de Cache e Configuração da IDE ---
+*.identcache
+*.local
+*.stat
+*.tvsconfig
+*.dsk
+*.skincfg
+*.vrc
+*.~*
+
+# --- Pastas de Histórico e Backup (Muito importante no Delphi) ---
+__history/
+__recovery/
+
+# --- Configurações específicas de usuário (Caminhos locais) ---
+*.dproj.local
+*.identcache
+*.res
+
+# --- Saídas de compilação comuns ---
+# Se você configurar seu projeto para salvar em pastas específicas
+/bin/
+/lib/
+/Win32/
+/Win64/
+/Android/
+/iOS/
+
+# --- Logs e temporários ---
+*.log
+*.tmp
