@@ -131,6 +131,20 @@
             <Form>FormPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\infra\MeuPDV.DMConexao.infra.pas">
+            <Form>dmConexao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.FormClientes.View.pas">
+            <Form>FormClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Styles\Estilos.pas"/>
+        <DCCReference Include="src\view\MeuPDV.FormProdutos.View.pas">
+            <Form>FormProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
