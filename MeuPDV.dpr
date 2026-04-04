@@ -6,13 +6,15 @@ uses
   MeuPDV.DMConexao.infra in 'src\infra\MeuPDV.DMConexao.infra.pas' {dmConexao: TDataModule},
   MeuPDV.FormClientes.View in 'src\view\MeuPDV.FormClientes.View.pas' {FormClientes},
   Estilos in 'src\view\Styles\Estilos.pas',
-  MeuPDV.FormProdutos.View in 'src\view\MeuPDV.FormProdutos.View.pas' {FormProdutos};
+  MeuPDV.FormProdutos.View in 'src\view\MeuPDV.FormProdutos.View.pas' {FormProdutos},
+  MeuPDV.ListaProdutos.View in 'src\view\MeuPDV.ListaProdutos.View.pas' {frmListaProdutos};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
   Application.CreateForm(TFormProdutos, FormProdutos);
   Application.CreateForm(TdmConexao, dmConexao);
   Application.CreateForm(TFormClientes, FormClientes);

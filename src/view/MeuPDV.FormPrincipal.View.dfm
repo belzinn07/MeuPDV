@@ -2,8 +2,8 @@ object FormPrincipal: TFormPrincipal
   Left = 0
   Top = 0
   Caption = 'In'#237'cio - MeuPDV'
-  ClientHeight = 711
-  ClientWidth = 984
+  ClientHeight = 730
+  ClientWidth = 1124
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,9 +15,10 @@ object FormPrincipal: TFormPrincipal
   object pnlGeral: TPanel
     Left = 0
     Top = 0
-    Width = 984
-    Height = 711
+    Width = 1124
+    Height = 730
     Align = alClient
+    BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -29,14 +30,17 @@ object FormPrincipal: TFormPrincipal
     ExplicitWidth = 982
     ExplicitHeight = 703
     object pnlCabecalho: TPanel
-      Left = 1
-      Top = 1
-      Width = 982
+      Left = 0
+      Top = 0
+      Width = 1124
       Height = 112
       Align = alTop
+      BevelOuter = bvNone
       Color = 9929832
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitTop = 1
       ExplicitWidth = 980
       object btnClientes: TSpeedButton
         Left = 24

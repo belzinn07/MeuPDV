@@ -20,10 +20,8 @@ object FormProdutos: TFormProdutos
     Align = alClient
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 280
-    ExplicitTop = 72
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 622
+    ExplicitHeight = 273
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
@@ -32,11 +30,13 @@ object FormProdutos: TFormProdutos
       Align = alTop
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 620
       object SpeedButton1: TSpeedButton
-        Left = 174
-        Top = 8
-        Width = 247
-        Height = 46
+        Left = 1
+        Top = 1
+        Width = 620
+        Height = 68
+        Align = alClient
         BiDiMode = bdLeftToRight
         Caption = 'Formul'#225'rio de Produtos'
         ImageIndex = 0
@@ -50,6 +50,10 @@ object FormProdutos: TFormProdutos
         ParentFont = False
         ParentBiDiMode = False
         Spacing = 8
+        ExplicitLeft = 174
+        ExplicitTop = 8
+        ExplicitWidth = 247
+        ExplicitHeight = 46
       end
     end
     object edtDescricao: TLabeledEdit

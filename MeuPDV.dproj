@@ -145,6 +145,10 @@
             <Form>FormProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.ListaProdutos.View.pas">
+            <Form>frmListaProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
