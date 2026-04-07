@@ -19,7 +19,10 @@ object dmConexao: TdmConexao
     Top = 264
   end
   object qryClientes: TFDQuery
+    Active = True
     Connection = FDConexao
+    SQL.Strings = (
+      'SELECT * FROM CLIENTES')
     Left = 456
     Top = 176
   end

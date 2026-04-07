@@ -7,6 +7,8 @@ uses
   MeuPDV.FormClientes.View in 'src\view\MeuPDV.FormClientes.View.pas' {FormClientes},
   Estilos in 'src\view\Styles\Estilos.pas',
   MeuPDV.FormProdutos.View in 'src\view\MeuPDV.FormProdutos.View.pas' {FormProdutos},
+  MeuPDV.FormBaseListagem.View in 'src\view\MeuPDV.FormBaseListagem.View.pas' {frmBaseListagem},
+  MeuPDV.ListaClientes.View in 'src\view\MeuPDV.ListaClientes.View.pas' {frmListaClientes},
   MeuPDV.ListaProdutos.View in 'src\view\MeuPDV.ListaProdutos.View.pas' {frmListaProdutos};
 
 {$R *.res}
@@ -14,10 +16,12 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
+  Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFormProdutos, FormProdutos);
   Application.CreateForm(TdmConexao, dmConexao);
   Application.CreateForm(TFormClientes, FormClientes);
-  Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.CreateForm(TfrmBaseListagem, frmBaseListagem);
+  Application.CreateForm(TfrmListaClientes, frmListaClientes);
+  Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
   Application.Run;
 end.

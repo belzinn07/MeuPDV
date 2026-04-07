@@ -1,6 +1,7 @@
 object FormPrincipal: TFormPrincipal
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'In'#237'cio - MeuPDV'
   ClientHeight = 730
   ClientWidth = 1124
@@ -10,6 +11,7 @@ object FormPrincipal: TFormPrincipal
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesktopCenter
   OnCreate = FormCreate
   TextHeight = 15
   object pnlGeral: TPanel
@@ -27,8 +29,8 @@ object FormPrincipal: TFormPrincipal
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 982
-    ExplicitHeight = 703
+    ExplicitWidth = 1122
+    ExplicitHeight = 722
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -39,9 +41,7 @@ object FormPrincipal: TFormPrincipal
       Color = 9929832
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 980
+      ExplicitWidth = 1122
       object btnClientes: TSpeedButton
         Left = 24
         Top = 12
@@ -60,6 +60,7 @@ object FormPrincipal: TFormPrincipal
         Margin = 12
         ParentFont = False
         Spacing = 5
+        OnClick = btnClientesClick
       end
       object btnProdutos: TSpeedButton
         Left = 144
@@ -79,6 +80,7 @@ object FormPrincipal: TFormPrincipal
         Margin = 12
         ParentFont = False
         Spacing = 5
+        OnClick = btnProdutosClick
       end
       object btnVendas: TSpeedButton
         Left = 277
@@ -99,6 +101,30 @@ object FormPrincipal: TFormPrincipal
         ParentFont = False
         Spacing = 5
       end
+    end
+    object pnlRodape: TPanel
+      Left = 0
+      Top = 672
+      Width = 1124
+      Height = 58
+      Align = alBottom
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitTop = 664
+      ExplicitWidth = 1122
+    end
+    object pnlCental: TPanel
+      Left = 0
+      Top = 112
+      Width = 1124
+      Height = 560
+      Align = alClient
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 2
+      ExplicitWidth = 1122
+      ExplicitHeight = 552
     end
   end
   object ImageList1: TImageList

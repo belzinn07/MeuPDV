@@ -145,6 +145,14 @@
             <Form>FormProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.FormBaseListagem.View.pas">
+            <Form>frmBaseListagem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.ListaClientes.View.pas">
+            <Form>frmListaClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="src\view\MeuPDV.ListaProdutos.View.pas">
             <Form>frmListaProdutos</Form>
             <FormType>dfm</FormType>

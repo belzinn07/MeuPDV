@@ -1,4 +1,4 @@
-unit MeuPDV.ListaProdutos.View;
+unit MeuPDV.ListaClientes.View;
 
 interface
 
@@ -6,10 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, MeuPDV.FormBaseListagem.View, Data.DB,
   System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.Buttons;
+  Vcl.Buttons, MeuPDV.DMConexao.infra;
 
 type
-  TfrmListaProdutos = class(TfrmBaseListagem)
+  TfrmListaClientes = class(TfrmBaseListagem)
   private
     { Private declarations }
   public
@@ -17,7 +17,7 @@ type
   end;
 
 var
-  frmListaProdutos: TfrmListaProdutos;
+  frmListaClientes: TfrmListaClientes;
 
 implementation
 
