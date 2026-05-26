@@ -16,11 +16,12 @@ type
     ImageList1: TImageList;
     btnProdutos: TSpeedButton;
     btnVendas: TSpeedButton;
+    pnlContainer: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
   private
-    { Private declarations }
+    procedure AbrirForm(FormClass: TFormClass; var Formulario: TForm);
   public
     { Public declarations }
   end;
@@ -32,17 +33,33 @@ implementation
 
 {$R *.dfm}
 
+procedure TFormPrincipal.AbrirForm(FormClass: TFormClass; var Formulario: TForm);
+begin
+if Assigned(Formulario) then
+  begin
+    Formulario.Close;
+    FreeAndNil(Formulario);
+  end;
+
+  Formulario.Create(Self);
+  Formulario.BorderStyle := bsNone;
+  Formulario.Align := alClient;
+  Formulario.Parent := pnlContainer;
+  Formulario.Show;
+
+end;
+
 procedure TFormPrincipal.btnClientesClick(Sender: TObject);
 begin
 
-frmListaClientes.ShowModal;
+AbrirForm(TfrmListaClientes, TForm(frmListaClientes));
 
 end;
 
 procedure TFormPrincipal.btnProdutosClick(Sender: TObject);
 begin
 
-frmListaProdutos.ShowModal;
+AbrirForm(TfrmListaProdutos, TForm(frmListaProdutos));
 
 end;
 

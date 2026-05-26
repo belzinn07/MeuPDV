@@ -102,6 +102,20 @@ object FormPrincipal: TFormPrincipal
         Spacing = 5
       end
     end
+    object pnlContainer: TPanel
+      Left = 0
+      Top = 112
+      Width = 1124
+      Height = 618
+      Align = alClient
+      BevelOuter = bvNone
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = 696
+      ExplicitTop = 488
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+    end
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit

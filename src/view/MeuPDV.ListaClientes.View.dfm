@@ -1,29 +1,28 @@
 inherited frmListaClientes: TfrmListaClientes
   Caption = 'Lista de Clientes - MeuPDV'
   ClientWidth = 873
+  Position = poDefault
   StyleElements = [seFont, seClient, seBorder]
   ExplicitWidth = 889
+  ExplicitHeight = 639
   TextHeight = 15
   inherited pnlContainer: TPanel
     Width = 873
     StyleElements = [seFont, seClient, seBorder]
-    ExplicitLeft = 0
-    ExplicitTop = 0
-    ExplicitWidth = 918
-    ExplicitHeight = 592
     inherited pnlCabecalho: TPanel
       Width = 873
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 918
       inherited btnTitulo: TSpeedButton
         Width = 873
         Caption = 'Clientes'
         Images = ImageList1
+        ExplicitWidth = 873
       end
     end
     inherited pnlRodape: TPanel
       Width = 873
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 871
       inherited pnlAltera: TPanel
         StyleElements = [seFont, seClient, seBorder]
       end
@@ -37,10 +36,6 @@ inherited frmListaClientes: TfrmListaClientes
     inherited pnlCentral: TPanel
       Width = 873
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 0
-      ExplicitTop = 70
-      ExplicitWidth = 918
-      ExplicitHeight = 458
       inherited dbgProdutos: TDBGrid
         Width = 873
         DataSource = dmConexao.dsClientes

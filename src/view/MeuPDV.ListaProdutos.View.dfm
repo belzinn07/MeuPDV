@@ -2,23 +2,24 @@ inherited frmListaProdutos: TfrmListaProdutos
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Lista de Produtos - MeuPDV'
   ClientWidth = 883
+  Position = poDefault
   StyleElements = [seFont, seClient, seBorder]
   OnDestroy = FormDestroy
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 899
-  ExplicitHeight = 639
   TextHeight = 15
   inherited pnlContainer: TPanel
     Width = 883
     StyleElements = [seFont, seClient, seBorder]
+    ExplicitWidth = 881
     inherited pnlCabecalho: TPanel
       Width = 883
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 881
       inherited btnTitulo: TSpeedButton
         Width = 883
         Caption = 'Produtos'
         Images = ImageList1
+        ExplicitWidth = 883
       end
       object btnPesquisar: TSpeedButton
         Left = 299
@@ -49,6 +50,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     inherited pnlRodape: TPanel
       Width = 883
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 881
       inherited pnlAltera: TPanel
         StyleElements = [seFont, seClient, seBorder]
         inherited btnAlterar: TSpeedButton
@@ -71,6 +73,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     inherited pnlCentral: TPanel
       Width = 883
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 881
       inherited dbgProdutos: TDBGrid
         Width = 883
         DataSource = dsProdutos
