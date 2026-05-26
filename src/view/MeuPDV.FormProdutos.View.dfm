@@ -1,6 +1,7 @@
 object FormProdutos: TFormProdutos
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Formul'#225'rio Produtos'
   ClientHeight = 281
   ClientWidth = 624
@@ -10,6 +11,7 @@ object FormProdutos: TFormProdutos
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poMainFormCenter
   OnCreate = FormCreate
   TextHeight = 15
   object pnlGeral: TPanel
@@ -20,8 +22,6 @@ object FormProdutos: TFormProdutos
     Align = alClient
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 622
-    ExplicitHeight = 273
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
@@ -30,7 +30,6 @@ object FormProdutos: TFormProdutos
       Align = alTop
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 620
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1
@@ -61,6 +60,7 @@ object FormProdutos: TFormProdutos
       Top = 128
       Width = 377
       Height = 25
+      CharCase = ecUpperCase
       EditLabel.Width = 51
       EditLabel.Height = 15
       EditLabel.Caption = 'Descri'#231#227'o'
@@ -73,7 +73,7 @@ object FormProdutos: TFormProdutos
       TabOrder = 1
       Text = ''
     end
-    object LabeledEdit1: TLabeledEdit
+    object edtPreco: TLabeledEdit
       Left = 104
       Top = 184
       Width = 161
@@ -90,7 +90,7 @@ object FormProdutos: TFormProdutos
       TabOrder = 2
       Text = ''
     end
-    object LabeledEdit2: TLabeledEdit
+    object edtEstoque: TLabeledEdit
       Left = 304
       Top = 184
       Width = 161
@@ -105,6 +105,34 @@ object FormProdutos: TFormProdutos
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      Text = ''
+    end
+    object bntSalvar: TBitBtn
+      Left = 248
+      Top = 232
+      Width = 75
+      Height = 25
+      Caption = 'Salvar'
+      TabOrder = 4
+      OnClick = bntSalvarClick
+    end
+    object edtCodigo: TLabeledEdit
+      Left = 18
+      Top = 128
+      Width = 73
+      Height = 25
+      Color = clBtnFace
+      EditLabel.Width = 39
+      EditLabel.Height = 15
+      EditLabel.Caption = 'C'#243'digo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 5
       Text = ''
     end
   end

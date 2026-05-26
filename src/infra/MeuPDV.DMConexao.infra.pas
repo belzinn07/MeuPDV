@@ -18,7 +18,6 @@ type
     qryProdutos: TFDQuery;
     qryVendas: TFDQuery;
     FDTransacao: TFDTransaction;
-    dsProdutos: TDataSource;
     dsClientes: TDataSource;
     dsVendas: TDataSource;
   private

@@ -24,7 +24,7 @@ type
     Shape4: TShape;
     btnExcluirProduto: TSpeedButton;
     pnlCentral: TPanel;
-    DBGrid1: TDBGrid;
+    dbgProdutos: TDBGrid;
     procedure FormCreate(Sender: TObject);
   private
     procedure AplicarEstilos;

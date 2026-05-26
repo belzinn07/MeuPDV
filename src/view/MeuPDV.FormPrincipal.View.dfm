@@ -102,30 +102,6 @@ object FormPrincipal: TFormPrincipal
         Spacing = 5
       end
     end
-    object pnlRodape: TPanel
-      Left = 0
-      Top = 672
-      Width = 1124
-      Height = 58
-      Align = alBottom
-      BevelOuter = bvNone
-      ParentBackground = False
-      TabOrder = 1
-      ExplicitTop = 664
-      ExplicitWidth = 1122
-    end
-    object pnlCental: TPanel
-      Left = 0
-      Top = 112
-      Width = 1124
-      Height = 560
-      Align = alClient
-      BevelOuter = bvNone
-      ParentBackground = False
-      TabOrder = 2
-      ExplicitWidth = 1122
-      ExplicitHeight = 552
-    end
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit

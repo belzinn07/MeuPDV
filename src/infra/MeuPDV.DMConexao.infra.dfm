@@ -10,6 +10,7 @@ object dmConexao: TdmConexao
       'CharacterSet=UTF8'
       'DriverID=FB')
     Connected = True
+    Transaction = FDTransacao
     Left = 520
     Top = 384
   end
@@ -27,10 +28,9 @@ object dmConexao: TdmConexao
     Top = 176
   end
   object qryProdutos: TFDQuery
-    Active = True
     Connection = FDConexao
     SQL.Strings = (
-      'SELECT * FROM PRODUTOS;')
+      'SELECT ID, DESCRICAO, PRECO FROM PRODUTOS;')
     Left = 584
     Top = 176
   end
@@ -43,11 +43,6 @@ object dmConexao: TdmConexao
     Connection = FDConexao
     Left = 408
     Top = 384
-  end
-  object dsProdutos: TDataSource
-    DataSet = qryProdutos
-    Left = 351
-    Top = 528
   end
   object dsClientes: TDataSource
     DataSet = qryClientes

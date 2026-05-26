@@ -16,8 +16,6 @@ type
     ImageList1: TImageList;
     btnProdutos: TSpeedButton;
     btnVendas: TSpeedButton;
-    pnlRodape: TPanel;
-    pnlCental: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
@@ -54,8 +52,7 @@ pnlCabecalho.Color :=  COR_CABECALHO_AZUL;
 btnClientes.Font.Color := COR_TEXTO_BRANCO;
 btnProdutos.Font.Color := COR_TEXTO_BRANCO;
 btnVendas.Font.Color := COR_TEXTO_BRANCO;
-pnlRodape.Color :=  COR_CABECALHO_AZUL;
-pnlCental.Color := COR_FUNDO_CLARO;
+
 
 end;
 

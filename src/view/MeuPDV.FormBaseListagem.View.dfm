@@ -22,10 +22,8 @@ object frmBaseListagem: TfrmBaseListagem
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 440
-    ExplicitTop = 240
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 918
+    ExplicitHeight = 592
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -36,6 +34,7 @@ object frmBaseListagem: TfrmBaseListagem
       Color = 16744448
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 918
       object btnTitulo: TSpeedButton
         Left = 0
         Top = 0
@@ -193,11 +192,9 @@ object frmBaseListagem: TfrmBaseListagem
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 480
-      ExplicitTop = 416
-      ExplicitWidth = 185
-      ExplicitHeight = 41
-      object DBGrid1: TDBGrid
+      ExplicitWidth = 918
+      ExplicitHeight = 458
+      object dbgProdutos: TDBGrid
         Left = 0
         Top = 0
         Width = 920

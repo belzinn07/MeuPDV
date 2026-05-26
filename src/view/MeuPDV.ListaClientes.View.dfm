@@ -1,5 +1,5 @@
 inherited frmListaClientes: TfrmListaClientes
-  Caption = 'frmListaClientes'
+  Caption = 'Lista de Clientes - MeuPDV'
   ClientWidth = 873
   StyleElements = [seFont, seClient, seBorder]
   ExplicitWidth = 889
@@ -41,7 +41,7 @@ inherited frmListaClientes: TfrmListaClientes
       ExplicitTop = 70
       ExplicitWidth = 918
       ExplicitHeight = 458
-      inherited DBGrid1: TDBGrid
+      inherited dbgProdutos: TDBGrid
         Width = 873
         DataSource = dmConexao.dsClientes
       end

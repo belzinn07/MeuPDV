@@ -157,6 +157,21 @@
             <Form>frmListaProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.FormVenda.View.pas">
+            <Form>frmVendas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\MeuPDV.FormInicialVenda.View.pas">
+            <Form>FormInicialVenda</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\domain\model\MeuPDV.Produto.Model.pas"/>
+        <DCCReference Include="src\domain\contracts\MeuPDV.Validador.Contracts.pas"/>
+        <DCCReference Include="src\utils\MeuPDV.Validador.Utils.pas"/>
+        <DCCReference Include="src\repository\MeuPDV.Produto.Repository.pas"/>
+        <DCCReference Include="src\repository\interfaces\MeuPDV.IProduto.Repository.pas"/>
+        <DCCReference Include="src\service\interfaces\MeuPDV.IProduto.Service.pas"/>
+        <DCCReference Include="src\service\MeuPDV.Produto.Service.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

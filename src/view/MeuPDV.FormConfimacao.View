@@ -1,0 +1,49 @@
+unit MeuPDV.FormConfimacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFormConfirmacao = class(TForm)
+    plnGeral: TPanel;
+    pnlTopo: TPanel; // corrigido
+    lblMensagem: TLabel;
+    btnSim: TButton;
+    btnNao: TButton;
+    procedure btnSimClick(Sender: TObject);
+    procedure btnNaoClick(Sender: TObject);
+  public
+    class function Confirmar(const AMensagem: string): Boolean;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormConfirmacao.btnSimClick(Sender: TObject);
+begin
+  ModalResult := mrYes;
+end;
+
+procedure TFormConfirmacao.btnNaoClick(Sender: TObject);
+begin
+  ModalResult := mrNo;
+end;
+
+class function TFormConfirmacao.Confirmar(const AMensagem: string): Boolean;
+var
+  Form: TFormConfirmacao;
+begin
+  Form := TFormConfirmacao.Create(nil);
+  try
+    Form.lblMensagem.Caption := AMensagem;
+    Result := Form.ShowModal = mrYes;
+  finally
+    Form.Free;
+  end;
+end;
+
+end.
