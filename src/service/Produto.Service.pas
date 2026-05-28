@@ -1,11 +1,11 @@
-unit MeuPDV.Produto.Service;
+unit Produto.Service;
 
 interface
 
 uses
-  MeuPDV.IProduto.Service,
-  MeuPDV.Produto.Model,
-  MeuPDV.IProduto.Repository,
+  IProduto.Service,
+  Produto.Model,
+  IProduto.Repository,
   System.SysUtils,
   System.Generics.Collections;
 type

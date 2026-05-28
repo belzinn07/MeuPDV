@@ -1,4 +1,4 @@
-unit MeuPDV.FormPrincipal.View;
+unit FormPrincipal.View;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ExtCtrls, Estilos, Vcl.Imaging.pngimage,
-  MeuPDV.ListaProdutos.View, MeuPDV.ListaClientes.View, MeuPDV.FormVenda.View;
+  ListaProdutos.View, ListaClientes.View, FormVenda.View,FormBaseListagem.View;
 
 type
   TFormPrincipal = class(TForm)

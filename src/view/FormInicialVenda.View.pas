@@ -1,4 +1,4 @@
-unit MeuPDV.FormInicialVenda.View;
+unit FormInicialVenda.View;
 
 interface
 

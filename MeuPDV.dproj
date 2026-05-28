@@ -127,53 +127,52 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="src\view\MeuPDV.FormPrincipal.View.pas">
+        <DCCReference Include="src\view\FormPrincipal.View.pas">
             <Form>FormPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\infra\MeuPDV.DMConexao.infra.pas">
+        <DCCReference Include="src\infra\DMConexao.infra.pas">
             <Form>dmConexao</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.FormClientes.View.pas">
+        <DCCReference Include="src\view\FormClientes.View.pas">
             <Form>FormClientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\view\Styles\Estilos.pas"/>
-        <DCCReference Include="src\view\MeuPDV.FormProdutos.View.pas">
+        <DCCReference Include="src\view\FormProdutos.View.pas">
             <Form>FormProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.FormBaseListagem.View.pas">
+        <DCCReference Include="src\view\FormBaseListagem.View.pas">
             <Form>frmBaseListagem</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.ListaClientes.View.pas">
+        <DCCReference Include="src\view\ListaClientes.View.pas">
             <Form>frmListaClientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.ListaProdutos.View.pas">
+        <DCCReference Include="src\view\ListaProdutos.View.pas">
             <Form>frmListaProdutos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.FormVenda.View.pas">
+        <DCCReference Include="src\view\FormVenda.View.pas">
             <Form>frmVendas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\MeuPDV.FormInicialVenda.View.pas">
+        <DCCReference Include="src\view\FormInicialVenda.View.pas">
             <Form>FormInicialVenda</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\domain\model\MeuPDV.Produto.Model.pas"/>
-        <DCCReference Include="src\domain\contracts\MeuPDV.Validador.Contracts.pas"/>
-        <DCCReference Include="src\utils\MeuPDV.Validador.Utils.pas"/>
-        <DCCReference Include="src\repository\MeuPDV.Produto.Repository.pas"/>
-        <DCCReference Include="src\repository\interfaces\MeuPDV.IProduto.Repository.pas"/>
-        <DCCReference Include="src\service\interfaces\MeuPDV.IProduto.Service.pas"/>
-        <DCCReference Include="src\service\MeuPDV.Produto.Service.pas"/>
-        <DCCReference Include="src\domain\model\MeuPDV.Pessoa.Model.pas"/>
-        <DCCReference Include="src\domain\model\MeuPDV.PessoaFisica.Model.pas"/>
+        <DCCReference Include="src\domain\model\Produto.Model.pas"/>
+        <DCCReference Include="src\domain\contracts\Validador.Contracts.pas"/>
+        <DCCReference Include="src\utils\Validador.Utils.pas"/>
+        <DCCReference Include="src\repository\Produto.Repository.pas"/>
+        <DCCReference Include="src\repository\interfaces\IProduto.Repository.pas"/>
+        <DCCReference Include="src\service\interfaces\IProduto.Service.pas"/>
+        <DCCReference Include="src\service\Produto.Service.pas"/>
+        <DCCReference Include="src\domain\model\Pessoa.Model.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

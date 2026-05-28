@@ -55,6 +55,7 @@ inherited frmListaProdutos: TfrmListaProdutos
       inherited pnlAltera: TPanel
         Left = 523
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 523
         inherited btnAlterar: TSpeedButton
           OnClick = btnAlterarClick
         end
@@ -63,6 +64,7 @@ inherited frmListaProdutos: TfrmListaProdutos
         Left = 300
         Margins.Left = 300
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 300
         inherited Shape3: TShape
           ExplicitLeft = 1
           ExplicitWidth = 120
@@ -78,6 +80,7 @@ inherited frmListaProdutos: TfrmListaProdutos
       inherited pnlExcluirProduto: TPanel
         Left = 746
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 746
         inherited btnExcluirProduto: TSpeedButton
           OnClick = btnExcluirProdutoClick
           ExplicitLeft = 24

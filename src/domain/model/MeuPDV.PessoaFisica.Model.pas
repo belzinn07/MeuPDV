@@ -22,8 +22,7 @@ implementation
 procedure TPessoaFisica.Validar;
 begin
     ValidarCampo(Trim(FCpf)<> '', 'CPF é obrigatório');
-    ValidarCampo(Length(FCpf))
-
+    ValidarCampo(Length(FCpf)<>'', '')
 end;
 
 

@@ -1,11 +1,11 @@
-unit MeuPDV.FormVenda.View;
+unit FormVenda.View;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  MeuPDV.DMConexao.infra, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  DMConexao.infra, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmVendas = class(TForm)

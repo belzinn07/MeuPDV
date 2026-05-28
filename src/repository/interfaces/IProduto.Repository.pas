@@ -1,8 +1,8 @@
-unit MeuPDV.IProduto.Repository;
+unit IProduto.Repository;
 
 interface
 
-uses MeuPDV.Produto.Model, System.Generics.Collections;
+uses Produto.Model, System.Generics.Collections;
 
 type
 IProdutoRepository = interface

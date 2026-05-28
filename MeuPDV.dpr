@@ -2,25 +2,24 @@ program MeuPDV;
 
 uses
   Vcl.Forms,
-  MeuPDV.FormPrincipal.View in 'src\view\MeuPDV.FormPrincipal.View.pas' {FormPrincipal},
-  MeuPDV.DMConexao.infra in 'src\infra\MeuPDV.DMConexao.infra.pas' {dmConexao: TDataModule},
-  MeuPDV.FormClientes.View in 'src\view\MeuPDV.FormClientes.View.pas' {FormClientes},
+  FormPrincipal.View in 'src\view\FormPrincipal.View.pas' {FormPrincipal},
+  DMConexao.infra in 'src\infra\DMConexao.infra.pas' {dmConexao: TDataModule},
+  FormClientes.View in 'src\view\FormClientes.View.pas' {FormClientes},
   Estilos in 'src\view\Styles\Estilos.pas',
-  MeuPDV.FormProdutos.View in 'src\view\MeuPDV.FormProdutos.View.pas' {FormProdutos},
-  MeuPDV.FormBaseListagem.View in 'src\view\MeuPDV.FormBaseListagem.View.pas' {frmBaseListagem},
-  MeuPDV.ListaClientes.View in 'src\view\MeuPDV.ListaClientes.View.pas' {frmListaClientes},
-  MeuPDV.ListaProdutos.View in 'src\view\MeuPDV.ListaProdutos.View.pas' {frmListaProdutos},
-  MeuPDV.FormVenda.View in 'src\view\MeuPDV.FormVenda.View.pas' {frmVendas},
-  MeuPDV.FormInicialVenda.View in 'src\view\MeuPDV.FormInicialVenda.View.pas' {FormInicialVenda},
-  MeuPDV.Produto.Model in 'src\domain\model\MeuPDV.Produto.Model.pas',
-  MeuPDV.Validador.Contracts in 'src\domain\contracts\MeuPDV.Validador.Contracts.pas',
-  MeuPDV.Validador.Utils in 'src\utils\MeuPDV.Validador.Utils.pas',
-  MeuPDV.Produto.Repository in 'src\repository\MeuPDV.Produto.Repository.pas',
-  MeuPDV.IProduto.Repository in 'src\repository\interfaces\MeuPDV.IProduto.Repository.pas',
-  MeuPDV.IProduto.Service in 'src\service\interfaces\MeuPDV.IProduto.Service.pas',
-  MeuPDV.Produto.Service in 'src\service\MeuPDV.Produto.Service.pas',
-  MeuPDV.Pessoa.Model in 'src\domain\model\MeuPDV.Pessoa.Model.pas',
-  MeuPDV.PessoaFisica.Model in 'src\domain\model\MeuPDV.PessoaFisica.Model.pas';
+  FormProdutos.View in 'src\view\FormProdutos.View.pas' {FormProdutos},
+  FormBaseListagem.View in 'src\view\FormBaseListagem.View.pas' {frmBaseListagem},
+  ListaClientes.View in 'src\view\ListaClientes.View.pas' {frmListaClientes},
+  ListaProdutos.View in 'src\view\ListaProdutos.View.pas' {frmListaProdutos},
+  FormVenda.View in 'src\view\FormVenda.View.pas' {frmVendas},
+  FormInicialVenda.View in 'src\view\FormInicialVenda.View.pas' {FormInicialVenda},
+  Produto.Model in 'src\domain\model\Produto.Model.pas',
+  Validador.Contracts in 'src\domain\contracts\Validador.Contracts.pas',
+  Validador.Utils in 'src\utils\Validador.Utils.pas',
+  Produto.Repository in 'src\repository\Produto.Repository.pas',
+  IProduto.Repository in 'src\repository\interfaces\IProduto.Repository.pas',
+  IProduto.Service in 'src\service\interfaces\IProduto.Service.pas',
+  Produto.Service in 'src\service\Produto.Service.pas',
+  Pessoa.Model in 'src\domain\model\Pessoa.Model.pas';
 
 {$R *.res}
 

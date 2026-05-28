@@ -1,10 +1,10 @@
-unit MeuPDV.Produto.Repository;
+unit Produto.Repository;
 
 interface
 
-uses MeuPDV.IProduto.Repository,
- MeuPDV.DMConexao.infra,
- MeuPDV.Produto.Model,
+uses IProduto.Repository,
+ DMConexao.infra,
+ Produto.Model,
  System.SysUtils,
  System.Generics.Collections;
 

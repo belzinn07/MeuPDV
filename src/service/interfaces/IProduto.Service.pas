@@ -1,9 +1,9 @@
-unit MeuPDV.IProduto.Service;
+unit IProduto.Service;
 
 interface
 
 uses
-  MeuPDV.Produto.Model,
+  Produto.Model,
   System.Generics.Collections;
 type
  IProdutoService = interface

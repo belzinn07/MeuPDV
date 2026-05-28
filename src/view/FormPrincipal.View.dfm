@@ -29,8 +29,6 @@ object FormPrincipal: TFormPrincipal
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1122
-    ExplicitHeight = 722
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -41,7 +39,6 @@ object FormPrincipal: TFormPrincipal
       Color = 9929832
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1122
       object btnClientes: TSpeedButton
         Left = 24
         Top = 12
@@ -119,8 +116,6 @@ object FormPrincipal: TFormPrincipal
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 1122
-      ExplicitHeight = 610
     end
   end
   object ImageList1: TImageList

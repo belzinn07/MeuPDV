@@ -1,4 +1,4 @@
-unit MeuPDV.FormProdutos.View;
+unit FormProdutos.View;
 
 interface
 
@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, System.ImageList,
   Vcl.ImgList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Estilos,
-  MeuPDV.IProduto.Service, MeuPDV.Produto.Service, MeuPDV.Produto.Repository,
-  MeuPDV.DMConexao.infra, MeuPDV.Produto.Model, MeuPDV.Validador.Utils;
+  IProduto.Service, Produto.Service, Produto.Repository,
+  DMConexao.infra, Produto.Model, Validador.Utils;
 
 type
   TFormProdutos = class(TForm)
@@ -105,7 +105,7 @@ procedure TFormProdutos.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
 
-  FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dmConexao));
+  FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dmConexao.infra.dmConexao));
 
 
 end;

@@ -1,19 +1,19 @@
-﻿unit MeuPDV.ListaProdutos.View;
+﻿unit ListaProdutos.View;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, MeuPDV.FormBaseListagem.View, Data.DB,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB,
   System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  Vcl.Buttons, MeuPDV.DMConexao.infra, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  Vcl.Buttons, DMConexao.infra, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
 
 
-  System.Generics.Collections, MeuPDV.Produto.Model, MeuPDV.IProduto.Service,
-  MeuPDV.Produto.Service, MeuPDV.Produto.Repository, MeuPDV.FormProdutos.View,
-  Vcl.StdCtrls, Estilos;
+  System.Generics.Collections, Produto.Model, IProduto.Service,
+  Produto.Service, Produto.Repository, FormProdutos.View,
+  Vcl.StdCtrls, Estilos, FormBaseListagem.View;
 
 type
   TfrmListaProdutos = class(TfrmBaseListagem)
@@ -230,7 +230,7 @@ procedure TfrmListaProdutos.FormCreate(Sender: TObject);
 begin
 
 
-FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dmConexao));
+FPodutoService := TProdutoService.Create(TProdutoRepository.Create(DMConexao.infra.dmConexao));
 
   dsProdutos.DataSet := MemTable;
 

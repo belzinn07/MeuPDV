@@ -1,9 +1,9 @@
-unit MeuPDV.Produto.Model;
+unit Produto.Model;
 
 interface
 
 uses
-  MeuPDV.Validador.Contracts, MeuPDV.Validador.Utils, System.SysUtils;
+  Validador.Contracts, Validador.Utils, System.SysUtils;
 
 type
   TProduto = class(TInterfacedObject, IValidador)
