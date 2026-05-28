@@ -1,28 +1,29 @@
 inherited frmListaClientes: TfrmListaClientes
   Caption = 'Lista de Clientes - MeuPDV'
-  ClientWidth = 873
+  ClientWidth = 1108
   Position = poDefault
   StyleElements = [seFont, seClient, seBorder]
-  ExplicitWidth = 889
-  ExplicitHeight = 639
+  ExplicitWidth = 1124
   TextHeight = 15
   inherited pnlContainer: TPanel
-    Width = 873
+    Width = 1108
     StyleElements = [seFont, seClient, seBorder]
+    ExplicitWidth = 1106
     inherited pnlCabecalho: TPanel
-      Width = 873
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 1106
       inherited btnTitulo: TSpeedButton
-        Width = 873
+        Width = 1108
         Caption = 'Clientes'
         Images = ImageList1
         ExplicitWidth = 873
       end
     end
     inherited pnlRodape: TPanel
-      Width = 873
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 871
+      ExplicitWidth = 1106
       inherited pnlAltera: TPanel
         StyleElements = [seFont, seClient, seBorder]
       end
@@ -34,10 +35,11 @@ inherited frmListaClientes: TfrmListaClientes
       end
     end
     inherited pnlCentral: TPanel
-      Width = 873
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitWidth = 1106
       inherited dbgProdutos: TDBGrid
-        Width = 873
+        Width = 1108
         DataSource = dmConexao.dsClientes
       end
     end
@@ -581,5 +583,16 @@ inherited frmListaClientes: TfrmListaClientes
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object FDMemTable1: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 712
+    Top = 16
   end
 end

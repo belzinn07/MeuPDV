@@ -1,22 +1,23 @@
 inherited frmListaProdutos: TfrmListaProdutos
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Lista de Produtos - MeuPDV'
-  ClientWidth = 883
+  ClientWidth = 1108
   Position = poDefault
   StyleElements = [seFont, seClient, seBorder]
   OnDestroy = FormDestroy
-  ExplicitWidth = 899
+  OnResize = FormResize
+  ExplicitWidth = 1124
   TextHeight = 15
   inherited pnlContainer: TPanel
-    Width = 883
+    Width = 1108
     StyleElements = [seFont, seClient, seBorder]
-    ExplicitWidth = 881
+    ExplicitWidth = 1106
     inherited pnlCabecalho: TPanel
-      Width = 883
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 881
+      ExplicitWidth = 1106
       inherited btnTitulo: TSpeedButton
-        Width = 883
+        Width = 1108
         Caption = 'Produtos'
         Images = ImageList1
         ExplicitWidth = 883
@@ -48,37 +49,65 @@ inherited frmListaProdutos: TfrmListaProdutos
       end
     end
     inherited pnlRodape: TPanel
-      Width = 883
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 881
+      ExplicitWidth = 1106
       inherited pnlAltera: TPanel
+        Left = 523
         StyleElements = [seFont, seClient, seBorder]
         inherited btnAlterar: TSpeedButton
           OnClick = btnAlterarClick
         end
       end
       inherited pnlAdicionarProduto: TPanel
+        Left = 300
+        Margins.Left = 300
         StyleElements = [seFont, seClient, seBorder]
+        inherited Shape3: TShape
+          ExplicitLeft = 1
+          ExplicitWidth = 120
+        end
         inherited btnAdicionarProduto: TSpeedButton
           OnClick = btnAdicionarProdutoClick
+          ExplicitLeft = 1
+          ExplicitTop = 0
+          ExplicitWidth = 120
+          ExplicitHeight = 44
         end
       end
       inherited pnlExcluirProduto: TPanel
+        Left = 746
         StyleElements = [seFont, seClient, seBorder]
         inherited btnExcluirProduto: TSpeedButton
           OnClick = btnExcluirProdutoClick
+          ExplicitLeft = 24
+          ExplicitTop = 24
+          ExplicitWidth = 120
+          ExplicitHeight = 44
         end
       end
     end
     inherited pnlCentral: TPanel
-      Width = 883
+      Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 881
+      ExplicitWidth = 1106
+      object Bevel1: TBevel [0]
+        Left = 704
+        Top = 328
+        Width = 50
+        Height = 50
+      end
       inherited dbgProdutos: TDBGrid
-        Width = 883
+        Width = 1108
         DataSource = dsProdutos
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         OnDblClick = dbgProdutosDblClick
+        Columns = <
+          item
+            Expanded = False
+            Width = 100
+            Visible = True
+          end>
       end
     end
   end
@@ -86,6 +115,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     ColorDepth = cd32Bit
     Height = 32
     Width = 32
+    Left = 1032
     Bitmap = {
       494C010102000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
@@ -624,7 +654,7 @@ inherited frmListaProdutos: TfrmListaProdutos
   end
   object dsProdutos: TDataSource
     DataSet = MemTable
-    Left = 679
+    Left = 887
     Top = 24
   end
   object MemTable: TFDMemTable
@@ -635,7 +665,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 576
-    Top = 14
+    Left = 768
+    Top = 22
   end
 end

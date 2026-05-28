@@ -13,7 +13,7 @@ uses
 
   System.Generics.Collections, MeuPDV.Produto.Model, MeuPDV.IProduto.Service,
   MeuPDV.Produto.Service, MeuPDV.Produto.Repository, MeuPDV.FormProdutos.View,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, Estilos;
 
 type
   TfrmListaProdutos = class(TfrmBaseListagem)
@@ -21,6 +21,7 @@ type
     MemTable: TFDMemTable;
     btnPesquisar: TSpeedButton;
     edtPesquisa: TEdit;
+    Bevel1: TBevel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAdicionarProdutoClick(Sender: TObject);
@@ -30,6 +31,7 @@ type
     procedure btnPesquisarClick(Sender: TObject);
     procedure edtPesquisaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
   private
     FPodutoService : IProdutoService;
     ListaDeProdutos : TObjectList<TProduto>;
@@ -38,6 +40,8 @@ type
     procedure RecarregarLista;
     procedure EditarProduto;
     procedure PesquisarProduto;
+    procedure AplicarEstilo;
+    procedure AjustarColunas;
 
   public
 
@@ -163,9 +167,23 @@ begin
   MemTable.FieldByName('PRECO').DisplayLabel := 'Preço';
   MemTable.FieldByName('SALDO').DisplayLabel := 'Saldo  ';
 
- MemTable.Open;
  end;
 
+
+ procedure TfrmListaProdutos.AjustarColunas;
+var
+  W: Integer;
+begin
+  if dbgProdutos.Columns.Count = 0 then
+    Exit;
+
+  W := dbgProdutos.ClientWidth - 20;
+
+  dbgProdutos.Columns[0].Width := Round(W * 0.08); // ID
+  dbgProdutos.Columns[1].Width := Round(W * 0.57); // DESCRICAO
+  dbgProdutos.Columns[2].Width := Round(W * 0.15); // PRECO
+  dbgProdutos.Columns[3].Width := Round(W * 0.20); // SALDO
+end;
 
 procedure TfrmListaProdutos.dbgProdutosDblClick(Sender: TObject);
 begin
@@ -217,17 +235,26 @@ FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dmConexao));
   dsProdutos.DataSet := MemTable;
 
   ConfigurarMemTable;
-
+  AjustarColunas;
   ListaDeProdutos := FPodutoService.ListarProdutos;
 
   CarregarProdutosNaMemtable;
+  AplicarEstilo;
 
 end;
+
+
 
 procedure TfrmListaProdutos.FormDestroy(Sender: TObject);
 begin
   inherited;
   FreeAndNil(ListaDeProdutos);
+end;
+
+procedure TfrmListaProdutos.FormResize(Sender: TObject);
+begin
+  inherited;
+ AjustarColunas;
 end;
 
 procedure TfrmListaProdutos.PesquisarProduto;
@@ -241,6 +268,13 @@ begin
       FPodutoService.PesquisarProdutos(edtPesquisa.Text);
 
   CarregarProdutosNaMemtable;
+end;
+
+procedure TfrmListaProdutos.AplicarEstilo;
+begin
+  pnlCabecalho.Color := COR_CABECALHO_AZUL;
+  pnlRodape.Color := COR_CABECALHO_AZUL;
+
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ExtCtrls, Estilos, Vcl.Imaging.pngimage,
-  MeuPDV.ListaProdutos.View, MeuPDV.ListaClientes.View;
+  MeuPDV.ListaProdutos.View, MeuPDV.ListaClientes.View, MeuPDV.FormVenda.View;
 
 type
   TFormPrincipal = class(TForm)
@@ -17,11 +17,14 @@ type
     btnProdutos: TSpeedButton;
     btnVendas: TSpeedButton;
     pnlContainer: TPanel;
+    Bevel1: TBevel;
     procedure FormCreate(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
+    procedure btnVendasClick(Sender: TObject);
   private
-    procedure AbrirForm(FormClass: TFormClass; var Formulario: TForm);
+    procedure AbrirForm(FormClass: TFormClass);
+    procedure AplicarEstilos;
   public
     { Public declarations }
   end;
@@ -33,43 +36,49 @@ implementation
 
 {$R *.dfm}
 
-procedure TFormPrincipal.AbrirForm(FormClass: TFormClass; var Formulario: TForm);
+procedure TFormPrincipal.AbrirForm(FormClass: TFormClass);
+var
+  Formulario: TForm;
 begin
-if Assigned(Formulario) then
-  begin
-    Formulario.Close;
-    FreeAndNil(Formulario);
-  end;
+  Formulario := FormClass.Create(Self);
 
-  Formulario.Create(Self);
   Formulario.BorderStyle := bsNone;
   Formulario.Align := alClient;
   Formulario.Parent := pnlContainer;
   Formulario.Show;
+end;
 
+procedure TFormPrincipal.AplicarEstilos;
+begin
+  pnlCabecalho.Color := COR_CABECALHO_AZUL;
+  btnClientes.Font.Color := COR_TEXTO_BRANCO;
+  btnProdutos.Font.Color := COR_TEXTO_BRANCO;
+  btnVendas.Font.Color := COR_TEXTO_BRANCO;
 end;
 
 procedure TFormPrincipal.btnClientesClick(Sender: TObject);
+
 begin
 
-AbrirForm(TfrmListaClientes, TForm(frmListaClientes));
+AbrirForm(TfrmListaClientes);
 
 end;
 
 procedure TFormPrincipal.btnProdutosClick(Sender: TObject);
 begin
 
-AbrirForm(TfrmListaProdutos, TForm(frmListaProdutos));
+AbrirForm(TfrmListaProdutos);
 
+end;
+
+procedure TFormPrincipal.btnVendasClick(Sender: TObject);
+begin
+frmVendas.ShowModal;
 end;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
-pnlCabecalho.Color :=  COR_CABECALHO_AZUL;
-btnClientes.Font.Color := COR_TEXTO_BRANCO;
-btnProdutos.Font.Color := COR_TEXTO_BRANCO;
-btnVendas.Font.Color := COR_TEXTO_BRANCO;
-
+  AplicarEstilos;
 
 end;
 

@@ -172,6 +172,8 @@
         <DCCReference Include="src\repository\interfaces\MeuPDV.IProduto.Repository.pas"/>
         <DCCReference Include="src\service\interfaces\MeuPDV.IProduto.Service.pas"/>
         <DCCReference Include="src\service\MeuPDV.Produto.Service.pas"/>
+        <DCCReference Include="src\domain\model\MeuPDV.Pessoa.Model.pas"/>
+        <DCCReference Include="src\domain\model\MeuPDV.PessoaFisica.Model.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

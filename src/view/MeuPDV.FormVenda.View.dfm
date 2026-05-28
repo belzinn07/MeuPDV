@@ -11,6 +11,7 @@ object frmVendas: TfrmVendas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  WindowState = wsMaximized
   TextHeight = 15
   object pnlContainer: TPanel
     Left = 0
@@ -22,6 +23,8 @@ object frmVendas: TfrmVendas
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1122
+    ExplicitHeight = 722
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -67,6 +70,8 @@ object frmVendas: TfrmVendas
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 640
+      ExplicitWidth = 1122
       object pnlFecharVenda: TPanel
         AlignWithMargins = True
         Left = 60
@@ -129,7 +134,6 @@ object frmVendas: TfrmVendas
         Color = 9063714
         ParentBackground = False
         TabOrder = 1
-        ExplicitLeft = 60
         object Shape7: TShape
           Left = 0
           Top = 0
@@ -178,7 +182,6 @@ object frmVendas: TfrmVendas
         Color = 9063714
         ParentBackground = False
         TabOrder = 2
-        ExplicitLeft = 60
         object Shape8: TShape
           Left = 0
           Top = 0
@@ -624,7 +627,6 @@ object frmVendas: TfrmVendas
       Width = 724
       Height = 567
       Align = alClient
-      DataSource = dmConexao.dsProdutos
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 7568383
       Font.Height = -12

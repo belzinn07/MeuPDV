@@ -100,6 +100,14 @@ object FormPrincipal: TFormPrincipal
         Margin = 12
         ParentFont = False
         Spacing = 5
+        OnClick = btnVendasClick
+      end
+      object Bevel1: TBevel
+        Left = 0
+        Top = 102
+        Width = 1124
+        Height = 10
+        Shape = bsBottomLine
       end
     end
     object pnlContainer: TPanel
@@ -111,10 +119,8 @@ object FormPrincipal: TFormPrincipal
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 696
-      ExplicitTop = 488
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 1122
+      ExplicitHeight = 610
     end
   end
   object ImageList1: TImageList

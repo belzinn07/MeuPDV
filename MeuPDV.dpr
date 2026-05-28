@@ -18,7 +18,9 @@ uses
   MeuPDV.Produto.Repository in 'src\repository\MeuPDV.Produto.Repository.pas',
   MeuPDV.IProduto.Repository in 'src\repository\interfaces\MeuPDV.IProduto.Repository.pas',
   MeuPDV.IProduto.Service in 'src\service\interfaces\MeuPDV.IProduto.Service.pas',
-  MeuPDV.Produto.Service in 'src\service\MeuPDV.Produto.Service.pas';
+  MeuPDV.Produto.Service in 'src\service\MeuPDV.Produto.Service.pas',
+  MeuPDV.Pessoa.Model in 'src\domain\model\MeuPDV.Pessoa.Model.pas',
+  MeuPDV.PessoaFisica.Model in 'src\domain\model\MeuPDV.PessoaFisica.Model.pas';
 
 {$R *.res}
 
