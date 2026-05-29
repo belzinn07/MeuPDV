@@ -35,7 +35,7 @@ type
   end;
 
 var
-  FormProdutos: TFormProdutos;
+  frmProdutos: TFormProdutos;
 
 implementation
 
@@ -105,7 +105,7 @@ procedure TFormProdutos.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
 
-  FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dmConexao.infra.dmConexao));
+  FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dm));
 
 
 end;

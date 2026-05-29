@@ -27,7 +27,7 @@ type
   end;
 
 var
-  dmConexao: TdmConexao;
+  dm: TdmConexao;
 
 implementation
 

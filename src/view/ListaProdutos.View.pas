@@ -230,7 +230,7 @@ procedure TfrmListaProdutos.FormCreate(Sender: TObject);
 begin
 
 
-FPodutoService := TProdutoService.Create(TProdutoRepository.Create(DMConexao.infra.dmConexao));
+FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dm));
 
   dsProdutos.DataSet := MemTable;
 

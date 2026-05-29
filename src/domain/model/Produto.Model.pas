@@ -6,7 +6,7 @@ uses
   Validador.Contracts, Validador.Utils, System.SysUtils;
 
 type
-  TProduto = class(TInterfacedObject, IValidador)
+  TProduto = class
 
    private
     FId : Integer;
@@ -16,7 +16,6 @@ type
 
    public
 
-    procedure Validar;
     property Id : Integer read FId write FId;
     property Descricao : string read FDescricao write FDescricao;
     property Preco : Currency read FPreco write FPreco;
@@ -27,15 +26,5 @@ type
 implementation
 
 { TProduto }
-
-
-procedure TProduto.Validar;
-begin
-
-ValidarCampo(Trim(FDescricao)<> '', 'Descrição é obrigatória');
-ValidarCampo(FPreco > 0 , 'Preço deve ser maior que zero' );
-
-end;
-
 
 end.

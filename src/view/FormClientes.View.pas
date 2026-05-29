@@ -28,7 +28,7 @@ type
   end;
 
 var
-  FormClientes: TFormClientes;
+  frmClientes: TFormClientes;
 
 implementation
 

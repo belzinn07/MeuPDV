@@ -30,7 +30,7 @@ type
   end;
 
 var
-  FormPrincipal: TFormPrincipal;
+  frmPrincipal: TFormPrincipal;
 
 implementation
 

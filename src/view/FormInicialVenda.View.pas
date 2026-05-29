@@ -23,7 +23,7 @@ type
   end;
 
 var
-  FormInicialVenda: TFormInicialVenda;
+  frmInicialVenda: TFormInicialVenda;
 
 implementation
 

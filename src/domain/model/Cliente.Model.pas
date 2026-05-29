@@ -1,11 +1,11 @@
-unit Pessoa.Model;
+unit Cliente.Model;
 
 interface
 
 uses
   Validador.Contracts, Validador.Utils, System.SysUtils, System.RegularExpressions;
 type
- TPessoa = class(TInterfacedObject, IValidador)
+ TCliente = class(TInterfacedObject, IValidador)
 
  private
   FId : Integer;
@@ -31,7 +31,7 @@ implementation
 
 { TPessoa }
 
-procedure TPessoa.Validar;
+procedure TCliente.Validar;
 begin
 
 ValidarCampo(Trim(FNome)<> '', 'Nome é um campo obrigatório');
@@ -39,7 +39,7 @@ ValidarCampo(EmailValido(Trim(FEmail)), 'Email inválido ou não informado');
 
 end;
 
-function TPessoa.EmailValido(const AEmail: string): Boolean;
+function TCliente.EmailValido(const AEmail: string): Boolean;
 begin
    if AEmail = '' then
     Exit(False);

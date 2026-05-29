@@ -7,7 +7,7 @@ uses
   Produto.Model,
   IProduto.Repository,
   System.SysUtils,
-  System.Generics.Collections;
+  System.Generics.Collections, Validador.Contracts, Produto.Validation;
 type
  TProdutoService = class(TInterfacedObject, IProdutoService)
 
@@ -36,9 +36,12 @@ FRepository := ARepository;
 end;
 
 procedure TProdutoService.Salvar(AProduto: TProduto);
+var
+  Validador: IValidador<TProduto>;
 begin
+  Validador := TP
 try
- AProduto.Validar;
+
 
  if AProduto.Id = 0 then
    FRepository.Inserir(AProduto)
