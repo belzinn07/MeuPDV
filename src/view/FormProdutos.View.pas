@@ -50,7 +50,6 @@ begin
  edtEstoque.Clear;
 
  FProduto.Id := 0;
-
 end;
 
 procedure TFormProdutos.PrepararEdicao(Aid : Integer);
@@ -104,12 +103,9 @@ end;
 procedure TFormProdutos.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
-
   FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dm));
 
-
 end;
-
 
 procedure TFormProdutos.AplicarEstilos;
 begin
@@ -118,7 +114,5 @@ begin
   SpeedButton1.Flat := True;
   SpeedButton1.Font.Color := COR_TEXTO_BRANCO;
 end;
-
-
 
 end.

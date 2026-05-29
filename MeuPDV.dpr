@@ -27,14 +27,14 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TFormPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListaClientes, frmListaClientes);
-  Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TFormClientes, frmClientes);
+  Application.CreateForm(TdmConexao, dm);
   Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
-  Application.CreateForm(TfrmInicialVenda, frmInicialVenda);
+  Application.CreateForm(TFormInicialVenda, frmInicialVenda);
   Application.CreateForm(TfrmVendas, frmVendas);
-  Application.CreateForm(TfrmProdutos, frmProdutos);
+  Application.CreateForm(TFormProdutos, frmProdutos);
   Application.CreateForm(TfrmBaseListagem, frmBaseListagem);
   Application.Run;
 end.

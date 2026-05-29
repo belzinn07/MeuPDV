@@ -3,7 +3,7 @@ object FormPrincipal: TFormPrincipal
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'In'#237'cio - MeuPDV'
-  ClientHeight = 730
+  ClientHeight = 661
   ClientWidth = 1124
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 0
     Width = 1124
-    Height = 730
+    Height = 661
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -29,8 +29,7 @@ object FormPrincipal: TFormPrincipal
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1122
-    ExplicitHeight = 722
+    ExplicitHeight = 730
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -41,7 +40,6 @@ object FormPrincipal: TFormPrincipal
       Color = 9929832
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1122
       object btnClientes: TSpeedButton
         Left = 24
         Top = 12
@@ -51,14 +49,8 @@ object FormPrincipal: TFormPrincipal
         ImageIndex = 0
         Images = ImageList1
         Flat = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
         Layout = blGlyphTop
         Margin = 12
-        ParentFont = False
         Spacing = 5
         OnClick = btnClientesClick
       end
@@ -114,13 +106,12 @@ object FormPrincipal: TFormPrincipal
       Left = 0
       Top = 112
       Width = 1124
-      Height = 618
+      Height = 549
       Align = alClient
       BevelOuter = bvNone
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 1122
-      ExplicitHeight = 610
+      ExplicitHeight = 618
     end
   end
   object ImageList1: TImageList

@@ -2,10 +2,8 @@ unit Cliente.Model;
 
 interface
 
-uses
-  Validador.Contracts, Validador.Utils, System.SysUtils, System.RegularExpressions;
 type
- TCliente = class(TInterfacedObject, IValidador)
+ TCliente = class
 
  private
   FId : Integer;
@@ -14,10 +12,8 @@ type
   FCnpj: string;
   FTelefone: string;
   FEmail: string;
-  function EmailValido(const AEmail: string): Boolean;
 
  public
- procedure Validar;
  property Id: Integer read FId write FId;
  property Nome: string read FNome write FNome;
  property Cpf: string read FCpf write FCpf;
@@ -31,6 +27,7 @@ implementation
 
 { TPessoa }
 
+{
 procedure TCliente.Validar;
 begin
 
@@ -48,7 +45,7 @@ Result := TRegEx.IsMatch(AEmail,'^[^\s@]+@[^\s@]+\.[^\s@]+$', [roCompiled]);
 
 end;
 
-
+  }
 
 
 end.

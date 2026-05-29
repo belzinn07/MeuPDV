@@ -39,9 +39,9 @@ procedure TProdutoService.Salvar(AProduto: TProduto);
 var
   Validador: IValidador<TProduto>;
 begin
-  Validador := TP
+  Validador := TProdutoValidador.Create;
 try
-
+     Validador.Validar(AProduto);
 
  if AProduto.Id = 0 then
    FRepository.Inserir(AProduto)
