@@ -58,11 +58,11 @@ implementation
 
 procedure TfrmListaProdutos.btnAdicionarProdutoClick(Sender: TObject);
 var
- FormProdutos : TFormProdutos;
+ FormProdutos : TfrmProdutos;
 begin
   inherited;
 
-FormProdutos := TFormProdutos.Create(nil);
+FormProdutos := TfrmProdutos.Create(nil);
   try
 
    if FormProdutos.ShowModal = mrOk then  RecarregarLista;
@@ -194,7 +194,7 @@ end;
 procedure TfrmListaProdutos.EditarProduto;
 var
   Id: Integer;
-  FormProdutos: TFormProdutos;
+  FormProdutos: TfrmProdutos;
 begin
   if MemTable.IsEmpty then
   begin
@@ -204,7 +204,7 @@ begin
 
   Id := MemTable.FieldByName('ID').AsInteger;
 
-  FormProdutos := TFormProdutos.Create(nil);
+  FormProdutos := TfrmProdutos.Create(nil);
 
   try
     FormProdutos.PrepararEdicao(Id);

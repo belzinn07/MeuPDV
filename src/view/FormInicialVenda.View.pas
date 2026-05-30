@@ -8,7 +8,7 @@ uses
   Vcl.Buttons;
 
 type
-  TFormInicialVenda = class(TForm)
+  TfrmInicialVenda = class(TForm)
     pnlContainer: TPanel;
     pnlCabecalho: TPanel;
     cbxSelecionarCliente: TComboBox;
@@ -23,7 +23,7 @@ type
   end;
 
 var
-  frmInicialVenda: TFormInicialVenda;
+  frmInicialVenda: TfrmInicialVenda;
 
 implementation
 

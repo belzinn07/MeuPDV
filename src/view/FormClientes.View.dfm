@@ -1,4 +1,4 @@
-object FormClientes: TFormClientes
+object frmClientes: TfrmClientes
   Left = 0
   Top = 0
   Caption = 'Formul'#225'rio de Clientes'

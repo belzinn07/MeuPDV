@@ -128,7 +128,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="src\view\FormPrincipal.View.pas">
-            <Form>FormPrincipal</Form>
+            <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFormPrincipal</DesignClass>
         </DCCReference>
@@ -138,13 +138,13 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\FormClientes.View.pas">
-            <Form>FormClientes</Form>
+            <Form>frmClientes</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFormClientes</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\Styles\Estilos.pas"/>
         <DCCReference Include="src\view\FormProdutos.View.pas">
-            <Form>FormProdutos</Form>
+            <Form>frmProdutos</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFormProdutos</DesignClass>
         </DCCReference>
@@ -169,7 +169,7 @@
             <DesignClass>TfrmVendas</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\FormInicialVenda.View.pas">
-            <Form>FormInicialVenda</Form>
+            <Form>frmInicialVenda</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFormInicialVenda</DesignClass>
         </DCCReference>
@@ -182,6 +182,7 @@
         <DCCReference Include="src\service\Produto.Service.pas"/>
         <DCCReference Include="src\domain\model\Cliente.Model.pas"/>
         <DCCReference Include="src\domain\validation\Produto.Validation.pas"/>
+        <DCCReference Include="src\domain\validation\Cliente.Validation.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

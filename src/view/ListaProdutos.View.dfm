@@ -3,18 +3,15 @@ inherited frmListaProdutos: TfrmListaProdutos
   Caption = 'Lista de Produtos - MeuPDV'
   ClientWidth = 1108
   Position = poDefault
-  StyleElements = [seFont, seClient, seBorder]
   OnDestroy = FormDestroy
   OnResize = FormResize
-  ExplicitWidth = 1124
+  ExplicitWidth = 1126
   TextHeight = 15
   inherited pnlContainer: TPanel
     Width = 1108
-    StyleElements = [seFont, seClient, seBorder]
     ExplicitWidth = 1106
     inherited pnlCabecalho: TPanel
       Width = 1108
-      StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 1106
       inherited btnTitulo: TSpeedButton
         Width = 1108
@@ -50,11 +47,9 @@ inherited frmListaProdutos: TfrmListaProdutos
     end
     inherited pnlRodape: TPanel
       Width = 1108
-      StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 1106
       inherited pnlAltera: TPanel
         Left = 523
-        StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 523
         inherited btnAlterar: TSpeedButton
           OnClick = btnAlterarClick
@@ -63,7 +58,6 @@ inherited frmListaProdutos: TfrmListaProdutos
       inherited pnlAdicionarProduto: TPanel
         Left = 300
         Margins.Left = 300
-        StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 300
         inherited Shape3: TShape
           ExplicitLeft = 1
@@ -79,7 +73,6 @@ inherited frmListaProdutos: TfrmListaProdutos
       end
       inherited pnlExcluirProduto: TPanel
         Left = 746
-        StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 746
         inherited btnExcluirProduto: TSpeedButton
           OnClick = btnExcluirProdutoClick
@@ -92,7 +85,6 @@ inherited frmListaProdutos: TfrmListaProdutos
     end
     inherited pnlCentral: TPanel
       Width = 1108
-      StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 1106
       object Bevel1: TBevel [0]
         Left = 704

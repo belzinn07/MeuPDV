@@ -1,4 +1,4 @@
-object FormInicialVenda: TFormInicialVenda
+object frmInicialVenda: TfrmInicialVenda
   Left = 0
   Top = 0
   BorderStyle = bsDialog

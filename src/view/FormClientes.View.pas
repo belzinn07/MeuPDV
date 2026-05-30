@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.Buttons;
 
 type
-  TFormClientes = class(TForm)
+  TfrmClientes = class(TForm)
     pnlGeral: TPanel;
     pnlCabecalho: TPanel;
     RadioGroup1: TRadioGroup;
@@ -28,7 +28,7 @@ type
   end;
 
 var
-  frmClientes: TFormClientes;
+  frmClientes: TfrmClientes;
 
 implementation
 
@@ -38,13 +38,13 @@ uses Estilos;
 
 
 
-procedure TFormClientes.FormCreate(Sender: TObject);
+procedure TfrmClientes.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
 
 end;
 
-procedure TFormClientes.AplicarEstilos;
+procedure TfrmClientes.AplicarEstilos;
 begin
   pnlCabecalho.Color := COR_CABECALHO_AZUL;
   pnlGeral.Color := COR_FUNDO_CLARO;

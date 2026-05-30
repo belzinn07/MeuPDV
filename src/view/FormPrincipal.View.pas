@@ -9,7 +9,7 @@ uses
   ListaProdutos.View, ListaClientes.View, FormVenda.View,FormBaseListagem.View;
 
 type
-  TFormPrincipal = class(TForm)
+  TfrmPrincipal = class(TForm)
     pnlGeral: TPanel;
     pnlCabecalho: TPanel;
     btnClientes: TSpeedButton;
@@ -30,13 +30,13 @@ type
   end;
 
 var
-  frmPrincipal: TFormPrincipal;
+  frmPrincipal: TfrmPrincipal;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFormPrincipal.AbrirForm(FormClass: TFormClass);
+procedure TfrmPrincipal.AbrirForm(FormClass: TFormClass);
 var
   Formulario: TForm;
 begin
@@ -48,7 +48,7 @@ begin
   Formulario.Show;
 end;
 
-procedure TFormPrincipal.AplicarEstilos;
+procedure TfrmPrincipal.AplicarEstilos;
 begin
   pnlCabecalho.Color := COR_CABECALHO_AZUL;
   btnClientes.Font.Color := COR_TEXTO_BRANCO;
@@ -56,7 +56,7 @@ begin
   btnVendas.Font.Color := COR_TEXTO_BRANCO;
 end;
 
-procedure TFormPrincipal.btnClientesClick(Sender: TObject);
+procedure TfrmPrincipal.btnClientesClick(Sender: TObject);
 
 begin
 
@@ -64,19 +64,19 @@ AbrirForm(TfrmListaClientes);
 
 end;
 
-procedure TFormPrincipal.btnProdutosClick(Sender: TObject);
+procedure TfrmPrincipal.btnProdutosClick(Sender: TObject);
 begin
 
 AbrirForm(TfrmListaProdutos);
 
 end;
 
-procedure TFormPrincipal.btnVendasClick(Sender: TObject);
+procedure TfrmPrincipal.btnVendasClick(Sender: TObject);
 begin
 frmVendas.ShowModal;
 end;
 
-procedure TFormPrincipal.FormCreate(Sender: TObject);
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
 

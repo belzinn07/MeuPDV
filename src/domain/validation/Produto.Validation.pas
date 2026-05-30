@@ -7,9 +7,12 @@ uses
 type
  TProdutoValidador = class(TInterfacedObject, IValidador<TProduto>)
 
+ private
+    function PrecoValido(const APreco :Currency): Boolean;
+
  public
    procedure Validar(AProduto: TProduto);
-   function PrecoValido(const APreco :Currency): Boolean;
+
 
  end;
 

@@ -1,4 +1,4 @@
-object FormPrincipal: TFormPrincipal
+object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]

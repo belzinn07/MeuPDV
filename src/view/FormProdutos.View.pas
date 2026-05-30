@@ -10,7 +10,7 @@ uses
   DMConexao.infra, Produto.Model, Validador.Utils;
 
 type
-  TFormProdutos = class(TForm)
+  TfrmProdutos = class(TForm)
     pnlGeral: TPanel;
     pnlCabecalho: TPanel;
     SpeedButton1: TSpeedButton;
@@ -35,13 +35,13 @@ type
   end;
 
 var
-  frmProdutos: TFormProdutos;
+  frmProdutos: TfrmProdutos;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFormProdutos.PrepararCadastro;
+procedure TfrmProdutos.PrepararCadastro;
 begin
 
  edtCodigo.Text := 'Novo';
@@ -52,7 +52,7 @@ begin
  FProduto.Id := 0;
 end;
 
-procedure TFormProdutos.PrepararEdicao(Aid : Integer);
+procedure TfrmProdutos.PrepararEdicao(Aid : Integer);
 begin
 FProduto := FPodutoService.BuscarPorId(Aid);
 edtCodigo.Text := IntToStr(FProduto.Id);
@@ -62,7 +62,7 @@ edtEstoque.Text := FloatToStr(FProduto.Saldo);
 
 end;
 
-procedure TFormProdutos.bntSalvarClick(Sender: TObject);
+procedure TfrmProdutos.bntSalvarClick(Sender: TObject);
 var
 
 Produto : TProduto;
@@ -100,14 +100,14 @@ end;
 
 end;
 
-procedure TFormProdutos.FormCreate(Sender: TObject);
+procedure TfrmProdutos.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
   FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dm));
 
 end;
 
-procedure TFormProdutos.AplicarEstilos;
+procedure TfrmProdutos.AplicarEstilos;
 begin
   pnlCabecalho.Color := COR_CABECALHO_AZUL;
   pnlGeral.Color := COR_FUNDO_CLARO;
