@@ -9,6 +9,7 @@
 *.map
 *.o
 *.obj
+*.ini
 
 # --- Arquivos de Cache e Configuração da IDE ---
 *.identcache

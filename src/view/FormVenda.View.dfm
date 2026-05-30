@@ -1,7 +1,6 @@
 object frmVendas: TfrmVendas
   Left = 0
   Top = 0
-  BorderStyle = bsSizeToolWin
   Caption = 'MeuPDV - Venda'
   ClientHeight = 730
   ClientWidth = 1124
@@ -24,8 +23,6 @@ object frmVendas: TfrmVendas
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1122
-    ExplicitHeight = 722
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -36,7 +33,6 @@ object frmVendas: TfrmVendas
       Color = 9063714
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1122
       object Label1: TLabel
         AlignWithMargins = True
         Left = 3
@@ -71,8 +67,6 @@ object frmVendas: TfrmVendas
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 640
-      ExplicitWidth = 1122
       object pnlFecharVenda: TPanel
         AlignWithMargins = True
         Left = 60
@@ -236,8 +230,6 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 722
-      ExplicitHeight = 559
       object pnlTotalCompra: TPanel
         AlignWithMargins = True
         Left = 3
@@ -249,7 +241,6 @@ object frmVendas: TfrmVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 466
         object Shape4: TShape
           Left = 0
           Top = 19
@@ -325,7 +316,6 @@ object frmVendas: TfrmVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 390
         object Shape2: TShape
           Left = 0
           Top = 19
@@ -401,7 +391,6 @@ object frmVendas: TfrmVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 2
-        ExplicitTop = 314
         object Shape3: TShape
           Left = 0
           Top = 19
@@ -478,7 +467,6 @@ object frmVendas: TfrmVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 3
-        ExplicitTop = 238
         object Shape5: TShape
           Left = 0
           Top = 19
@@ -555,7 +543,6 @@ object frmVendas: TfrmVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 4
-        ExplicitTop = 162
         object Shape6: TShape
           Left = 0
           Top = 19

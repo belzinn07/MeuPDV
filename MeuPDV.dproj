@@ -183,6 +183,7 @@
         <DCCReference Include="src\domain\model\Cliente.Model.pas"/>
         <DCCReference Include="src\domain\validation\Produto.Validation.pas"/>
         <DCCReference Include="src\domain\validation\Cliente.Validation.pas"/>
+        <DCCReference Include="src\utils\ValidadorDocumentos.Utils.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

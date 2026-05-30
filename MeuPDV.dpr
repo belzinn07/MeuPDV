@@ -21,7 +21,8 @@ uses
   Produto.Service in 'src\service\Produto.Service.pas',
   Cliente.Model in 'src\domain\model\Cliente.Model.pas',
   Produto.Validation in 'src\domain\validation\Produto.Validation.pas',
-  Cliente.Validation in 'src\domain\validation\Cliente.Validation.pas';
+  Cliente.Validation in 'src\domain\validation\Cliente.Validation.pas',
+  ValidadorDocumentos.Utils in 'src\utils\ValidadorDocumentos.Utils.pas';
 
 {$R *.res}
 
@@ -31,7 +32,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListaClientes, frmListaClientes);
   Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TdmConexao, dm);
   Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
   Application.CreateForm(TfrmInicialVenda, frmInicialVenda);
   Application.CreateForm(TfrmVendas, frmVendas);
