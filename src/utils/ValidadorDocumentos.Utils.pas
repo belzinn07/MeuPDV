@@ -8,39 +8,47 @@ uses
 type
  TValidadorDocumentos = class
   private
-    function TodosDigitosIguais(const NumDocumento: string): Boolean;
+    class function TodosDigitosIguais(const NumDocumento: string): Boolean;
+    class procedure SomenteNumeros(var NumDocumento: string; const ADocumento: string);
 
  public
-    function ValidarDocumento(const ADocumento : string; const ATamanho: Integer): Boolean;
+   class function ValidarDocumento(const ADocumento : string; const ATamanho: Integer): Boolean;
  end;
 
 implementation
 
 { TValidadorDocumentos }
 
-function TValidadorDocumentos.ValidarDocumento
+class function TValidadorDocumentos.ValidarDocumento
 (const ADocumento: string; const ATamanho: Integer): Boolean;
 var
 NumDocumento : string;
-Caractere: Char;
 
 begin
  Result:= False;
 
  NumDocumento := '';
 
- for Caractere in ADocumento do
- begin
-    if CharInSet(Caractere, ['0'..'9']) then
-    NumDocumento := NumDocumento + Caractere;
- end;
+
+ SomenteNumeros(NumDocumento, ADocumento);
 
  if (Length(NumDocumento) <> ATamanho) or TodosDigitosIguais(NumDocumento) then Exit(False);
 
 Result := True;
 end;
 
-function TValidadorDocumentos.TodosDigitosIguais
+class procedure TValidadorDocumentos.SomenteNumeros(var NumDocumento: string; const ADocumento: string);
+var
+  Caractere: Char;
+begin
+  for Caractere in ADocumento do
+  begin
+    if CharInSet(Caractere, ['0'..'9']) then
+      NumDocumento := NumDocumento + Caractere;
+  end;
+end;
+
+class function TValidadorDocumentos.TodosDigitosIguais
 (const NumDocumento: string): Boolean;
 var
   I: Integer;

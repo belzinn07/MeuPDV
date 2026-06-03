@@ -13,6 +13,7 @@ procedure ValidarCampo(Condicao: Boolean; const Mensagem: String);
 begin
   if not Condicao then
     raise Exception.Create(Mensagem);
+
 end;
 
 end.
