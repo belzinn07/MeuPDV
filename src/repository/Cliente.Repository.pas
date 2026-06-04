@@ -1,0 +1,139 @@
+unit Cliente.Repository;
+
+interface
+
+uses
+  ICliente.Repository, DMConexao.infra, Cliente.Model,
+  System.Generics.Collections, FireDAC.Comp.Client, TipoPessoa.Enums.Model;
+type
+ TClienteRepository = class(TInterfacedObject, IClienteRepository)
+
+   private
+    FdmConexao : TdmConexao;
+    procedure AtualizarLista;
+
+   public
+    constructor Create(AdmConexão : TdmConexao);
+    procedure Inserir(const ACliente : TCliente);
+    procedure Atualizar(const ACliente: TCliente);
+    procedure Excluir(AId: Integer);
+    function Listar: TObjectList<TCliente>;
+    function BuscarPorId(d : Integer): TCliente;
+    function Pesquisar(const APesquisa : string): TObjectList<TCliente>;
+
+ end;
+
+implementation
+
+
+
+{ TClienteRepository }
+
+constructor TClienteRepository.Create(AdmConexão: TdmConexao);
+begin
+  FdmConexao := AdmConexão;
+end;
+
+procedure TClienteRepository.Inserir(const ACliente: TCliente);
+var
+ Qry : TFDQuery;
+
+begin
+ Qry := TFDQuery.Create(nil);
+ try
+
+   Qry.Connection := FdmConexao.FDConexao;
+   Qry.SQL.Text := 'INSERT INTO CLIENTES (NOME, CPF, CNPJ, TIPOPESSOA, TELEFONE, EMAIL, IE)' +
+                    'VALUES(:NOME, :CPF, :CNPJ, :TIPOPESSOA, :TELEFONE, :EMAIL, :IE)';
+   Qry.ParamByName('NOME').AsString := ACliente.Nome;
+   Qry.ParamByName('CPF').AsString := ACliente.CPF;
+   Qry.ParamByName('CNPJ').AsString := ACliente.CNPJ;
+
+   case ACliente.TipoPessoa of
+   tpFisica: Qry.ParamByName('TIPOPESSOA').AsString := 'F';
+   tpJuridica: Qry.ParamByName('TIPOPESSOA').AsString := 'J';
+   end;
+
+   Qry.ParamByName('TELEFONE').AsString := ACliente.Telefone;
+   Qry.ParamByName('EMAIL').AsString := ACliente.Email;
+   Qry.ParamByName('IE').AsString := ACliente.IE;
+
+   Qry.ExecSQL;
+
+ finally
+   Qry.Free;
+
+ end;
+
+end;
+
+procedure TClienteRepository.Atualizar(const ACliente: TCliente);
+var
+ Qry : TFDQuery;
+begin
+ Qry := TFDQuery.Create(nil);
+
+ try
+  Qry.Connection := FdmConexao.FDConexao;
+  Qry.SQL.Text := 'UPDATE CLIENTES SET NOME = :NOME, CPF = :CPF , CNPJ = :CNPJ,' +
+                  'TIPOPESSOA = :TIPOPESSOA, TELEFOME = :TELEFONE, EMAIL = :EMAIL, IE  = :IE';
+   Qry.ParamByName('NOME').AsString := ACliente.Nome;
+   Qry.ParamByName('CPF').AsString := ACliente.CPF;
+   Qry.ParamByName('CNPJ').AsString := ACliente.CNPJ;
+
+   case ACliente.TipoPessoa of
+   tpFisica: Qry.ParamByName('TIPOPESSOA').AsString := 'F';
+   tpJuridica: Qry.ParamByName('TIPOPESSOA').AsString := 'J';
+   end;
+
+   Qry.ParamByName('TELEFONE').AsString := ACliente.Telefone;
+   Qry.ParamByName('EMAIL').AsString := ACliente.Email;
+   Qry.ParamByName('IE').AsString := ACliente.IE;
+
+   Qry.ExecSQL;
+ finally
+   Qry.Free;
+ end;
+
+end;
+
+procedure TClienteRepository.Excluir(AId: Integer);
+var
+ Qry : TFDQuery;
+begin
+ Qry := TFDQuery.Create(nil);
+
+ try
+   Qry.Connection := FdmConexao.FDConexao;
+   Qry.SQL.Text := 'DELETE FROM CLIENTES WHERE ID = :ID';
+   Qry.ParamByName('ID').AsInteger := AId;
+   Qry.ExecSQL;
+
+ finally
+  Qry.Free;
+
+ end;
+end;
+
+procedure TClienteRepository.AtualizarLista;
+begin
+
+end;
+
+function TClienteRepository.BuscarPorId(d: Integer): TCliente;
+begin
+
+end;
+
+function TClienteRepository.Listar: TObjectList<TCliente>;
+begin
+
+end;
+
+function TClienteRepository.Pesquisar(
+  const APesquisa: string): TObjectList<TCliente>;
+begin
+
+end;
+
+end.

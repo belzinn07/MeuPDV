@@ -23,7 +23,9 @@ uses
   Produto.Validation in 'src\domain\validation\Produto.Validation.pas',
   Cliente.Validation in 'src\domain\validation\Cliente.Validation.pas',
   ValidadorDocumentos.Utils in 'src\utils\ValidadorDocumentos.Utils.pas',
-  TipoPessoa.Enums.Model in 'src\domain\model\enums\TipoPessoa.Enums.Model.pas';
+  TipoPessoa.Enums.Model in 'src\domain\model\enums\TipoPessoa.Enums.Model.pas',
+  ICliente.Repository in 'src\repository\interfaces\ICliente.Repository.pas',
+  Cliente.Repository in 'src\repository\Cliente.Repository.pas';
 
 {$R *.res}
 

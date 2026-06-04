@@ -41,13 +41,11 @@ begin
 
    tpJuridica:
    begin
-      ValidarCampo(Trim(ACliente.CNPJ)<> '', 'CNPJ é obrigatório');
+      ValidarCampo(Trim(ACliente.CNPJ)<> '', 'CNPJ é obrigatório' );
       ValidarCampo(TValidadorDocumentos.ValidarDocumento(Trim(ACliente.CNPJ),14), 'CNPJ inválido');
       ValidarCampo(TValidadorDocumentos.ValidarDocumento(Trim(ACliente.IE), 9), 'IE do cliente inválida');
    end;
    end;
-
-
 
 end;
 

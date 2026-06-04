@@ -48,7 +48,8 @@ FdmConexao.FDTransacao.StartTransaction;
 
 try
   FdmConexao.qryCRUD.SQL.Clear;
-  FdmConexao.qryCRUD.SQL.Text := 'INSERT INTO PRODUTOS (DESCRICAO, PRECO, SALDO) VALUES (:DESCRICAO, :PRECO, :SALDO)';
+  FdmConexao.qryCRUD.SQL.Text := 'INSERT INTO PRODUTOS (DESCRICAO, PRECO, SALDO) ' +
+                                  'VALUES (:DESCRICAO, :PRECO, :SALDO)';
 
   FdmConexao.qryCRUD.ParamByName('DESCRICAO').AsString := AProduto.Descricao;
   FdmConexao.qryCRUD.ParamByName('PRECO').AsCurrency := AProduto.Preco;
@@ -70,7 +71,8 @@ FdmConexao.FDTransacao.StartTransaction;
 
 try
 FdmConexao.qryCRUD.SQL.Clear;
-FdmConexao.qryCRUD.SQL.Text := 'UPDATE PRODUTOS SET DESCRICAO = :DESCRICAO, PRECO = :PRECO, SALDO = :SALDO WHERE ID = :ID';
+FdmConexao.qryCRUD.SQL.Text := 'UPDATE PRODUTOS SET DESCRICAO = :DESCRICAO,'+
+                                'PRECO = :PRECO, SALDO = :SALDO WHERE ID = :ID';
 
 FdmConexao.qryCRUD.ParamByName('DESCRICAO').AsString := AProduto.Descricao;
 FdmConexao.qryCRUD.ParamByName('PRECO').AsCurrency := AProduto.Preco;
