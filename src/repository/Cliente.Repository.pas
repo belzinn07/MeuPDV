@@ -18,7 +18,7 @@ type
     procedure Atualizar(const ACliente: TCliente);
     procedure Excluir(AId: Integer);
     function Listar: TObjectList<TCliente>;
-    function BuscarPorId(d : Integer): TCliente;
+    function BuscarPorId(AId : Integer): TCliente;
     function Pesquisar(const APesquisa : string): TObjectList<TCliente>;
 
  end;
@@ -117,16 +117,81 @@ end;
 
 procedure TClienteRepository.AtualizarLista;
 begin
-
+ FdmConexao.qryProdutos.Close;
+ FdmConexao.qryProdutos.Open;
 end;
 
-function TClienteRepository.BuscarPorId(d: Integer): TCliente;
+function TClienteRepository.BuscarPorId(AId: Integer): TCliente;
+var
+ Qry: TFDQuery;
+
+
 begin
+ Qry := TFDQuery.Create(nil);
+ Result := nil;
+
+try
+ Qry.Connection := FdmConexao.FDConexao;
+
+ Qry.SQL.Text := 'SELECT * FROM CLIENTES WHERE ID = :ID';
+ Qry.ParamByName('ID').AsInteger := AId;
+ Qry.Open;
+
+ if not Qry.IsEmpty then
+ begin
+   Result.Id := Qry.FieldByName('ID').AsInteger;
+   Result.Nome := Qry.FieldByName('NOME').AsString;
+   Result.CPF := Qry.FieldByName('CPF').AsString;
+   Result.CNPJ := Qry.FieldByName('CNPJ').AsString;
+   case Qry.FieldByName('TIPOPESSOA').AsString[1] of
+    'F': Result.TipoPessoa := tpFisica;
+    'J': Result.TipoPessoa := tpJuridica;
+   end;
+   Result.Telefone := Qry.FieldByName('TELEFONE').AsString;
+   Result.Email := Qry.FieldByName('EMAIL').AsString;
+   Result.IE := QRY.FieldByName('IE').AsString;
+ end;
+
+finally
+ Qry.Free;
+
+end;
 
 end;
 
 function TClienteRepository.Listar: TObjectList<TCliente>;
+var
+ Qry: TFDQuery;
+ Cliente: TCliente;
+
 begin
+ Qry := TFDQuery.Create(nil);
+ Result := TObjectList<TCliente>.Create(True);
+
+ try
+   Qry.Connection := FdmConexao.FDConexao;
+   Qry.SQL.Text := 'SELECT ID, NOME, CPF, CNPJ, TELEFONE, EMAIL' +
+                   'FROM CLIENTES ORDER BY ID';
+   Qry.Open;
+
+   while not Qry.Eof do
+   begin
+     Cliente := TCliente.Create;
+
+     Cliente.Id := Qry.FieldByName('ID').AsInteger;
+     Cliente.Nome := Qry.FieldByName('NOME').AsString;
+     Cliente.CPF := Qry.FieldByName('CNPJ').AsString;
+     Cliente.Telefone := Qry.FieldByName('TELEFONE').AsString;
+     Cliente.Email := Qry.FieldByName('EMAIL').AsString;
+
+     Result.Add(Cliente);
+
+     Qry.Next;
+   end;
+
+ finally
+
+ end;
 
 end;
 

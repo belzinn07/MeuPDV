@@ -64,7 +64,7 @@ end;
 
 function TProdutoService.ListarProdutos: TObjectList<TProduto>;
 begin
- Result := FRepository.ListarProdutos;
+ Result := FRepository.Listar;
 end;
 
 function TProdutoService.PesquisarProdutos(

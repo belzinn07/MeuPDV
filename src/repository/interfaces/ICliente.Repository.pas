@@ -12,7 +12,7 @@ type
    procedure Atualizar(const ACliente: TCliente);
    procedure Excluir(AId: Integer);
    function Listar: TObjectList<TCliente>;
-   function BuscarPorId(d : Integer): TCliente;
+   function BuscarPorId(Aid : Integer): TCliente;
    function Pesquisar(const APesquisa : string): TObjectList<TCliente>;
 
  end;

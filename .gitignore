@@ -42,3 +42,5 @@ __recovery/
 # --- Logs e temporários ---
 *.log
 *.tmp
+config.ini
+*.ini

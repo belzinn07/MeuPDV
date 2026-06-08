@@ -20,7 +20,7 @@ TProdutoRepository = class (TInterfacedObject, IProdutoRepository)
   procedure Inserir(AProduto: TProduto);
   procedure Atualizar(AProduto : TProduto);
   procedure Excluir(AId : Integer);
-  function ListarProdutos: TObjectList<TProduto>;
+  function Listar: TObjectList<TProduto>;
   function BuscarPorId(AId: Integer): TProduto;
   function PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
 end;
@@ -145,7 +145,7 @@ end;
 
 
 
-function TProdutoRepository.ListarProdutos: TObjectList<TProduto>;
+function TProdutoRepository.Listar: TObjectList<TProduto>;
 var
  Qry :TFDQuery;
  Produto : TProduto;
@@ -203,7 +203,6 @@ begin
     while not Qry.Eof do
     begin
       Produto := TProduto.Create;
-
 
       Produto.Id        := Qry.FieldByName('ID').AsInteger;
       Produto.Descricao := Qry.FieldByName('DESCRICAO').AsString;
