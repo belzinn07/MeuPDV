@@ -197,7 +197,48 @@ end;
 
 function TClienteRepository.Pesquisar(
   const APesquisa: string): TObjectList<TCliente>;
+var
+ Qry: TFDQuery;
+ Cliente : TCliente;
+
 begin
+ Qry := TFDQuery.Create(nil);
+ Result := TObjectList<TCliente>.Create(True);
+
+ try
+   Qry.Connection := FdmConexao.FDConexao;
+   Qry.SQL.Text := 'SELECT ID, NOME,CPF, CNPJ, TELEFONE, EMAIL FROM CLIENTES' +
+                   'WHERE CAST(ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA' +
+                   'OR UPPER(NOME) LIKE UPPER (:VALOR_PESQUISA)' +
+                   'OR CPF LIKE :VALOR_PESQUISA' +
+                   'OR CNPJ LIKE :VALOR_PESQUISA' +
+                   'OR TELEFONE LIKE :VALOR_PESQUISA' +
+                   'OR EMAIL LIKE :VALOR_PESQUISA' +
+                   'ORDER BY ID';
+   Qry.ParamByName('VALOR_PESQUISA').AsString := '%' + APesquisa + '%';
+   Qry.Open;
+
+   while not Qry.Eof do
+   begin
+    Cliente := TCliente.Create;
+
+    Cliente.Id := Qry.FieldByName('ID').AsInteger;
+    Cliente.Nome := Qry.FieldByName('NOME').AsString;
+    Cliente.CPF := Qry.FieldByName('CPF').AsString;
+    Cliente.CNPJ := Qry.FieldByName('CNPJ').AsString;
+    Cliente.Telefone := Qry.FieldByName('TELEFONE').AsString;
+    Cliente.Email := Qry.FieldByName('EMAIL').AsString;
+
+    Result.Add(Cliente);
+    Qry.Next
+   end;
+
+
+ except
+    Qry.Free;
+    Result.Free;
+    raise;
+ end;
 
 end;
 
