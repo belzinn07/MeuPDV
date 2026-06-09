@@ -7,7 +7,8 @@ uses
   Produto.Model,
   IProduto.Repository,
   System.SysUtils,
-  System.Generics.Collections, Validador.Contracts, Produto.Validation;
+  System.Generics.Collections, Validador.Contracts, Produto.Validation,
+  DMConexao.infra, Produto.Repository;
 type
  TProdutoService = class(TInterfacedObject, IProdutoService)
 
@@ -16,7 +17,7 @@ type
 
 
   public
-   constructor Create(ARepository: IProdutoRepository);
+   constructor Create(Adm : Tdmconexao);
    procedure Salvar(AProduto: TProduto);
    procedure Excluir(AId : Integer);
    function ListarProdutos : TObjectList<TProduto>;
@@ -29,9 +30,9 @@ implementation
 
 { TProdutoService }
 
-constructor TProdutoService.Create(ARepository: IProdutoRepository);
+constructor TProdutoService.Create(Adm : TdmConexao);
 begin
-FRepository := ARepository;
+FRepository := TProdutoRepository.Create(Adm)
 
 end;
 
@@ -80,7 +81,5 @@ function TProdutoService.BuscarPorId(AId: Integer): TProduto;
 begin
 Result := FRepository.BuscarPorId(AId);
 end;
-
-
 
 end.

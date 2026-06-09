@@ -25,7 +25,7 @@ type
 
   private
     FProduto : TProduto;
-    FPodutoService : IProdutoService;
+    FProdutoService : IProdutoService;
     procedure AplicarEstilos;
 
     { Private declarations }
@@ -54,7 +54,7 @@ end;
 
 procedure TfrmProdutos.PrepararEdicao(Aid : Integer);
 begin
-FProduto := FPodutoService.BuscarPorId(Aid);
+FProduto := FProdutoService.BuscarPorId(Aid);
 edtCodigo.Text := IntToStr(FProduto.Id);
 edtDescricao.Text := FProduto.Descricao;
 edtPreco.Text := CurrToStr(FProduto.Preco);
@@ -83,7 +83,7 @@ try
     else
       Produto.Id := 0;
 
-FPodutoService.Salvar(Produto);
+FProdutoService.Salvar(Produto);
 ShowMessage('Salvo com sucesso!');
 ModalResult := mrOk;
 
@@ -103,7 +103,7 @@ end;
 procedure TfrmProdutos.FormCreate(Sender: TObject);
 begin
   AplicarEstilos;
-  FPodutoService := TProdutoService.Create(TProdutoRepository.Create(dm));
+  FProdutoService := TProdutoService.Create(dm);
 
 end;
 
