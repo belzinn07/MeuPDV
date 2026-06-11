@@ -133,7 +133,7 @@
             <DesignClass>TFormPrincipal</DesignClass>
         </DCCReference>
         <DCCReference Include="src\infra\DMConexao.infra.pas">
-            <Form>dmConexao</Form>
+            <Form>dm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -187,6 +187,7 @@
         <DCCReference Include="src\domain\model\enums\TipoPessoa.Enums.Model.pas"/>
         <DCCReference Include="src\repository\interfaces\ICliente.Repository.pas"/>
         <DCCReference Include="src\repository\Cliente.Repository.pas"/>
+        <DCCReference Include="src\service\interfaces\ICliente.Service.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

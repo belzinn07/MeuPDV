@@ -1,4 +1,4 @@
-object dmConexao: TdmConexao
+object dm: Tdm
   OnCreate = DataModuleCreate
   Height = 750
   Width = 1000

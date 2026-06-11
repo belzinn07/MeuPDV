@@ -12,11 +12,11 @@ type
 TProdutoRepository = class (TInterfacedObject, IProdutoRepository)
 
  private
-  FdmConexao: TdmConexao;
+  FdmConexao: Tdm;
   procedure AtualizarLista;
 
  public
-  constructor Create(AdmConexão : TdmConexao);
+  constructor Create(AdmConexão : Tdm);
   procedure Inserir(AProduto: TProduto);
   procedure Atualizar(AProduto : TProduto);
   procedure Excluir(AId : Integer);
@@ -30,7 +30,7 @@ implementation
 
 { TProdutoRepository }
 
-constructor TProdutoRepository.Create(AdmConexão: TdmConexao);
+constructor TProdutoRepository.Create(AdmConexão: Tdm);
 begin
 
 FdmConexao := AdmConexão;

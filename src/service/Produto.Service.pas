@@ -17,7 +17,7 @@ type
 
 
   public
-   constructor Create(Adm : Tdmconexao);
+   constructor Create(Adm : Tdm);
    procedure Salvar(AProduto: TProduto);
    procedure Excluir(AId : Integer);
    function ListarProdutos : TObjectList<TProduto>;
@@ -30,7 +30,7 @@ implementation
 
 { TProdutoService }
 
-constructor TProdutoService.Create(Adm : TdmConexao);
+constructor TProdutoService.Create(Adm : Tdm);
 begin
 FRepository := TProdutoRepository.Create(Adm)
 

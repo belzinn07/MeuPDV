@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.DataSet, System.IniFiles, Vcl.Dialogs;
 
 type
-  TdmConexao = class(TDataModule)
+  Tdm = class(TDataModule)
     FDConexao: TFDConnection;
     qryCRUD: TFDQuery;
     qryClientes: TFDQuery;
@@ -28,7 +28,7 @@ type
   end;
 
 var
-  dm: TdmConexao;
+  dm: Tdm;
 
 implementation
 
@@ -38,7 +38,7 @@ implementation
 
 
 
-procedure TdmConexao.CarregarConfiguracoes;
+procedure Tdm.CarregarConfiguracoes;
 var
   Ini: TIniFile;
   CaminhoBanco: string;
@@ -52,7 +52,7 @@ begin
   end;
 end;
 
-procedure TdmConexao.DataModuleCreate(Sender: TObject);
+procedure Tdm.DataModuleCreate(Sender: TObject);
 begin
  CarregarConfiguracoes;
  FDConexao.Connected := True;

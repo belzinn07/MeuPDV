@@ -9,11 +9,11 @@ type
  TClienteRepository = class(TInterfacedObject, IClienteRepository)
 
    private
-    FdmConexao : TdmConexao;
+    FdmConexao : Tdm;
     procedure AtualizarLista;
 
    public
-    constructor Create(AdmConexão : TdmConexao);
+    constructor Create(AdmConexão : Tdm);
     procedure Inserir(const ACliente : TCliente);
     procedure Atualizar(const ACliente: TCliente);
     procedure Excluir(AId: Integer);
@@ -29,7 +29,7 @@ implementation
 
 { TClienteRepository }
 
-constructor TClienteRepository.Create(AdmConexão: TdmConexao);
+constructor TClienteRepository.Create(AdmConexão: Tdm);
 begin
   FdmConexao := AdmConexão;
 end;

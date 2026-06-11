@@ -3,7 +3,7 @@ program MeuPDV;
 uses
   Vcl.Forms,
   FormPrincipal.View in 'src\view\FormPrincipal.View.pas' {frmPrincipal: TFormPrincipal},
-  DMConexao.infra in 'src\infra\DMConexao.infra.pas' {dmConexao: TDataModule},
+  DMConexao.infra in 'src\infra\DMConexao.infra.pas' {dm: TDataModule},
   FormClientes.View in 'src\view\FormClientes.View.pas' {frmClientes: TFormClientes},
   Estilos in 'src\view\Styles\Estilos.pas',
   FormProdutos.View in 'src\view\FormProdutos.View.pas' {frmProdutos: TFormProdutos},
@@ -25,7 +25,8 @@ uses
   ValidadorDocumentos.Utils in 'src\utils\ValidadorDocumentos.Utils.pas',
   TipoPessoa.Enums.Model in 'src\domain\model\enums\TipoPessoa.Enums.Model.pas',
   ICliente.Repository in 'src\repository\interfaces\ICliente.Repository.pas',
-  Cliente.Repository in 'src\repository\Cliente.Repository.pas';
+  Cliente.Repository in 'src\repository\Cliente.Repository.pas',
+  ICliente.Service in 'src\service\interfaces\ICliente.Service.pas';
 
 {$R *.res}
 
@@ -35,7 +36,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListaClientes, frmListaClientes);
   Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(TdmConexao, dm);
+  Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
   Application.CreateForm(TfrmInicialVenda, frmInicialVenda);
   Application.CreateForm(TfrmVendas, frmVendas);
