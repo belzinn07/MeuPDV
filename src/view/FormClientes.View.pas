@@ -19,6 +19,8 @@ type
     LabeledEdit1: TLabeledEdit;
     SpeedButton1: TSpeedButton;
     ImageList1: TImageList;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
   private
     procedure AplicarEstilos;

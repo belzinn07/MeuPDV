@@ -32,7 +32,7 @@ implementation
 
 constructor TProdutoService.Create(Adm : Tdm);
 begin
-FRepository := TProdutoRepository.Create(Adm)
+FRepository := TProdutoRepository.Create(Adm);
 
 end;
 

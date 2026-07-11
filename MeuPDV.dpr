@@ -26,7 +26,10 @@ uses
   TipoPessoa.Enums.Model in 'src\domain\model\enums\TipoPessoa.Enums.Model.pas',
   ICliente.Repository in 'src\repository\interfaces\ICliente.Repository.pas',
   Cliente.Repository in 'src\repository\Cliente.Repository.pas',
-  ICliente.Service in 'src\service\interfaces\ICliente.Service.pas';
+  ICliente.Service in 'src\service\interfaces\ICliente.Service.pas',
+  Cliente.Service in 'src\service\Cliente.Service.pas',
+  MeuPDV.Logger in 'src\utils\Logger\MeuPDV.Logger.pas',
+  MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas';
 
 {$R *.res}
 

@@ -188,6 +188,9 @@
         <DCCReference Include="src\repository\interfaces\ICliente.Repository.pas"/>
         <DCCReference Include="src\repository\Cliente.Repository.pas"/>
         <DCCReference Include="src\service\interfaces\ICliente.Service.pas"/>
+        <DCCReference Include="src\service\Cliente.Service.pas"/>
+        <DCCReference Include="src\utils\Logger\MeuPDV.Logger.pas"/>
+        <DCCReference Include="src\utils\Logger\MeuPDV.LogTipo.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

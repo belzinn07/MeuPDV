@@ -118,6 +118,40 @@ object frmClientes: TfrmClientes
       TabOrder = 5
       Text = ''
     end
+    object LabeledEdit2: TLabeledEdit
+      Left = 64
+      Top = 248
+      Width = 137
+      Height = 25
+      EditLabel.Width = 33
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Nome'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+      Text = ''
+    end
+    object LabeledEdit3: TLabeledEdit
+      Left = 237
+      Top = 248
+      Width = 204
+      Height = 25
+      EditLabel.Width = 33
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Nome'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Text = ''
+    end
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit
