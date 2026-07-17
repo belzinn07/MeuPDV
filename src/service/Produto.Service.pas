@@ -60,12 +60,15 @@ try
 
  end
  else
+ begin
    TLogger.Info('ProdutoService.Salvar',
    Format('Operação identificada: Edição do produto código = %d', [AProduto.Id]));
    FRepository.Atualizar(AProduto);
+ end;
 
  TLogger.Info('ProdutoService.Salvar','Processo de salvamento concluído com sucesso');
-except
+
+ except
    on E: Exception do
      begin
        TLogger.Erro('ProdutoService.Salvar',
@@ -81,38 +84,54 @@ begin
 
 if AId <= 0 then
 begin
-  TLogger.Erro('ProdutoService','Erro: ID ' + AId.ToString + ' è inválido');
+  TLogger.Warning('ProdutoService.Excluir','Erro: ID ' + AId.ToString + ' è inválido');
   raise Exception.Create('ID inválido');
 end;
 
+
+TLogger.Info('ProdutoService.Excluir','Iniciando exclusão do produto ' + AId.ToString);
 FRepository.Excluir(AId);
-TLogger.Info( 'ProdutoService','Produto de código ' + AId.ToString +' excluído com sucesso');
+TLogger.Info( 'ProdutoService.Excluir','Produto de código ' + AId.ToString +' excluído com sucesso');
 end;
 
 function TProdutoService.ListarProdutos: TObjectList<TProduto>;
 begin
+ TLogger.Debug('ProdutoService.ListarProdutos','Iniciando listagem de produtos');
  Result := FRepository.Listar;
+ TLogger.Debug('ProdutoService.ListarProdutos',Format('Total de %d produtos dispóníveis no sistema', [Result.Count] ));
 end;
 
 function TProdutoService.PesquisarProdutos(
   APesquisa: String): TObjectList<TProduto>;
 begin
+try
+
   if APesquisa.Trim.IsEmpty then
   begin
-    TLogger.Erro('ProdutoService', 'Tentativa de pesuisa com termo vazio');
+    TLogger.Warning('ProdutoService.PesquisarProdutos', 'Tentativa de pesuisa com termo vazio');
     raise Exception.Create('Informe algo para pesquisar');
   end;
-  TLogger.Info('ProdutoService', 'Pesquisando produtos por: ' + APesquisa.Trim );
+  TLogger.Debug('ProdutoService.PesquisarProdutos', 'Pesquisando produtos por: ' + APesquisa.Trim );
   Result := FRepository.PesquisarProdutos(APesquisa);
 
-  if Result <> nil then
-    TLogger.Info('ProdutoService', Format('Pesquisa por "%s" retornou %d resultado(s)', [APesquisa.Trim, Result.Count]))
+  if Assigned(Result) then
+    TLogger.Debug('ProdutoService.PesquisarProdutos', Format('Pesquisa por "%s" retornou %d resultado(s)', [APesquisa.Trim, Result.Count]))
   else
-    TLogger.Info('ProdutoService', 'Pesquisa por ' + APesquisa.Trim + 'retornou nada');
+    TLogger.Warning('ProdutoService.PesquisarProdutos', 'Pesquisa por ' + APesquisa.Trim + ' retornou nada');
+
+except
+  on E: Exception do
+   begin
+   TLogger.Erro('ProdutoService.PesquisarProdutos', Format('Erro ao pesquisar: %s',[E.Message]));
+   raise;
+   end;
+
+end;
 end;
 
 function TProdutoService.BuscarPorId(AId: Integer): TProduto;
 begin
+TLogger.Debug('ProdutoService.BuscarPorId','Buscando produto pelo ID ' + AId.ToString);
 Result := FRepository.BuscarPorId(AId);
 end;
 

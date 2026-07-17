@@ -70,7 +70,7 @@ begin
                       AMensagem
                       ]);
 
-  try 
+  try
    Writer := TStreamWriter.Create(CaminhoArquivoLogs,True, TEncoding.UTF8);
     try
      Writer.WriteLine(LinhaDoLog);
@@ -78,7 +78,7 @@ begin
      Writer.Free;
     end;
   except
-  
+
   end;
 
 end;
