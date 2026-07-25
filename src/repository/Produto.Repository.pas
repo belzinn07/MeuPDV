@@ -52,11 +52,14 @@ Qry := TFDQuery.Create(nil);
 try
   Qry.Connection := FdmConexao.FDConexao;
   Qry.SQL.Text := 'INSERT INTO PRODUTOS (DESCRICAO, PRECO, SALDO) ' +
-                   'VALUES (:DESCRICAO, :PRECO, :SALDO)';
+                   'VALUES (:DESCRICAO, :PRECO, :SALDO)' +
+                    'RETURNING ID';
   Qry.ParamByName('DESCRICAO').AsString := AProduto.Descricao;
   Qry.ParamByName('PRECO').AsCurrency := AProduto.Preco;
   Qry.ParamByName('SALDO').AsFloat := AProduto.Saldo;
-  Qry.ExecSQL;
+  Qry.Open;
+
+  AProduto.Id := Qry.FieldByName('ID').AsInteger;
 
   AtualizarLista;
 finally

@@ -2,47 +2,80 @@ object frmClientes: TfrmClientes
   Left = 0
   Top = 0
   Caption = 'Formul'#225'rio de Clientes'
-  ClientHeight = 301
-  ClientWidth = 515
+  ClientHeight = 433
+  ClientWidth = 797
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poMainFormCenter
   OnCreate = FormCreate
   TextHeight = 15
+  object Label3: TLabel
+    Left = 343
+    Top = 235
+    Width = 27
+    Height = 21
+    Caption = 'CPF'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
   object pnlGeral: TPanel
     Left = 0
     Top = 0
-    Width = 515
-    Height = 301
+    Width = 797
+    Height = 433
     Align = alClient
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 513
-    ExplicitHeight = 293
-    object lblCpfCnpj: TLabel
-      Left = 157
-      Top = 98
-      Width = 57
-      Height = 15
-      Caption = 'lblCpfCnpj'
+    ExplicitWidth = 795
+    ExplicitHeight = 425
+    object lblCliente: TLabel
+      Left = 376
+      Top = 101
+      Width = 40
+      Height = 16
+      Caption = 'Cliente'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe U'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblCodigo: TLabel
+      Left = 275
+      Top = 101
+      Width = 40
+      Height = 16
+      Caption = 'C'#243'digo'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe U'
+      Font.Style = []
+      ParentFont = False
     end
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
-      Width = 513
+      Width = 795
       Height = 70
       Align = alTop
       Color = 6888724
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 511
+      ExplicitWidth = 793
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1
-        Width = 511
+        Width = 793
         Height = 68
         Align = alClient
         BiDiMode = bdLeftToRight
@@ -65,50 +98,139 @@ object frmClientes: TfrmClientes
       end
     end
     object RadioGroup1: TRadioGroup
-      Left = 1
+      Left = 2
       Top = 77
-      Width = 440
+      Width = 239
       Height = 76
       Caption = 'Tipo de Pessoa'
       TabOrder = 1
     end
-    object btnPessoaFisica: TRadioButton
+    object rbPessoaFisica: TRadioButton
       Left = 16
       Top = 104
       Width = 113
       Height = 17
       Caption = 'Pessoa F'#237'sica'
-      TabOrder = 2
-    end
-    object RadioButton1: TRadioButton
-      Left = 16
-      Top = 127
-      Width = 113
-      Height = 17
-      Caption = 'Pessoa Jur'#237'dica'
-      TabOrder = 3
-    end
-    object Edit1: TEdit
-      Left = 157
-      Top = 119
-      Width = 233
-      Height = 25
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 2
+      OnClick = rbPessoaFisicaClick
     end
-    object LabeledEdit1: TLabeledEdit
-      Left = 64
-      Top = 200
-      Width = 377
+    object rbPessoaJuridica: TRadioButton
+      Left = 16
+      Top = 127
+      Width = 145
+      Height = 17
+      Caption = 'Pessoa Jur'#237'dica'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = rbPessoaJuridicaClick
+    end
+    object pnlPessoaFisica: TPanel
+      Left = 151
+      Top = 208
+      Width = 506
+      Height = 169
+      TabOrder = 4
+      object lblCPF: TLabel
+        Left = 124
+        Top = 22
+        Width = 27
+        Height = 21
+        Caption = 'CPF'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblEmail: TLabel
+        Left = 120
+        Top = 91
+        Width = 38
+        Height = 21
+        Caption = 'Email'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 280
+        Top = 21
+        Width = 120
+        Height = 21
+        Caption = 'Telefone / Celular'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edtCPF: TMaskEdit
+        Left = 120
+        Top = 49
+        Width = 137
+        Height = 25
+        EditMask = '999.999.999-99;1;_'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        MaxLength = 14
+        ParentFont = False
+        TabOrder = 0
+        Text = '   .   .   -  '
+      end
+      object edtEmail: TEdit
+        Left = 124
+        Top = 118
+        Width = 281
+        Height = 25
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object edtTelefone: TMaskEdit
+        Left = 280
+        Top = 48
+        Width = 134
+        Height = 25
+        EditMask = '(99) 99999-9999;1;_'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        MaxLength = 15
+        ParentFont = False
+        TabOrder = 2
+        Text = '(  )      -    '
+      end
+    end
+    object edtCliente: TEdit
+      Left = 376
+      Top = 123
+      Width = 393
       Height = 25
-      EditLabel.Width = 33
-      EditLabel.Height = 15
-      EditLabel.Caption = 'Nome'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -116,16 +238,12 @@ object frmClientes: TfrmClientes
       Font.Style = []
       ParentFont = False
       TabOrder = 5
-      Text = ''
     end
-    object LabeledEdit2: TLabeledEdit
-      Left = 64
-      Top = 248
-      Width = 137
+    object Edit1: TEdit
+      Left = 271
+      Top = 123
+      Width = 81
       Height = 25
-      EditLabel.Width = 33
-      EditLabel.Height = 15
-      EditLabel.Caption = 'Nome'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -133,24 +251,123 @@ object frmClientes: TfrmClientes
       Font.Style = []
       ParentFont = False
       TabOrder = 6
-      Text = ''
     end
-    object LabeledEdit3: TLabeledEdit
-      Left = 237
-      Top = 248
-      Width = 204
-      Height = 25
-      EditLabel.Width = 33
-      EditLabel.Height = 15
-      EditLabel.Caption = 'Nome'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
+    object pnlPessoaJuridica: TPanel
+      Left = 151
+      Top = 188
+      Width = 506
+      Height = 209
       TabOrder = 7
-      Text = ''
+      object Label2: TLabel
+        Left = 124
+        Top = 22
+        Width = 36
+        Height = 21
+        Caption = 'CNPJ'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 120
+        Top = 91
+        Width = 38
+        Height = 21
+        Caption = 'Email'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 280
+        Top = 21
+        Width = 123
+        Height = 21
+        Caption = 'Inscri'#231#227'o Estadual'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 124
+        Top = 148
+        Width = 120
+        Height = 21
+        Caption = 'Telefone / Celular'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object MaskEdit1: TMaskEdit
+        Left = 120
+        Top = 49
+        Width = 133
+        Height = 25
+        EditMask = '99.999.999/9999-99;1;_'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        MaxLength = 18
+        ParentFont = False
+        TabOrder = 0
+        Text = '  .   .   /    -  '
+      end
+      object Edit2: TEdit
+        Left = 124
+        Top = 118
+        Width = 281
+        Height = 25
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object MaskEdit3: TMaskEdit
+        Left = 124
+        Top = 175
+        Width = 134
+        Height = 25
+        EditMask = '(99) 99999-9999;1;_'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        MaxLength = 15
+        ParentFont = False
+        TabOrder = 2
+        Text = '(  )      -    '
+      end
+      object Edit3: TEdit
+        Left = 280
+        Top = 48
+        Width = 153
+        Height = 25
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+      end
     end
   end
   object ImageList1: TImageList

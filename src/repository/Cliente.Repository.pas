@@ -44,7 +44,8 @@ begin
 
    Qry.Connection := FdmConexao.FDConexao;
    Qry.SQL.Text := 'INSERT INTO CLIENTES (NOME, CPF, CNPJ, TIPOPESSOA, TELEFONE, EMAIL, IE)' +
-                    'VALUES(:NOME, :CPF, :CNPJ, :TIPOPESSOA, :TELEFONE, :EMAIL, :IE)';
+                    'VALUES(:NOME, :CPF, :CNPJ, :TIPOPESSOA, :TELEFONE, :EMAIL, :IE)' +
+                    'RETURNING ID';
    Qry.ParamByName('NOME').AsString := ACliente.Nome;
    Qry.ParamByName('CPF').AsString := ACliente.CPF;
    Qry.ParamByName('CNPJ').AsString := ACliente.CNPJ;
@@ -58,8 +59,11 @@ begin
    Qry.ParamByName('EMAIL').AsString := ACliente.Email;
    Qry.ParamByName('IE').AsString := ACliente.IE;
 
-   Qry.ExecSQL;
+   Qry.Open;
 
+   ACliente.Id := Qry.FieldByName('ID').AsInteger;
+
+   AtualizarLista;
  finally
    Qry.Free;
 
@@ -91,6 +95,8 @@ begin
    Qry.ParamByName('IE').AsString := ACliente.IE;
 
    Qry.ExecSQL;
+
+   AtualizarLista;
  finally
    Qry.Free;
  end;
@@ -108,6 +114,8 @@ begin
    Qry.SQL.Text := 'DELETE FROM CLIENTES WHERE ID = :ID';
    Qry.ParamByName('ID').AsInteger := AId;
    Qry.ExecSQL;
+
+   AtualizarLista;
 
  finally
   Qry.Free;

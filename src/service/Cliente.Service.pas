@@ -6,7 +6,8 @@ uses
   ICliente.Service,
   Cliente.Repository,
   System.Generics.Collections,
-  Cliente.Model, DMConexao.infra, Cliente.Validation, System.SysUtils;
+  Cliente.Model, DMConexao.infra, Cliente.Validation, System.SysUtils,
+  MeuPDV.Logger;
 
 type
   TClienteService = class(TInterfacedObject, IClienteService)
@@ -38,20 +39,38 @@ var
  Validador : TClienteValidador;
 
 begin
+ TLogger.Info('ClienteService.Salvar',
+  Format('Iniciando processo de salvamento. ID = %d | Cliente = %s ',
+  [ACliente.Id, ACliente.Nome]));
  Validador := TClienteValidador.Create;
 
  try
+  TLogger.Debug('ClienteService.Salvar', 'Executando validação do cliente');
   Validador.Validar(ACliente);
+  TLogger.Debug('ClienteService.Salvar', 'Cliente validado com sucesso');
 
   if ACliente.Id = 0 then
-     FRepository.Inserir(ACliente)
+  begin
+     TLogger.Info('ClienteService.Salvar', 'Operação identificada: Cadastro de Cliente');
+     FRepository.Inserir(ACliente);
+     TLogger.Info('ClienteService.Salvar', 'Cliente cadastrado com sucesso no banco de dados ' +
+     'ID gerado: ' + ACliente.Id.ToString );
+  end
   else
+     TLogger.Info('ClienteService.Salvar', 'Operação identificada: Edição de Cliente');
      FRepository.Atualizar(ACliente);
+     TLogger.Info('ClienteService.Salvar',
+     Format('Cliente ID = %d atualizado com sucesso',
+     [ACliente.Id.ToString]));
 
  except
   on E: Exception do
+  begin
+     TLogger.Erro('ClienteService.Salvar',
+     Format('Erro ao salvar Cliente %s | ID = %d | Erro: %s' ,
+     [ACliente.Nome, ACliente.Id, E.Message]));
      raise Exception.CreateFmt('Erro ao salvar Cliente: %s', [E.Message]);
-
+  end
  end;
 
 end;
@@ -59,9 +78,12 @@ end;
 procedure TClienteService.Excluir(AId: Integer);
 begin
   if AId <= 0 then
+  TLogger.Warning('ClienteService.Excluir','Erro: ID ' + AId.ToString + ' è inválido');
   raise Exception.Create('ID inválido');
 
+ TLogger.Info('ClienteService.Excluir','Iniciando exclusão do cliente ' + AId.ToString);
  FRepository.Excluir(AId);
+ TLogger.Info( 'ClienteService.Excluir','Cliente de código ' + AId.ToString +' excluído com sucesso');
 end;
 
 function TClienteService.BuscarPorId(AId: Integer): TCliente;
@@ -71,7 +93,9 @@ end;
 
 function TClienteService.Listar: TObjectList<TCliente>;
 begin
+   TLogger.Debug('ClienteService.Listar','Iniciando listagem de clientes');
    Result := FRepository.Listar;
+   TLogger.Debug('ProdutoService.ListarProdutos',Format('Total de %d produtos dispóníveis no sistema', [Result.Count] ));
 end;
 
 function TClienteService.Pesquisar(

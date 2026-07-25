@@ -9,11 +9,12 @@ uses
   Vcl.Buttons, DMConexao.infra, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FormBaseListagem.View;
+  FormBaseListagem.View, FormClientes.View;
 
 type
   TfrmListaClientes = class(TfrmBaseListagem)
     FDMemTable1: TFDMemTable;
+    procedure btnAdicionarProdutoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,5 +27,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmListaClientes.btnAdicionarProdutoClick(Sender: TObject);
+begin
+  inherited;
+frmClientes.ShowModal;
+end;
 
 end.

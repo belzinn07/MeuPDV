@@ -8,11 +8,11 @@ inherited frmListaClientes: TfrmListaClientes
   inherited pnlContainer: TPanel
     Width = 1108
     StyleElements = [seFont, seClient, seBorder]
-    ExplicitWidth = 1108
+    ExplicitWidth = 1106
     inherited pnlCabecalho: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       inherited btnTitulo: TSpeedButton
         Width = 1108
         Caption = 'Clientes'
@@ -23,12 +23,15 @@ inherited frmListaClientes: TfrmListaClientes
     inherited pnlRodape: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       inherited pnlAltera: TPanel
         StyleElements = [seFont, seClient, seBorder]
       end
       inherited pnlAdicionarProduto: TPanel
         StyleElements = [seFont, seClient, seBorder]
+        inherited btnAdicionarProduto: TSpeedButton
+          OnClick = btnAdicionarProdutoClick
+        end
       end
       inherited pnlExcluirProduto: TPanel
         StyleElements = [seFont, seClient, seBorder]
@@ -37,10 +40,9 @@ inherited frmListaClientes: TfrmListaClientes
     inherited pnlCentral: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       inherited dbgProdutos: TDBGrid
         Width = 1108
-        DataSource = dmConexao.dsClientes
       end
     end
   end

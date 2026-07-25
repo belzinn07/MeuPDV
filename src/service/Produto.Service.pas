@@ -47,7 +47,7 @@ begin
      [AProduto.Id, AProduto.Descricao]));
 
 try
-     TLogger.Debug('ProdutoService.Salvar', 'Executando validação do produto ' + AProduto.Id.ToString);
+     TLogger.Debug('ProdutoService.Salvar', 'Executando validação do produto ');
      Validador.Validar(AProduto);
      TLogger.Info('ProdutoService.Salvar','Validação concluída com sucesso.');
 
@@ -56,7 +56,8 @@ try
 
    TLogger.Info('ProdutoService.Salvar','Operação identificada: Cadastro de produto');
    FRepository.Inserir(AProduto);
-   TLogger.Info('ProdutoService.Salvar', 'Produto inserido com sucesso no banco de dados');
+   TLogger.Info('ProdutoService.Salvar', 'Produto cadastrado com sucesso no banco de dados. ' +
+   'ID gerado: ' + AProduto.Id.ToString);
 
  end
  else
@@ -64,6 +65,9 @@ try
    TLogger.Info('ProdutoService.Salvar',
    Format('Operação identificada: Edição do produto código = %d', [AProduto.Id]));
    FRepository.Atualizar(AProduto);
+   TLogger.Info('ProdutoService.Salvar',
+   Format('Produto ID=%d atualizado com sucesso.', [AProduto.Id]));
+
  end;
 
  TLogger.Info('ProdutoService.Salvar','Processo de salvamento concluído com sucesso');
@@ -87,7 +91,6 @@ begin
   TLogger.Warning('ProdutoService.Excluir','Erro: ID ' + AId.ToString + ' è inválido');
   raise Exception.Create('ID inválido');
 end;
-
 
 TLogger.Info('ProdutoService.Excluir','Iniciando exclusão do produto ' + AId.ToString);
 FRepository.Excluir(AId);
