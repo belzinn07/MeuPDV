@@ -13,7 +13,7 @@ uses
 
   System.Generics.Collections, Produto.Model, IProduto.Service,
   Produto.Service, Produto.Repository, FormProdutos.View,
-  Vcl.StdCtrls, Estilos, FormBaseListagem.View;
+  Vcl.StdCtrls, Estilos, FormBaseListagem.View, IProduto.Repository;
 
 type
   TfrmListaProdutos = class(TfrmBaseListagem)
@@ -227,10 +227,13 @@ begin
 end;
 
 procedure TfrmListaProdutos.FormCreate(Sender: TObject);
+var
+ Repository: IProdutoRepository;
+
 begin
 
-
-FPodutoService := TProdutoService.Create(dm);
+  Repository := TProdutoRepository.Create(dm);
+  FPodutoService := TProdutoService.Create(Repository);
 
   dsProdutos.DataSet := MemTable;
 

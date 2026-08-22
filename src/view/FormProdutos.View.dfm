@@ -22,8 +22,6 @@ object frmProdutos: TfrmProdutos
     Align = alClient
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 622
-    ExplicitHeight = 273
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
@@ -32,7 +30,6 @@ object frmProdutos: TfrmProdutos
       Align = alTop
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 620
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1

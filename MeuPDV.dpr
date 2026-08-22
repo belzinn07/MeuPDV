@@ -29,7 +29,8 @@ uses
   ICliente.Service in 'src\service\interfaces\ICliente.Service.pas',
   Cliente.Service in 'src\service\Cliente.Service.pas',
   MeuPDV.Logger in 'src\utils\Logger\MeuPDV.Logger.pas',
-  MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas';
+  MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas',
+  Produto.DTO in 'src\dto\Produto.DTO.pas';
 
 {$R *.res}
 
