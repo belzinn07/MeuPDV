@@ -22,8 +22,6 @@ object frmBaseListagem: TfrmBaseListagem
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 918
-    ExplicitHeight = 592
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -34,7 +32,6 @@ object frmBaseListagem: TfrmBaseListagem
       Color = 16744448
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 918
       object btnTitulo: TSpeedButton
         Left = 0
         Top = 0
@@ -70,8 +67,6 @@ object frmBaseListagem: TfrmBaseListagem
       FullRepaint = False
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 528
-      ExplicitWidth = 918
       object pnlAltera: TPanel
         AlignWithMargins = True
         Left = 403
@@ -109,7 +104,7 @@ object frmBaseListagem: TfrmBaseListagem
           ExplicitHeight = 22
         end
       end
-      object pnlAdicionarProduto: TPanel
+      object pnlAdicionar: TPanel
         AlignWithMargins = True
         Left = 180
         Top = 10
@@ -132,7 +127,7 @@ object frmBaseListagem: TfrmBaseListagem
           Shape = stRoundRect
           ExplicitWidth = 153
         end
-        object btnAdicionarProduto: TSpeedButton
+        object btnAdicionar: TSpeedButton
           Left = 0
           Top = 0
           Width = 120
@@ -146,7 +141,7 @@ object frmBaseListagem: TfrmBaseListagem
           ExplicitHeight = 22
         end
       end
-      object pnlExcluirProduto: TPanel
+      object pnlExcluir: TPanel
         AlignWithMargins = True
         Left = 626
         Top = 10
@@ -169,7 +164,7 @@ object frmBaseListagem: TfrmBaseListagem
           Shape = stRoundRect
           ExplicitWidth = 153
         end
-        object btnExcluirProduto: TSpeedButton
+        object btnExcluir: TSpeedButton
           Left = 0
           Top = 0
           Width = 120
@@ -192,9 +187,7 @@ object frmBaseListagem: TfrmBaseListagem
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 918
-      ExplicitHeight = 458
-      object dbgProdutos: TDBGrid
+      object dbgItens: TDBGrid
         Left = 0
         Top = 0
         Width = 920

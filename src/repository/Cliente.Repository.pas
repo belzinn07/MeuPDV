@@ -80,7 +80,7 @@ begin
  try
   Qry.Connection := FdmConexao.FDConexao;
   Qry.SQL.Text := 'UPDATE CLIENTES SET NOME = :NOME, CPF = :CPF , CNPJ = :CNPJ,' +
-                  'TIPOPESSOA = :TIPOPESSOA, TELEFOME = :TELEFONE, EMAIL = :EMAIL, IE  = :IE';
+                  'TIPOPESSOA = :TIPOPESSOA, TELEFONE = :TELEFONE, EMAIL = :EMAIL, IE  = :IE';
    Qry.ParamByName('NOME').AsString := ACliente.Nome;
    Qry.ParamByName('CPF').AsString := ACliente.CPF;
    Qry.ParamByName('CNPJ').AsString := ACliente.CNPJ;
@@ -125,8 +125,8 @@ end;
 
 procedure TClienteRepository.AtualizarLista;
 begin
- FdmConexao.qryProdutos.Close;
- FdmConexao.qryProdutos.Open;
+  FdmConexao.qryClientes.Close;
+  FdmConexao.qryClientes.Open;
 end;
 
 function TClienteRepository.BuscarPorId(AId: Integer): TCliente;
@@ -147,6 +147,8 @@ try
 
  if not Qry.IsEmpty then
  begin
+  Result := TCliente.Create;
+
    Result.Id := Qry.FieldByName('ID').AsInteger;
    Result.Nome := Qry.FieldByName('NOME').AsString;
    Result.CPF := Qry.FieldByName('CPF').AsString;
@@ -178,7 +180,7 @@ begin
 
  try
    Qry.Connection := FdmConexao.FDConexao;
-   Qry.SQL.Text := 'SELECT ID, NOME, CPF, CNPJ, TELEFONE, EMAIL' +
+   Qry.SQL.Text := 'SELECT ID, NOME, CPF, CNPJ, TELEFONE, EMAIL ' +
                    'FROM CLIENTES ORDER BY ID';
    Qry.Open;
 
@@ -188,7 +190,8 @@ begin
 
      Cliente.Id := Qry.FieldByName('ID').AsInteger;
      Cliente.Nome := Qry.FieldByName('NOME').AsString;
-     Cliente.CPF := Qry.FieldByName('CNPJ').AsString;
+     Cliente.CPF := Qry.FieldByName('CPF').AsString;
+     Cliente.CNPJ := Qry.FieldByName('CNPJ').AsString;
      Cliente.Telefone := Qry.FieldByName('TELEFONE').AsString;
      Cliente.Email := Qry.FieldByName('EMAIL').AsString;
 
@@ -198,6 +201,7 @@ begin
    end;
 
  finally
+   Qry.Free;
 
  end;
 
@@ -222,7 +226,7 @@ begin
                    'OR CNPJ LIKE :VALOR_PESQUISA' +
                    'OR TELEFONE LIKE :VALOR_PESQUISA' +
                    'OR EMAIL LIKE :VALOR_PESQUISA' +
-                   'ORDER BY ID';
+                   'ORDER BY ID ';
    Qry.ParamByName('VALOR_PESQUISA').AsString := '%' + APesquisa + '%';
    Qry.Open;
 

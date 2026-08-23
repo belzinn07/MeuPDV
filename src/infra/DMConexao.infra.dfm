@@ -8,7 +8,9 @@ object dm: Tdm
       'User_Name=SYSDBA'
       'Password=masterkey'
       'CharacterSet=UTF8'
+      'Database=C:\DEV\Delphi\MeuPDV\database\DADOS.FDB'
       'DriverID=FB')
+    Connected = True
     Transaction = FDTransacao
     Left = 520
     Top = 384

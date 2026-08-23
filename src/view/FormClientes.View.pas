@@ -3,9 +3,11 @@ unit FormClientes.View;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Mask, Vcl.StdCtrls,
-  System.ImageList, Vcl.ImgList, Vcl.Buttons;
+  System.ImageList, Vcl.ImgList, Vcl.Buttons,Estilos, Cliente.Model, Cliente.Service,
+  DMConexao.infra, TipoPessoa.Enums.Model, Documento.Utils,
+  ICliente.Repository, Cliente.Repository;
 
 type
   TfrmClientes = class(TForm)
@@ -19,33 +21,37 @@ type
     pnlPessoaFisica: TPanel;
     lblCPF: TLabel;
     edtCPF: TMaskEdit;
-    edtEmail: TEdit;
-    lblEmail: TLabel;
     Label3: TLabel;
     edtTelefone: TMaskEdit;
     Label1: TLabel;
     edtCliente: TEdit;
     lblCliente: TLabel;
-    Edit1: TEdit;
-    lblCodigo: TLabel;
     pnlPessoaJuridica: TPanel;
     Label2: TLabel;
-    Label4: TLabel;
     Label5: TLabel;
-    MaskEdit1: TMaskEdit;
-    Edit2: TEdit;
+    edtCNPJ: TMaskEdit;
     Label6: TLabel;
     MaskEdit3: TMaskEdit;
-    Edit3: TEdit;
+    edtInscricaoEstadual: TEdit;
+    edtCodigo: TLabeledEdit;
+    bntSalvar: TBitBtn;
+    edtEmail: TEdit;
+    lblEmail: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure rbPessoaFisicaClick(Sender: TObject);
     procedure rbPessoaJuridicaClick(Sender: TObject);
+    procedure bntSalvarClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
+    FCliente : TCliente;
+    FClienteService: TClienteService;
     procedure AplicarEstilos;
-    procedure AtualizarCampos;
+    procedure AtualizarTipoPessoa(ATipo : TTipoPessoa);
 
   public
-    { Public declarations }
+    procedure PrepararCadastro;
+    procedure PrepararEdicao(Aid : Integer);
+
   end;
 
 var
@@ -55,31 +61,152 @@ implementation
 
 {$R *.dfm}
 
-uses Estilos;
-
-
-
-procedure TfrmClientes.AtualizarCampos;
-begin
-   pnlPessoaFisica.Visible := rbPessoaFisica.Checked;
-   pnlPessoaJuridica.Visible := rbPessoaJuridica.Checked;
-end;
-
 procedure TfrmClientes.FormCreate(Sender: TObject);
+var
+ ClienteRepository: IClienteRepository;
 begin
+
+   ClienteRepository := TClienteRepository.Create(dm);
+    FClienteService := TClienteService.Create(ClienteRepository);
   AplicarEstilos;
   rbPessoaFisica.Checked := true;
-  AtualizarCampos;
+  AtualizarTipoPessoa(tpFisica);
+
+end;
+
+procedure TfrmClientes.FormDestroy(Sender: TObject);
+begin
+ FClienteService.Free;
+ FCliente.Free;
+
+end;
+
+procedure TfrmClientes.AtualizarTipoPessoa(ATipo: TTipoPessoa);
+begin
+  case ATipo of
+
+    tpFisica:
+      begin
+        pnlPessoaFisica.Visible := True;
+        pnlPessoaJuridica.Visible := False;
+      end;
+
+    tpJuridica:
+      begin
+        pnlPessoaFisica.Visible := False;
+        pnlPessoaJuridica.Visible := True;
+      end;
+
+  end;
+
+end;
+
+
+procedure TfrmClientes.bntSalvarClick(Sender: TObject);
+begin
+  if not Assigned(FCliente) then
+    FCliente := TCliente.Create;
+
+  try
+    FCliente.Nome := edtCliente.Text;
+    FCliente.Telefone := edtTelefone.Text;
+    FCliente.Email := edtEmail.Text;
+
+    if rbPessoaFisica.Checked then
+    begin
+      FCliente.TipoPessoa := tpFisica;
+      FCliente.CPF := Trim(edtCPF.Text);
+
+      if FCliente.Id = 0 then
+      begin
+        FCliente.CNPJ := '';
+        FCliente.IE := '';
+      end;
+    end
+    else
+    begin
+      FCliente.TipoPessoa := tpJuridica;
+      FCliente.CNPJ := Trim(edtCNPJ.Text);
+      if FCliente.Id = 0 then
+        FCliente.CPF := '';
+      FCliente.IE := edtInscricaoEstadual.Text;
+    end;
+
+    FClienteService.Salvar(FCliente);
+
+    ShowMessage('Cliente salvo com sucesso!' + sLineBreak +
+                'Código: ' + FCliente.Id.ToString);
+
+    ModalResult := mrOk;
+
+  except
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
+end;
+
+
+
+procedure TfrmClientes.PrepararCadastro;
+begin
+  FreeAndNil(FCliente);
+
+  edtCodigo.Text := 'Novo';
+  edtCliente.Clear;
+  edtCPF.Clear;
+  edtCNPJ.Clear;
+  edtEmail.Clear;
+  edtTelefone.Clear;
+  edtInscricaoEstadual.Clear;
+
+  rbPessoaFisica.Checked := True;
+  AtualizarTipoPessoa(tpFisica);
+end;
+
+
+procedure TfrmClientes.PrepararEdicao(Aid: Integer);
+begin
+  FreeAndNil(FCliente);
+
+  FCliente := FClienteService.BuscarPorId(Aid);
+
+  if not Assigned(FCliente) then
+    raise Exception.Create('Cliente não encontrado.');
+
+  edtCodigo.Text := FCliente.Id.ToString;
+  edtCliente.Text := FCliente.Nome;
+  edtCPF.Clear;
+edtCPF.Text := FormatarCPF(FCliente.CPF);
+
+edtCNPJ.Clear;
+edtCNPJ.Text := FormatarCNPJ(FCliente.CNPJ);
+  edtEmail.Text := FCliente.Email;
+  edtTelefone.Text := FCliente.Telefone;
+  edtInscricaoEstadual.Text := FCliente.IE;
+
+  case FCliente.TipoPessoa of
+    tpFisica:
+      begin
+        rbPessoaFisica.Checked := True;
+        AtualizarTipoPessoa(tpFisica);
+      end;
+
+    tpJuridica:
+      begin
+        rbPessoaJuridica.Checked := True;
+        AtualizarTipoPessoa(tpJuridica);
+      end;
+  end;
 end;
 
 procedure TfrmClientes.rbPessoaFisicaClick(Sender: TObject);
 begin
-  AtualizarCampos;
+  AtualizarTipoPessoa(tpFisica);
 end;
 
 procedure TfrmClientes.rbPessoaJuridicaClick(Sender: TObject);
 begin
-  AtualizarCampos;
+  AtualizarTipoPessoa(tpJuridica);
 end;
 
 procedure TfrmClientes.AplicarEstilos;

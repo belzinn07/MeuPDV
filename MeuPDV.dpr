@@ -29,17 +29,18 @@ uses
   ICliente.Service in 'src\service\interfaces\ICliente.Service.pas',
   Cliente.Service in 'src\service\Cliente.Service.pas',
   MeuPDV.Logger in 'src\utils\Logger\MeuPDV.Logger.pas',
-  MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas';
+  MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas',
+  Documento.Utils in 'src\utils\Documento.Utils.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmListaClientes, frmListaClientes);
   Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmListaProdutos, frmListaProdutos);
   Application.CreateForm(TfrmInicialVenda, frmInicialVenda);
   Application.CreateForm(TfrmVendas, frmVendas);

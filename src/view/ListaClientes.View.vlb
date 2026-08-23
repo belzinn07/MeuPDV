@@ -1,9 +1,6 @@
 ﻿[pnlContainer]
 Coordinates=533,166,88,58
 
-[pnlExcluirProduto]
-Coordinates=407,166,116,58
-
 [dmConexao.qryVendas]
 Coordinates=97,166,148,58
 
@@ -15,12 +12,6 @@ Coordinates=86,234,93,58
 
 [dmConexao.qryClientes]
 Coordinates=10,10,152,146
-
-[pnlAdicionarProduto]
-Coordinates=281,10,131,58
-
-[btnAdicionarProduto]
-Coordinates=153,302,131,36
 
 [dmConexao.qryCRUD]
 Coordinates=255,166,142,58
@@ -37,9 +28,6 @@ Coordinates=10,166,77,58
 [Shape4]
 Coordinates=10,302,59,36
 
-[dbgProdutos]
-Coordinates=534,234,87,36
-
 [Shape2]
 Coordinates=465,234,59,36
 
@@ -52,14 +40,8 @@ Coordinates=10,234,66,58
 [dmConexao.dsClientes]
 Coordinates=27,166,147,36
 
-[btnExcluirProduto]
-Coordinates=270,234,116,36
-
 [btnAlterar]
 Coordinates=189,234,71,36
-
-[FDMemTable1]
-Coordinates=172,10,99,58
 
 [ImageList1]
 Coordinates=648,243,77,36
@@ -68,5 +50,20 @@ Coordinates=648,243,77,36
 Coordinates=462,155,144,36
 
 []
-Coordinates=648,298,91,36
+Coordinates=172,10,99,58
+
+[pnlExcluir]
+Coordinates=407,166,116,58
+
+[pnlAdicionar]
+Coordinates=281,10,131,58
+
+[btnExcluir]
+Coordinates=270,234,116,36
+
+[btnAdicionar]
+Coordinates=153,302,131,36
+
+[dbgItens]
+Coordinates=534,234,87,36
 

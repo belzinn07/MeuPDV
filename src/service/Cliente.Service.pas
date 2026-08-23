@@ -7,21 +7,23 @@ uses
   Cliente.Repository,
   System.Generics.Collections,
   Cliente.Model, DMConexao.infra, Cliente.Validation, System.SysUtils,
-  MeuPDV.Logger;
+  MeuPDV.Logger,
+    System.Character, ICliente.Repository;
 
 type
   TClienteService = class(TInterfacedObject, IClienteService)
 
   private
-   FRepository : TClienteRepository;
+   FRepository : IClienteRepository;
 
   public
-   constructor Create(Adm : Tdm);
+   constructor Create(ARepository: IClienteRepository);
    procedure Salvar(const ACliente : TCliente);
    procedure Excluir(AId : Integer);
    function Listar : TObjectList<TCliente>;
    function BuscarPorId(AId : Integer) : TCliente;
    function Pesquisar(const APesquisa : string) : TObjectList<TCliente>;
+   function SomenteNumeros(const ATexto: string): string;
 
   end;
 
@@ -29,9 +31,9 @@ implementation
 
 { TClienteService }
 
-constructor TClienteService.Create(Adm: Tdm);
+constructor TClienteService.Create(ARepository: IClienteRepository);
 begin
-  FRepository := TClienteRepository.Create(Adm);
+  FRepository := ARepository;
 end;
 
 procedure TClienteService.Salvar(const ACliente: TCliente);
@@ -45,6 +47,10 @@ begin
  Validador := TClienteValidador.Create;
 
  try
+  ACliente.CPF := SomenteNumeros(ACliente.CPF);
+  ACliente.CNPJ := SomenteNumeros(ACliente.CNPJ);
+  ACliente.Telefone := SomenteNumeros(ACliente.Telefone);
+
   TLogger.Debug('ClienteService.Salvar', 'Executando validação do cliente');
   Validador.Validar(ACliente);
   TLogger.Debug('ClienteService.Salvar', 'Cliente validado com sucesso');
@@ -55,13 +61,16 @@ begin
      FRepository.Inserir(ACliente);
      TLogger.Info('ClienteService.Salvar', 'Cliente cadastrado com sucesso no banco de dados ' +
      'ID gerado: ' + ACliente.Id.ToString );
+
   end
   else
+  begin
      TLogger.Info('ClienteService.Salvar', 'Operação identificada: Edição de Cliente');
      FRepository.Atualizar(ACliente);
      TLogger.Info('ClienteService.Salvar',
      Format('Cliente ID = %d atualizado com sucesso',
-     [ACliente.Id.ToString]));
+     [ACliente.Id]));
+  end;
 
  except
   on E: Exception do
@@ -78,8 +87,10 @@ end;
 procedure TClienteService.Excluir(AId: Integer);
 begin
   if AId <= 0 then
+  begin
   TLogger.Warning('ClienteService.Excluir','Erro: ID ' + AId.ToString + ' è inválido');
   raise Exception.Create('ID inválido');
+  end;
 
  TLogger.Info('ClienteService.Excluir','Iniciando exclusão do cliente ' + AId.ToString);
  FRepository.Excluir(AId);
@@ -107,5 +118,17 @@ begin
 
   Result := FRepository.Pesquisar(APesquisa);
 end;
+
+function TClienteService.SomenteNumeros(const ATexto: string): string;
+var
+  C: Char;
+begin
+  Result := '';
+
+  for C in ATexto do
+    if C.IsDigit then
+      Result := Result + C;
+end;
+
 
 end.

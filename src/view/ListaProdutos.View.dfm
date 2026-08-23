@@ -60,7 +60,7 @@ inherited frmListaProdutos: TfrmListaProdutos
           OnClick = btnAlterarClick
         end
       end
-      inherited pnlAdicionarProduto: TPanel
+      inherited pnlAdicionar: TPanel
         Left = 300
         Margins.Left = 300
         StyleElements = [seFont, seClient, seBorder]
@@ -69,7 +69,7 @@ inherited frmListaProdutos: TfrmListaProdutos
           ExplicitLeft = 1
           ExplicitWidth = 120
         end
-        inherited btnAdicionarProduto: TSpeedButton
+        inherited btnAdicionar: TSpeedButton
           OnClick = btnAdicionarProdutoClick
           ExplicitLeft = 1
           ExplicitTop = 0
@@ -77,11 +77,11 @@ inherited frmListaProdutos: TfrmListaProdutos
           ExplicitHeight = 44
         end
       end
-      inherited pnlExcluirProduto: TPanel
+      inherited pnlExcluir: TPanel
         Left = 746
         StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 746
-        inherited btnExcluirProduto: TSpeedButton
+        inherited btnExcluir: TSpeedButton
           OnClick = btnExcluirProdutoClick
           ExplicitLeft = 24
           ExplicitTop = 24
@@ -100,7 +100,7 @@ inherited frmListaProdutos: TfrmListaProdutos
         Width = 50
         Height = 50
       end
-      inherited dbgProdutos: TDBGrid
+      inherited dbgItens: TDBGrid
         Width = 1108
         DataSource = dsProdutos
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -109,6 +109,10 @@ inherited frmListaProdutos: TfrmListaProdutos
           item
             Expanded = False
             Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
             Visible = True
           end>
       end

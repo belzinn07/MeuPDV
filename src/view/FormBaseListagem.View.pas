@@ -17,14 +17,14 @@ type
     pnlAltera: TPanel;
     Shape2: TShape;
     btnAlterar: TSpeedButton;
-    pnlAdicionarProduto: TPanel;
+    pnlAdicionar: TPanel;
     Shape3: TShape;
-    btnAdicionarProduto: TSpeedButton;
-    pnlExcluirProduto: TPanel;
+    btnAdicionar: TSpeedButton;
+    pnlExcluir: TPanel;
     Shape4: TShape;
-    btnExcluirProduto: TSpeedButton;
+    btnExcluir: TSpeedButton;
     pnlCentral: TPanel;
-    dbgProdutos: TDBGrid;
+    dbgItens: TDBGrid;
     procedure FormCreate(Sender: TObject);
   private
     procedure AplicarEstilos;
