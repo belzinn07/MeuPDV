@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, System.ImageList,
   Vcl.ImgList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Estilos,
-  IProduto.Service, Produto.Service, Produto.Repository,
+  IProduto.Service, Produto.Service, IProduto.Repository, Produto.Repository,
   DMConexao.infra, Produto.Model, Validador.Utils;
 
 type
@@ -73,7 +73,7 @@ Produto := TProduto.Create;
 
 Produto.Descricao := edtDescricao.Text;
 
-ValidarCampo(Trim(edtPreco.Text) <> '', 'Preço é obrigatório');
+
 
 Produto.Preco := StrToCurr(edtPreco.Text);
 Produto.Saldo := StrToFloat(edtEstoque.Text);
@@ -101,9 +101,14 @@ end;
 end;
 
 procedure TfrmProdutos.FormCreate(Sender: TObject);
+var
+ Repository: IProdutoRepository;
+
 begin
+
+  Repository := TProdutoRepository.Create(dm);
+  FProdutoService := TProdutoService.Create(Repository);
   AplicarEstilos;
-  FProdutoService := TProdutoService.Create(dm);
 
 end;
 

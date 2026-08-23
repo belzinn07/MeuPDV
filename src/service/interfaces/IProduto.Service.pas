@@ -3,17 +3,16 @@ unit IProduto.Service;
 interface
 
 uses
-  Produto.Model,
-  System.Generics.Collections;
+  System.Generics.Collections, Produto.DTO;
 type
  IProdutoService = interface
   ['{BAAD7767-DFBB-41D2-B48D-CA1DC800C8DA}']
 
-  procedure Salvar(AProduto: TProduto);
+  procedure Salvar(AProduto: TProdutoDTO);
   procedure Excluir(AId : Integer);
-  function ListarProdutos : TObjectList<TProduto>;
-  function BuscarPorId(AId: Integer) : TProduto;
-  function PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
+  function ListarProdutos : TObjectList<TProdutoDTO>;
+  function BuscarPorId(AId: Integer) : TProdutoDTO;
+  function PesquisarProdutos(APesquisa: String): TObjectList<TProdutoDTO>;
 
  end;
 

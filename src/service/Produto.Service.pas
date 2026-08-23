@@ -4,11 +4,11 @@ interface
 
 uses
   IProduto.Service,
-  Produto.Model,
   IProduto.Repository,
   System.SysUtils,
   System.Generics.Collections, Validador.Contracts, Produto.Validation,
-  DMConexao.infra, Produto.Repository, MeuPDV.Logger;
+  DMConexao.infra, Produto.Repository, MeuPDV.Logger, Produto.DTO,
+  Produto.Model;
 type
  TProdutoService = class(TInterfacedObject, IProdutoService)
 
@@ -17,12 +17,12 @@ type
 
 
   public
-   constructor Create(Adm : Tdm);
-   procedure Salvar(AProduto: TProduto);
+   constructor Create(ARepository: IProdutoRepository);
+   procedure Salvar(AProduto: TProdutoDTO);
    procedure Excluir(AId : Integer);
-   function ListarProdutos : TObjectList<TProduto>;
-   function BuscarPorId(AId: Integer) : TProduto;
-   function PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
+   function ListarProdutos : TObjectList<TProdutoDTO>;
+   function BuscarPorId(AId: Integer) : TProdutoDTO;
+   function PesquisarProdutos(APesquisa: String): TObjectList<TProdutoDTO>;
 
  end;
 
@@ -30,23 +30,31 @@ implementation
 
 { TProdutoService }
 
-constructor TProdutoService.Create(Adm : Tdm);
+constructor TProdutoService.Create(ARepository: IProdutoRepository);
 begin
-FRepository := TProdutoRepository.Create(Adm);
+FRepository := ARepository;
 
 end;
 
-procedure TProdutoService.Salvar(AProduto: TProduto);
+procedure TProdutoService.Salvar(AProduto: TProdutoDTO);
 var
-  Validador: IValidador<TProduto>;
+  Validador: IValidador<TProdutoDTO>;
+  Produto : TProduto;
 begin
   Validador := TProdutoValidador.Create;
+  Produto := TProduto.Create;
 
   TLogger.Info('ProdutoService.Salvar',
    Format('Iniciando processo de salvamento. ID=%d | Descrição="%s"',
      [AProduto.Id, AProduto.Descricao]));
 
 try
+   Produto.Id := AProduto.Id;
+   Produto.Descricao := AProduto.Descricao;
+
+
+
+
      TLogger.Debug('ProdutoService.Salvar', 'Executando validação do produto ');
      Validador.Validar(AProduto);
      TLogger.Info('ProdutoService.Salvar','Validação concluída com sucesso.');
@@ -55,7 +63,7 @@ try
  begin
 
    TLogger.Info('ProdutoService.Salvar','Operação identificada: Cadastro de produto');
-   FRepository.Inserir(AProduto);
+   FRepository.Inserir(Produto);
    TLogger.Info('ProdutoService.Salvar', 'Produto cadastrado com sucesso no banco de dados. ' +
    'ID gerado: ' + AProduto.Id.ToString);
 
@@ -64,7 +72,7 @@ try
  begin
    TLogger.Info('ProdutoService.Salvar',
    Format('Operação identificada: Edição do produto código = %d', [AProduto.Id]));
-   FRepository.Atualizar(AProduto);
+   FRepository.Atualizar(Produto);
    TLogger.Info('ProdutoService.Salvar',
    Format('Produto ID=%d atualizado com sucesso.', [AProduto.Id]));
 
@@ -97,25 +105,42 @@ FRepository.Excluir(AId);
 TLogger.Info( 'ProdutoService.Excluir','Produto de código ' + AId.ToString +' excluído com sucesso');
 end;
 
-function TProdutoService.ListarProdutos: TObjectList<TProduto>;
+function TProdutoService.ListarProdutos: TObjectList<TProdutoDTO>;
+var
+  Produtos: TObjectList<TProduto>;
+  Produto: TProduto;
+  DTO: TProdutoDTO;
 begin
  TLogger.Debug('ProdutoService.ListarProdutos','Iniciando listagem de produtos');
- Result := FRepository.Listar;
+ for Produto in Produtos do
+    begin
+      DTO := TProdutoDTO.Create;
+
+      DTO.Id := Produto.Id;
+      DTO.Descricao := Produto.Descricao;
+      DTO.Preco := CurrToStr(Produto.Preco);
+      DTO.Saldo := FloatToStr(Produto.Saldo);
+
+      Result.Add(DTO);
+    end;
  TLogger.Debug('ProdutoService.ListarProdutos',Format('Total de %d produtos dispóníveis no sistema', [Result.Count] ));
 end;
 
 function TProdutoService.PesquisarProdutos(
-  APesquisa: String): TObjectList<TProduto>;
+  APesquisa: String): TObjectList<TProdutoDTO>;
+var
+  Termo: string;
 begin
-try
+  try
+    Termo := Trim(APesquisa);
 
-  if APesquisa.Trim.IsEmpty then
+  if Termo.IsEmpty then
   begin
     TLogger.Warning('ProdutoService.PesquisarProdutos', 'Tentativa de pesuisa com termo vazio');
     raise Exception.Create('Informe algo para pesquisar');
   end;
-  TLogger.Debug('ProdutoService.PesquisarProdutos', 'Pesquisando produtos por: ' + APesquisa.Trim );
-  Result := FRepository.PesquisarProdutos(APesquisa);
+  TLogger.Debug('ProdutoService.PesquisarProdutos', 'Pesquisando produtos por: ' + Termo );
+  Result := FRepository.PesquisarProdutos(Termo);
 
   if Assigned(Result) then
     TLogger.Debug('ProdutoService.PesquisarProdutos', Format('Pesquisa por "%s" retornou %d resultado(s)', [APesquisa.Trim, Result.Count]))
