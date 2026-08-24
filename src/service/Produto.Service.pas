@@ -8,7 +8,7 @@ uses
   System.SysUtils,
   System.Generics.Collections, Validador.Contracts, Produto.Validation,
   DMConexao.infra, Produto.Repository, MeuPDV.Logger, Produto.DTO,
-  Produto.Model;
+  Produto.Model, Produto.Mapper;
 type
  TProdutoService = class(TInterfacedObject, IProdutoService)
 
@@ -109,30 +109,47 @@ function TProdutoService.ListarProdutos: TObjectList<TProdutoDTO>;
 var
   Produtos: TObjectList<TProduto>;
   Produto: TProduto;
-  DTO: TProdutoDTO;
 begin
- TLogger.Debug('ProdutoService.ListarProdutos','Iniciando listagem de produtos');
- for Produto in Produtos do
+  TLogger.Debug(
+    'ProdutoService.ListarProdutos',
+    'Iniciando listagem de produtos'
+  );
+
+  Produtos := FRepository.Listar;
+
+  Result := TObjectList<TProdutoDTO>.Create(True);
+
+  try
+    for Produto in Produtos do
     begin
-      DTO := TProdutoDTO.Create;
-
-      DTO.Id := Produto.Id;
-      DTO.Descricao := Produto.Descricao;
-      DTO.Preco := CurrToStr(Produto.Preco);
-      DTO.Saldo := FloatToStr(Produto.Saldo);
-
-      Result.Add(DTO);
+      Result.Add(
+        TProdutoMapper.ConverterParaDto(Produto)
+      );
     end;
- TLogger.Debug('ProdutoService.ListarProdutos',Format('Total de %d produtos dispóníveis no sistema', [Result.Count] ));
-end;
 
+    TLogger.Debug(
+      'ProdutoService.ListarProdutos',
+      Format(
+        'Total de %d produtos disponíveis no sistema',
+        [Result.Count]));
+
+  finally
+    Produtos.Free;
+  end;
+end;
 function TProdutoService.PesquisarProdutos(
   APesquisa: String): TObjectList<TProdutoDTO>;
-var
+Var
   Termo: string;
+  Produto: TProduto;
+  ProdutoDTO: TProdutoDTO;
+
 begin
+
   try
     Termo := Trim(APesquisa);
+
+
 
   if Termo.IsEmpty then
   begin

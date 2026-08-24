@@ -30,7 +30,9 @@ uses
   Cliente.Service in 'src\service\Cliente.Service.pas',
   MeuPDV.Logger in 'src\utils\Logger\MeuPDV.Logger.pas',
   MeuPDV.LogTipo in 'src\utils\Logger\MeuPDV.LogTipo.pas',
-  Documento.Utils in 'src\utils\Documento.Utils.pas';
+  Documento.Utils in 'src\utils\Documento.Utils.pas',
+  Produto.DTO in 'src\dto\Produto.DTO.pas',
+  Produto.Mapper in 'src\mapper\Produto.Mapper.pas';
 
 {$R *.res}
 

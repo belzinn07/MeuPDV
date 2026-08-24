@@ -192,6 +192,8 @@
         <DCCReference Include="src\utils\Logger\MeuPDV.Logger.pas"/>
         <DCCReference Include="src\utils\Logger\MeuPDV.LogTipo.pas"/>
         <DCCReference Include="src\utils\Documento.Utils.pas"/>
+        <DCCReference Include="src\dto\Produto.DTO.pas"/>
+        <DCCReference Include="src\mapper\Produto.Mapper.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
