@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, System.ImageList,
   Vcl.ImgList, Vcl.Buttons, Vcl.StdCtrls, Vcl.Mask, Estilos,
   IProduto.Service, Produto.Service, IProduto.Repository, Produto.Repository,
-  DMConexao.infra, Produto.Model, Validador.Utils;
+  DMConexao.infra, Produto.Model, Validador.Utils, Produto.DTO;
 
 type
   TfrmProdutos = class(TForm)
@@ -24,7 +24,7 @@ type
     procedure bntSalvarClick(Sender: TObject);
 
   private
-    FProduto : TProduto;
+    FProdutoDTO : TProdutoDTO;
     FProdutoService : IProdutoService;
     procedure AplicarEstilos;
 
@@ -43,63 +43,55 @@ implementation
 
 procedure TfrmProdutos.PrepararCadastro;
 begin
+  FreeAndNil(FProdutoDTO);
+  FProdutoDTO := TProdutoDTO.Create;
 
  edtCodigo.Text := 'Novo';
  edtDescricao.Clear;
  edtPreco.Clear;
  edtEstoque.Clear;
 
- FProduto.Id := 0;
+ FProdutoDTO.Id := 0;
 end;
 
 procedure TfrmProdutos.PrepararEdicao(Aid : Integer);
 begin
-FProduto := FProdutoService.BuscarPorId(Aid);
-edtCodigo.Text := IntToStr(FProduto.Id);
-edtDescricao.Text := FProduto.Descricao;
-edtPreco.Text := CurrToStr(FProduto.Preco);
-edtEstoque.Text := FloatToStr(FProduto.Saldo);
+FProdutoDTO := FProdutoService.BuscarPorId(Aid);
+edtCodigo.Text := IntToStr(FProdutoDTO.Id);
+edtDescricao.Text := FProdutoDTO.Descricao;
+edtPreco.Text :=  FProdutoDTO.Preco;
+edtEstoque.Text := FProdutoDTO.Saldo;
 
 end;
 
 procedure TfrmProdutos.bntSalvarClick(Sender: TObject);
 var
-
-Produto : TProduto;
-
+  Produto: TProdutoDTO;
 begin
-try
-Produto := TProduto.Create;
+  Produto := TProdutoDTO.Create;
+  try
+    Produto.Descricao := edtDescricao.Text;
+    Produto.Preco := edtPreco.Text;
+    Produto.Saldo := edtEstoque.Text;
 
-Produto.Descricao := edtDescricao.Text;
-
-
-
-Produto.Preco := StrToCurr(edtPreco.Text);
-Produto.Saldo := StrToFloat(edtEstoque.Text);
-try
-  if Assigned(FProduto) then
-      Produto.Id := FProduto.Id
+    if Assigned(FProdutoDTO) then
+      Produto.Id := FProdutoDTO.Id
     else
       Produto.Id := 0;
 
-FProdutoService.Salvar(Produto);
-ShowMessage('Salvo com sucesso!');
-ModalResult := mrOk;
+    FProdutoService.Salvar(Produto);
 
-except
-   on E: Exception do
-      begin
-        ShowMessage(E.Message);
-        Exit;
-      end;
-end;
-finally
+    ShowMessage('Salvo com sucesso!' + sLineBreak +
+                'Código : ' + Produto.Id.ToString);
+
+    ModalResult := mrOk;
+  except
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
+
   Produto.Free;
 end;
-
-end;
-
 procedure TfrmProdutos.FormCreate(Sender: TObject);
 var
  Repository: IProdutoRepository;

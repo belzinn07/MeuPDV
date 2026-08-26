@@ -13,7 +13,7 @@ uses
 
   System.Generics.Collections, Produto.Model, IProduto.Service,
   Produto.Service, Produto.Repository, FormProdutos.View,
-  Vcl.StdCtrls, Estilos, FormBaseListagem.View, IProduto.Repository;
+  Vcl.StdCtrls, Estilos, FormBaseListagem.View, IProduto.Repository, Produto.DTO;
 
 type
   TfrmListaProdutos = class(TfrmBaseListagem)
@@ -34,7 +34,7 @@ type
     procedure FormResize(Sender: TObject);
   private
     FPodutoService : IProdutoService;
-    ListaDeProdutos : TObjectList<TProduto>;
+    ListaDeProdutos : TObjectList<TProdutoDTO>;
     procedure ConfigurarMemTable;
     procedure CarregarProdutosNaMemtable;
     procedure RecarregarLista;
@@ -113,7 +113,7 @@ end;
 
 procedure TfrmListaProdutos.CarregarProdutosNaMemtable;
 var
- Produto :  TProduto;
+ ProdutoDTO :  TProdutoDTO;
 
 begin
   if not Assigned(ListaDeProdutos) then
@@ -125,13 +125,13 @@ try
 
   MemTable.EmptyDataSet;
 
-  for Produto in ListaDeProdutos do
+  for ProdutoDTO in ListaDeProdutos do
   begin
    MemTable.Append;
-   MemTable.FieldByName('ID').AsInteger := Produto.Id;
-   MemTable.FieldByName('DESCRICAO').AsString := Produto.Descricao;
-   MemTable.FieldByName('PRECO').AsCurrency := Produto.Preco;
-   MemTable.FieldByName('SALDO').AsFloat := Produto.Saldo;
+   MemTable.FieldByName('ID').AsInteger := ProdutoDTO.Id;
+   MemTable.FieldByName('DESCRICAO').AsString := ProdutoDTO.Descricao;
+   MemTable.FieldByName('PRECO').AsString := ProdutoDTO.Preco;
+   MemTable.FieldByName('SALDO').AsString := ProdutoDTO.Saldo;
    MemTable.Post;
   end;
 
@@ -153,7 +153,7 @@ procedure TfrmListaProdutos.ConfigurarMemTable;
 begin
  MemTable.Close;
  MemTable.FieldDefs.Clear;
- dbgProdutos.Columns.Clear;
+ dbgItens.Columns.Clear;
 
  MemTable.FieldDefs.Add('ID', ftInteger);
  MemTable.FieldDefs.Add('DESCRICAO', ftString, 100);
@@ -174,15 +174,15 @@ begin
 var
   W: Integer;
 begin
-  if dbgProdutos.Columns.Count = 0 then
+  if dbgItens.Columns.Count = 0 then
     Exit;
 
-  W := dbgProdutos.ClientWidth - 20;
+  W := dbgItens.ClientWidth - 20;
 
-  dbgProdutos.Columns[0].Width := Round(W * 0.08); // ID
-  dbgProdutos.Columns[1].Width := Round(W * 0.57); // DESCRICAO
-  dbgProdutos.Columns[2].Width := Round(W * 0.15); // PRECO
-  dbgProdutos.Columns[3].Width := Round(W * 0.20); // SALDO
+  dbgItens.Columns[0].Width := Round(W * 0.08); // ID
+  dbgItens.Columns[1].Width := Round(W * 0.57); // DESCRICAO
+  dbgItens.Columns[2].Width := Round(W * 0.15); // PRECO
+  dbgItens.Columns[3].Width := Round(W * 0.20); // SALDO
 end;
 
 procedure TfrmListaProdutos.dbgProdutosDblClick(Sender: TObject);

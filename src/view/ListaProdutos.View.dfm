@@ -11,11 +11,11 @@ inherited frmListaProdutos: TfrmListaProdutos
   inherited pnlContainer: TPanel
     Width = 1108
     StyleElements = [seFont, seClient, seBorder]
-    ExplicitWidth = 1108
+    ExplicitWidth = 1106
     inherited pnlCabecalho: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       inherited btnTitulo: TSpeedButton
         Width = 1108
         Caption = 'Produtos'
@@ -51,7 +51,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     inherited pnlRodape: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       inherited pnlAltera: TPanel
         Left = 523
         StyleElements = [seFont, seClient, seBorder]
@@ -93,7 +93,7 @@ inherited frmListaProdutos: TfrmListaProdutos
     inherited pnlCentral: TPanel
       Width = 1108
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 1108
+      ExplicitWidth = 1106
       object Bevel1: TBevel [0]
         Left = 704
         Top = 328
