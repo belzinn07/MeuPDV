@@ -8,7 +8,7 @@ uses
   uDMConexao, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
-  TfrmVendas = class(TForm)
+  TFormVendas = class(TForm)
     pnlContainer: TPanel;
     pnlCabecalho: TPanel;
     pnlRodape: TPanel;
@@ -56,7 +56,7 @@ type
   end;
 
 var
-  frmVendas: TfrmVendas;
+  FormVendas: TFormVendas;
 
 implementation
 

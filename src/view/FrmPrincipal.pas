@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ExtCtrls, uEstilos, Vcl.Imaging.pngimage,
-  FrmListaProdutos, FrmListaClientes, FrmVenda, FrmBaseListagem;
+  FrmListaProdutos, FrmListaClientes, FrmVenda, FrmBaseListagem,
+  FrmInicialVenda;
 
 type
   TFormPrincipal = class(TForm)
@@ -72,8 +73,18 @@ AbrirForm(TFormListaProdutos);
 end;
 
 procedure TFormPrincipal.btnVendasClick(Sender: TObject);
+var
+ FormInicialVenda : TFormInicialVenda;
+
 begin
-frmVendas.ShowModal;
+ FormInicialVenda := TFormInicialVenda.Create(Self);
+ try
+ FormInicialVenda.ShowModal;
+
+ finally
+   FormInicialVenda.Free;
+ end;
+
 end;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);

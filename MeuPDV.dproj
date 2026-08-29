@@ -157,7 +157,7 @@
             <DesignClass>TfrmListaProdutos</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\FrmVenda.pas">
-            <Form>frmVendas</Form>
+            <Form>FormVendas</Form>
             <DesignClass>TfrmVendas</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\FrmInicialVenda.pas">
@@ -188,6 +188,7 @@
         <DCCReference Include="src\service\uServiceFactory.pas"/>
         <DCCReference Include="src\dto\uClienteDTO.pas"/>
         <DCCReference Include="src\mapper\uClienteMapper.pas"/>
+        <DCCReference Include="src\domain\model\uVenda.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

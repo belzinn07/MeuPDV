@@ -29,6 +29,8 @@ object FormInicialVenda: TFormInicialVenda
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 498
+    ExplicitHeight = 292
     object Label1: TLabel
       Left = 56
       Top = 157
@@ -106,6 +108,7 @@ object FormInicialVenda: TFormInicialVenda
       Kind = bkYes
       NumGlyphs = 2
       TabOrder = 3
+      OnClick = btnConfirmarClick
     end
     object btnCancelar: TBitBtn
       Left = 311

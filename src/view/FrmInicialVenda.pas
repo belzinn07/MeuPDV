@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.Buttons;
+  Vcl.Buttons, FrmVenda;
 
 type
   TFormInicialVenda = class(TForm)
@@ -16,6 +16,7 @@ type
     Label1: TLabel;
     btnConfirmar: TBitBtn;
     btnCancelar: TBitBtn;
+    procedure btnConfirmarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +29,19 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormInicialVenda.btnConfirmarClick(Sender: TObject);
+var
+ FormVendas : TFormVendas;
+begin
+ FormVendas := TFormVendas.Create(Self);
+
+ try
+   FormVendas.ShowModal;
+ finally
+   FormVendas.Free;
+ end;
+
+end;
 
 end.

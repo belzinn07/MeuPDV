@@ -1,4 +1,4 @@
-object frmVendas: TfrmVendas
+object FormVendas: TFormVendas
   Left = 0
   Top = 0
   Caption = 'MeuPDV - Venda'

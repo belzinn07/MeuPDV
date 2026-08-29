@@ -10,7 +10,7 @@ uses
   FrmBaseListagem in 'src\view\FrmBaseListagem.pas' {frmBaseListagem: TfrmBaseListagem},
   FrmListaClientes in 'src\view\FrmListaClientes.pas' {FormListaClientes: TfrmListaClientes},
   FrmListaProdutos in 'src\view\FrmListaProdutos.pas' {FormListaProdutos: TfrmListaProdutos},
-  FrmVenda in 'src\view\FrmVenda.pas' {frmVendas: TfrmVendas},
+  FrmVenda in 'src\view\FrmVenda.pas' {FormVendas: TfrmVendas},
   FrmInicialVenda in 'src\view\FrmInicialVenda.pas' {FormInicialVenda: TFormInicialVenda},
   uProduto in 'src\domain\model\uProduto.pas',
   uIValidador in 'src\domain\contracts\uIValidador.pas',
@@ -35,7 +35,8 @@ uses
   uProdutoMapper in 'src\mapper\uProdutoMapper.pas',
   uServiceFactory in 'src\service\uServiceFactory.pas',
   uClienteDTO in 'src\dto\uClienteDTO.pas',
-  uClienteMapper in 'src\mapper\uClienteMapper.pas';
+  uClienteMapper in 'src\mapper\uClienteMapper.pas',
+  uVenda in 'src\domain\model\uVenda.pas';
 
 {$R *.res}
 
