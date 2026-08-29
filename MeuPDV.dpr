@@ -36,7 +36,12 @@ uses
   uServiceFactory in 'src\service\uServiceFactory.pas',
   uClienteDTO in 'src\dto\uClienteDTO.pas',
   uClienteMapper in 'src\mapper\uClienteMapper.pas',
-  uVenda in 'src\domain\model\uVenda.pas';
+  uVenda in 'src\domain\model\uVenda.pas',
+  uItemVenda in 'src\domain\model\uItemVenda.pas',
+  uVendaValidador in 'src\domain\validation\uVendaValidador.pas',
+  uItemVendaDTO in 'src\dto\uItemVendaDTO.pas',
+  uVendaDTO in 'src\dto\uVendaDTO.pas',
+  uVendaMapper in 'src\mapper\uVendaMapper.pas';
 
 {$R *.res}
 

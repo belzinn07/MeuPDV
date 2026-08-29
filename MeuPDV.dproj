@@ -189,6 +189,11 @@
         <DCCReference Include="src\dto\uClienteDTO.pas"/>
         <DCCReference Include="src\mapper\uClienteMapper.pas"/>
         <DCCReference Include="src\domain\model\uVenda.pas"/>
+        <DCCReference Include="src\domain\model\uItemVenda.pas"/>
+        <DCCReference Include="src\domain\validation\uVendaValidador.pas"/>
+        <DCCReference Include="src\dto\uItemVendaDTO.pas"/>
+        <DCCReference Include="src\dto\uVendaDTO.pas"/>
+        <DCCReference Include="src\mapper\uVendaMapper.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

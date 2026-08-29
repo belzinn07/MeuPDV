@@ -3,13 +3,15 @@ unit uItemVendaDTO;
 interface
 
 type
- TVendaDTO = class
+ TItemVendaDTO = class
 
   public
    Id : Integer;
-   IdCliente : Integer;
-   Data : TDateTime;
-   Total:
+   IdVenda : Integer;
+   IdProduto : Integer;
+   Quantidade: string;
+   ValorUnitario: string;
+
  end;
 
 implementation
