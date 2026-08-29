@@ -1,9 +1,9 @@
-unit MeuPDV.PessoaFisica.Model;
+ï»¿unit MeuPDV.PessoaFisica.Model;
 
 interface
 
 uses
-  MeuPDV.Pessoa.Model, MeuPDV.Validador.Contracts, MeuPDV.Validador.Utils, System.SysUtils;
+  MeuPDV.Pessoa.Model, MeuPDV.IValidador, MeuPDV.ValidadorUtils, System.SysUtils;
 type
  TPessoaFisica= class(TPessoa,IValidador)
 
@@ -21,7 +21,7 @@ implementation
 
 procedure TPessoaFisica.Validar;
 begin
-    ValidarCampo(Trim(FCpf)<> '', 'CPF é obrigatório');
+    ValidarCampo(Trim(FCpf)<> '', 'CPF ï¿½ obrigatï¿½rio');
     ValidarCampo(Length(FCpf)<>'', '')
 end;
 

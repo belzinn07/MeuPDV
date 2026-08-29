@@ -127,73 +127,67 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="src\view\FormPrincipal.View.pas">
-            <Form>frmPrincipal</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmPrincipal.pas">
+            <Form>FormPrincipal</Form>
             <DesignClass>TFormPrincipal</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\infra\DMConexao.infra.pas">
+        <DCCReference Include="src\infra\uDMConexao.pas">
             <Form>dm</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\FormClientes.View.pas">
-            <Form>frmClientes</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmClientes.pas">
+            <Form>FormClientes</Form>
             <DesignClass>TFormClientes</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\Styles\Estilos.pas"/>
-        <DCCReference Include="src\view\FormProdutos.View.pas">
-            <Form>frmProdutos</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\Styles\uEstilos.pas"/>
+        <DCCReference Include="src\view\FrmProdutos.pas">
+            <Form>FormProdutos</Form>
             <DesignClass>TFormProdutos</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\FormBaseListagem.View.pas">
+        <DCCReference Include="src\view\FrmBaseListagem.pas">
             <Form>frmBaseListagem</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TfrmBaseListagem</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\ListaClientes.View.pas">
-            <Form>frmListaClientes</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmListaClientes.pas">
+            <Form>FormListaClientes</Form>
             <DesignClass>TfrmListaClientes</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\ListaProdutos.View.pas">
-            <Form>frmListaProdutos</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmListaProdutos.pas">
+            <Form>FormListaProdutos</Form>
             <DesignClass>TfrmListaProdutos</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\FormVenda.View.pas">
+        <DCCReference Include="src\view\FrmVenda.pas">
             <Form>frmVendas</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TfrmVendas</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\FormInicialVenda.View.pas">
-            <Form>frmInicialVenda</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmInicialVenda.pas">
+            <Form>FormInicialVenda</Form>
             <DesignClass>TFormInicialVenda</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\domain\model\Produto.Model.pas"/>
-        <DCCReference Include="src\domain\contracts\Validador.Contracts.pas"/>
-        <DCCReference Include="src\utils\Validador.Utils.pas"/>
-        <DCCReference Include="src\repository\Produto.Repository.pas"/>
-        <DCCReference Include="src\repository\interfaces\IProduto.Repository.pas"/>
-        <DCCReference Include="src\service\interfaces\IProduto.Service.pas"/>
-        <DCCReference Include="src\service\Produto.Service.pas"/>
-        <DCCReference Include="src\domain\model\Cliente.Model.pas"/>
-        <DCCReference Include="src\domain\validation\Produto.Validation.pas"/>
-        <DCCReference Include="src\domain\validation\Cliente.Validation.pas"/>
-        <DCCReference Include="src\utils\ValidadorDocumentos.Utils.pas"/>
-        <DCCReference Include="src\domain\model\enums\TipoPessoa.Enums.Model.pas"/>
-        <DCCReference Include="src\repository\interfaces\ICliente.Repository.pas"/>
-        <DCCReference Include="src\repository\Cliente.Repository.pas"/>
-        <DCCReference Include="src\service\interfaces\ICliente.Service.pas"/>
-        <DCCReference Include="src\service\Cliente.Service.pas"/>
-        <DCCReference Include="src\utils\Logger\MeuPDV.Logger.pas"/>
-        <DCCReference Include="src\utils\Logger\MeuPDV.LogTipo.pas"/>
-        <DCCReference Include="src\utils\Documento.Utils.pas"/>
-        <DCCReference Include="src\dto\Produto.DTO.pas"/>
-        <DCCReference Include="src\mapper\Produto.Mapper.pas"/>
+        <DCCReference Include="src\domain\model\uProduto.pas"/>
+        <DCCReference Include="src\domain\contracts\uIValidador.pas"/>
+        <DCCReference Include="src\utils\uValidadorUtils.pas"/>
+        <DCCReference Include="src\repository\uProdutoRepository.pas"/>
+        <DCCReference Include="src\repository\interfaces\uIProdutoRepository.pas"/>
+        <DCCReference Include="src\service\interfaces\uIProdutoService.pas"/>
+        <DCCReference Include="src\service\uProdutoService.pas"/>
+        <DCCReference Include="src\domain\model\uCliente.pas"/>
+        <DCCReference Include="src\domain\validation\uProdutoValidador.pas"/>
+        <DCCReference Include="src\domain\validation\uClienteValidador.pas"/>
+        <DCCReference Include="src\utils\uValidadorDocumentos.pas"/>
+        <DCCReference Include="src\domain\model\enums\uTipoPessoa.pas"/>
+        <DCCReference Include="src\repository\interfaces\uIClienteRepository.pas"/>
+        <DCCReference Include="src\repository\uClienteRepository.pas"/>
+        <DCCReference Include="src\service\interfaces\uIClienteService.pas"/>
+        <DCCReference Include="src\service\uClienteService.pas"/>
+        <DCCReference Include="src\utils\Logger\uLogger.pas"/>
+        <DCCReference Include="src\utils\Logger\uLogTipo.pas"/>
+        <DCCReference Include="src\utils\uDocumentoUtils.pas"/>
+        <DCCReference Include="src\dto\uProdutoDTO.pas"/>
+        <DCCReference Include="src\mapper\uProdutoMapper.pas"/>
+        <DCCReference Include="src\service\uServiceFactory.pas"/>
+        <DCCReference Include="src\dto\uClienteDTO.pas"/>
+        <DCCReference Include="src\mapper\uClienteMapper.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
