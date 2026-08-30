@@ -9,13 +9,13 @@ type
    FId : Integer;
    FIdCliente : Integer;
    FData : TDateTime;
-   FTotal : Double;
+   FTotal : Currency;
 
   public
    property Id : Integer read FId write FId;
    property IdCliente: Integer read FIdCliente write FIdCliente;
    property Data: TDateTime read FData write FData;
-   property Total : Double read FTotal write FTotal;
+   property Total : Currency read FTotal write FTotal;
 
  end;
 implementation

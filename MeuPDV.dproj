@@ -195,6 +195,8 @@
         <DCCReference Include="src\dto\uVendaDTO.pas"/>
         <DCCReference Include="src\mapper\uVendaMapper.pas"/>
         <DCCReference Include="src\domain\validation\uItemVendaValidador.pas"/>
+        <DCCReference Include="src\repository\interfaces\uIVendaRepository.pas"/>
+        <DCCReference Include="src\repository\uVendaRepository.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

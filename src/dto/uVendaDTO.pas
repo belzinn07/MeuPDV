@@ -2,6 +2,9 @@ unit uVendaDTO;
 
 interface
 
+uses
+  System.Generics.Collections, uItemVendaDTO;
+
 type
  TVendaDTO = class
 
@@ -9,7 +12,8 @@ type
   Id: Integer;
   IdCliente: string;
   Data : TDateTime;
-  Total : Double;
+  Total : Currency;
+  Itens: TObjectList<TItemVendaDTO>;
 
  end;
 

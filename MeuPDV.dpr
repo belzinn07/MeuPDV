@@ -42,7 +42,9 @@ uses
   uItemVendaDTO in 'src\dto\uItemVendaDTO.pas',
   uVendaDTO in 'src\dto\uVendaDTO.pas',
   uVendaMapper in 'src\mapper\uVendaMapper.pas',
-  uItemVendaValidador in 'src\domain\validation\uItemVendaValidador.pas';
+  uItemVendaValidador in 'src\domain\validation\uItemVendaValidador.pas',
+  uIVendaRepository in 'src\repository\interfaces\uIVendaRepository.pas',
+  uVendaRepository in 'src\repository\uVendaRepository.pas';
 
 {$R *.res}
 
