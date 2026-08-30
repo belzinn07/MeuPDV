@@ -8,7 +8,7 @@ type
   public
    Id : Integer;
    IdVenda : Integer;
-   IdProduto : Integer;
+   IdProduto : string;
    Quantidade: string;
    ValorUnitario: string;
 

@@ -41,7 +41,8 @@ uses
   uVendaValidador in 'src\domain\validation\uVendaValidador.pas',
   uItemVendaDTO in 'src\dto\uItemVendaDTO.pas',
   uVendaDTO in 'src\dto\uVendaDTO.pas',
-  uVendaMapper in 'src\mapper\uVendaMapper.pas';
+  uVendaMapper in 'src\mapper\uVendaMapper.pas',
+  uItemVendaValidador in 'src\domain\validation\uItemVendaValidador.pas';
 
 {$R *.res}
 

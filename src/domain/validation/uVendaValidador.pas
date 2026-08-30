@@ -33,7 +33,7 @@ end;
 procedure TVendaValidador.Validar(AVenda: TVendaDTO);
 begin
   ValidarCampo(Trim(AVenda.IdCliente) <> '', 'Selecione um cliente');
-  ValidarCampo(ClienteValido(AVenda.IdCliente), 'Cliente seleciona é inválido');
+  ValidarCampo(ClienteValido(AVenda.IdCliente), 'Cliente selecionado é inválido');
 
 end;
 
