@@ -79,6 +79,7 @@ var
 begin
  FormInicialVenda := TFormInicialVenda.Create(Self);
  try
+
  FormInicialVenda.ShowModal;
 
  finally

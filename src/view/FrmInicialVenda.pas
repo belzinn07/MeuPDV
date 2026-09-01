@@ -9,13 +9,14 @@ uses
 
 type
   TFormInicialVenda = class(TForm)
-    pnlContainer: TPanel;
+    pnlBox: TPanel;
     pnlCabecalho: TPanel;
     cbxSelecionarCliente: TComboBox;
     edtFatura: TLabeledEdit;
     Label1: TLabel;
     btnConfirmar: TBitBtn;
     btnCancelar: TBitBtn;
+    pnlContainer: TPanel;
     procedure btnConfirmarClick(Sender: TObject);
   private
     { Private declarations }

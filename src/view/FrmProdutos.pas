@@ -82,7 +82,7 @@ begin
     FProdutoService.Salvar(Produto);
 
     ShowMessage('Salvo com sucesso!' + sLineBreak +
-                'C�digo : ' + Produto.Id.ToString);
+                'Código : ' + Produto.Id.ToString);
 
     ModalResult := mrOk;
   except

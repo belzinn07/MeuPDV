@@ -44,7 +44,7 @@ begin
   TLogger.Info(
     'ProdutoService.Salvar',
     Format(
-      'Iniciando processo de salvamento. ID=%d | Descri��o="%s"',
+      'Iniciando processo de salvamento. ID=%d | Descrição="%s"',
       [AProdutoDTO.Id, AProdutoDTO.Descricao]
     )
   );
@@ -54,14 +54,14 @@ begin
 
     TLogger.Debug(
       'ProdutoService.Salvar',
-      'Executando valida��o do produto'
+      'Executando validação do produto'
     );
 
     Validador.Validar(AProdutoDTO);
 
     TLogger.Info(
       'ProdutoService.Salvar',
-      'Valida��o conclu�da com sucesso.'
+      'Validação conclu�da com sucesso.'
     );
 
     Produto := TProdutoMapper.ConverterParaEntidade(AProdutoDTO);
@@ -72,7 +72,7 @@ begin
       begin
         TLogger.Info(
           'ProdutoService.Salvar',
-          'Opera��o identificada: Cadastro de produto'
+          'Operação identificada: Cadastro de produto'
         );
 
         FRepository.Inserir(Produto);
@@ -88,7 +88,7 @@ begin
         TLogger.Info(
           'ProdutoService.Salvar',
           Format(
-            'Opera��o identificada: Edi��o do produto c�digo = %d',
+            'Operação identificada: Edição do produto código = %d',
             [Produto.Id]
           )
         );
@@ -106,7 +106,7 @@ begin
 
       TLogger.Info(
         'ProdutoService.Salvar',
-        'Processo de salvamento conclu�do com sucesso'
+        'Processo de salvamento concluído com sucesso'
       );
 
     finally
@@ -119,7 +119,7 @@ begin
       TLogger.Erro(
         'ProdutoService.Salvar',
         Format(
-          'Erro ao salvar produto. C�digo=%d | Descri��o="%s" | Erro=%s',
+          'Erro ao salvar produto. Código=%d | Descrição="%s" | Erro=%s',
           [AProdutoDTO.Id, AProdutoDTO.Descricao, E.Message]));
         raise Exception.CreateFmt('Erro ao salvar Produto: %s', [E.Message]);
     end;
@@ -131,13 +131,13 @@ begin
 
 if AId <= 0 then
 begin
-  TLogger.Warning('ProdutoService.Excluir','Erro: ID ' + AId.ToString + ' � inv�lido');
-  raise Exception.Create('ID inv�lido');
+  TLogger.Warning('ProdutoService.Excluir','Erro: ID ' + AId.ToString + ' é inválido');
+  raise Exception.Create('ID inválido');
 end;
 
-TLogger.Info('ProdutoService.Excluir','Iniciando exclus�o do produto ' + AId.ToString);
+TLogger.Info('ProdutoService.Excluir','Iniciando exclusão do produto ' + AId.ToString);
 FRepository.Excluir(AId);
-TLogger.Info( 'ProdutoService.Excluir','Produto de c�digo ' + AId.ToString +' exclu�do com sucesso');
+TLogger.Info( 'ProdutoService.Excluir','Produto de código ' + AId.ToString +' excluído com sucesso');
 end;
 
 function TProdutoService.ListarProdutos: TObjectList<TProdutoDTO>;
@@ -165,7 +165,7 @@ begin
     TLogger.Debug(
       'ProdutoService.ListarProdutos',
       Format(
-        'Total de %d produtos dispon�veis no sistema',
+        'Total de %d produtos disponíveis no sistema',
         [Result.Count]));
 
   finally

@@ -1,4 +1,4 @@
-object FormProdutos: TFormProdutos
+object FrmProdutos: TFrmProdutos
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
@@ -22,8 +22,6 @@ object FormProdutos: TFormProdutos
     Align = alClient
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 622
-    ExplicitHeight = 273
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
@@ -32,7 +30,6 @@ object FormProdutos: TFormProdutos
       Align = alTop
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 620
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1

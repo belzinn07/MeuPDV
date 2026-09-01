@@ -44,7 +44,9 @@ uses
   uVendaMapper in 'src\mapper\uVendaMapper.pas',
   uItemVendaValidador in 'src\domain\validation\uItemVendaValidador.pas',
   uIVendaRepository in 'src\repository\interfaces\uIVendaRepository.pas',
-  uVendaRepository in 'src\repository\uVendaRepository.pas';
+  uVendaRepository in 'src\repository\uVendaRepository.pas',
+  uIVendaService in 'src\service\interfaces\uIVendaService.pas',
+  uVendaService in 'src\service\uVendaService.pas';
 
 {$R *.res}
 

@@ -3,8 +3,8 @@ object FormInicialVenda: TFormInicialVenda
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Iniciar Venda - MeuPDV'
-  ClientHeight = 300
-  ClientWidth = 500
+  ClientHeight = 510
+  ClientWidth = 1108
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,11 +13,11 @@ object FormInicialVenda: TFormInicialVenda
   Font.Style = []
   Position = poMainFormCenter
   TextHeight = 15
-  object pnlContainer: TPanel
+  object pnlBox: TPanel
     Left = 0
     Top = 0
-    Width = 500
-    Height = 300
+    Width = 1108
+    Height = 510
     Align = alClient
     BevelOuter = bvNone
     Color = 16513528
@@ -29,8 +29,6 @@ object FormInicialVenda: TFormInicialVenda
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 498
-    ExplicitHeight = 292
     object Label1: TLabel
       Left = 56
       Top = 157
@@ -47,7 +45,7 @@ object FormInicialVenda: TFormInicialVenda
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
-      Width = 500
+      Width = 1108
       Height = 60
       Align = alTop
       BevelOuter = bvNone
@@ -61,7 +59,7 @@ object FormInicialVenda: TFormInicialVenda
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 498
+      ExplicitWidth = 500
     end
     object cbxSelecionarCliente: TComboBox
       Left = 56
@@ -120,5 +118,17 @@ object FormInicialVenda: TFormInicialVenda
       NumGlyphs = 2
       TabOrder = 4
     end
+  end
+  object pnlContainer: TPanel
+    Left = 0
+    Top = 0
+    Width = 1108
+    Height = 510
+    Align = alClient
+    BevelOuter = bvNone
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitWidth = 500
+    ExplicitHeight = 700
   end
 end
