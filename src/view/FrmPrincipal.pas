@@ -43,6 +43,9 @@ var
 begin
   Formulario := FormClass.Create(Self);
 
+  while pnlContainer.ControlCount > 0 do
+    pnlContainer.Controls[0].Free;
+
   Formulario.BorderStyle := bsNone;
   Formulario.Align := alClient;
   Formulario.Parent := pnlContainer;
@@ -73,18 +76,8 @@ AbrirForm(TFormListaProdutos);
 end;
 
 procedure TFormPrincipal.btnVendasClick(Sender: TObject);
-var
- FormInicialVenda : TFormInicialVenda;
-
 begin
- FormInicialVenda := TFormInicialVenda.Create(Self);
- try
-
- FormInicialVenda.ShowModal;
-
- finally
-   FormInicialVenda.Free;
- end;
+ AbrirForm(TFormInicialVenda);
 
 end;
 

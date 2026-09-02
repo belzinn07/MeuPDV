@@ -18,6 +18,7 @@ type
     btnCancelar: TBitBtn;
     pnlContainer: TPanel;
     procedure btnConfirmarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,6 +31,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormInicialVenda.btnCancelarClick(Sender: TObject);
+begin
+ Release;
+end;
 
 procedure TFormInicialVenda.btnConfirmarClick(Sender: TObject);
 var

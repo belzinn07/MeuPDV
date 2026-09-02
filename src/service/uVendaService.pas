@@ -3,53 +3,101 @@ unit uVendaService;
 interface
 
 uses
-  uIVendaRepository, uVendaDTO, uItemVendaDTO, uIValidador,
-  uItemVendaValidador, uLogger, System.SysUtils;
+  uIVendaService,
+  uVendaDTO,
+  uItemVendaDTO,
+  uIVendaRepository,
+  uIValidador,
+  System.Generics.Collections,
+  System.SysUtils;
 
 type
- TVendaService = class
+  TVendaService = class(TInterfacedObject, IVendaService)
 
   private
-   FRepository : IVendaRepository;
-   procedure ValidarItens(AVendaDTO : TVendaDTO);
+    FRepository : IVendaRepository;
+    FValidadorVenda : IValidador<TVendaDTO>;
 
   public
-   constructor Create(ARepository : IVendaRepository);
-   procedure Salvar(const AVendaDTO: TVendaDTO);
-
- end;
+    constructor Create(ARepository: IVendaRepository);
+    procedure Salvar(const AVendaDTO: TVendaDTO);
+  end;
 
 implementation
+
+uses
+  uVendaRepository,
+  uVenda,
+  uItemVenda,
+  uVendaMapper,
+  uVendaValidador,
+  uItemVendaValidador;
 
 { TVendaService }
 
 constructor TVendaService.Create(ARepository: IVendaRepository);
 begin
   FRepository := ARepository;
+  FValidadorVenda := TVendaValidador.Create;
 end;
 
 procedure TVendaService.Salvar(const AVendaDTO: TVendaDTO);
 var
- Validador : IValidador<TItemVendaDTO>;
- Venda : TVendaDTO;
+  ItemValidador : IValidador<TItemVendaDTO>;
+  ItemDTO : TItemVendaDTO;
+  Item : TItemVenda;
+  Itens : TObjectList<TItemVenda>;
+  Venda : TVenda;
+  Total : Currency;
+  ItemAtual : Integer;
 
 begin
-TLogger.Info('VendaService.Salvar', Format('Salvando venda. ID = ',[]));
+  FValidadorVenda.Validar(AVendaDTO);
 
+  ItemValidador := TItemVendaValidador.Create;
+  ItemAtual := 0;
+  for ItemDTO in AVendaDTO.Itens do
+  begin
+    Inc(ItemAtual);
+    try
+      ItemValidador.Validar(ItemDTO);
+    except
+      raise Exception.CreateFmt('Item %d da venda inválido: %s',
+        [ItemAtual, Exception(ExceptObject).Message]);
+    end;
+  end;
 
-end;
+  Total := 0;
+  for ItemDTO in AVendaDTO.Itens do
+    Total := Total +
+      (StrToInt(ItemDTO.Quantidade) * StrToFloat(ItemDTO.ValorUnitario));
 
-procedure TVendaService.ValidarItens(AVendaDTO: TVendaDTO);
-var
-  Item: TItemVendaDTO;
-  Validador : IValidador<TItemVendaDTO>;
+  AVendaDTO.Data := Now;
+  AVendaDTO.Total := Total;
 
-begin
-  Validador := TItemVendaValidador.Create;
+  Venda := TVendaMapper.ConverterParaEntidade(AVendaDTO);
 
-  for Item in AVendaDTO.Itens do
-   Validador.Validar(Item);
+  try
+    try
+      Itens := TObjectList<TItemVenda>.Create(True);
+      try
+        for ItemDTO in AVendaDTO.Itens do
+          Itens.Add(TVendaMapper.ConverterItemParaEntidade(ItemDTO));
 
+        FRepository.SalvarVendaComItens(Venda, Itens);
+      finally
+        Itens.Free;
+      end;
+    finally
+      Venda.Free;
+    end;
+  except
+    on E: Exception do
+    begin
+      raise Exception.CreateFmt(
+        'Erro ao salvar venda, nenhum dado foi gravado: %s', [E.Message]);
+    end;
+  end;
 end;
 
 end.

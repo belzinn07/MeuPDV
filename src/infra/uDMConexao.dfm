@@ -1,57 +1,55 @@
 object dm: Tdm
   OnCreate = DataModuleCreate
-  Height = 600
-  Width = 800
+  Height = 750
+  Width = 1000
+  PixelsPerInch = 120
   object FDConexao: TFDConnection
     Params.Strings = (
       'User_Name=SYSDBA'
       'Password=masterkey'
       'CharacterSet=UTF8'
-      
-        'Database=C:\Users\Sup-09\Documents\Belmiro\DELPHI\Projetos\MeuPD' +
-        'V\database\MeuPDV.FDB'
       'DriverID=FB')
     Transaction = FDTransacao
-    Left = 416
-    Top = 307
+    Left = 520
+    Top = 384
   end
   object qryCRUD: TFDQuery
     Connection = FDConexao
-    Left = 371
-    Top = 211
+    Left = 464
+    Top = 264
   end
   object qryClientes: TFDQuery
     Connection = FDConexao
     SQL.Strings = (
       'SELECT * FROM CLIENTES')
-    Left = 365
-    Top = 141
+    Left = 456
+    Top = 176
   end
   object qryProdutos: TFDQuery
     Connection = FDConexao
     SQL.Strings = (
       'SELECT ID, DESCRICAO, PRECO FROM PRODUTOS;')
-    Left = 467
-    Top = 141
+    Left = 584
+    Top = 176
   end
   object qryVendas: TFDQuery
     Connection = FDConexao
-    Left = 250
-    Top = 141
+    Left = 313
+    Top = 176
   end
   object FDTransacao: TFDTransaction
     Connection = FDConexao
-    Left = 326
-    Top = 307
+    Left = 408
+    Top = 384
   end
   object dsClientes: TDataSource
     DataSet = qryClientes
-    Left = 377
-    Top = 422
+    Left = 471
+    Top = 528
   end
   object dsVendas: TDataSource
     DataSet = qryVendas
-    Left = 473
-    Top = 422
+    Left = 591
+    Top = 528
   end
 end
