@@ -13,6 +13,7 @@ object FrmProdutos: TFrmProdutos
   Font.Style = []
   Position = poMainFormCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object pnlGeral: TPanel
     Left = 0
@@ -22,6 +23,8 @@ object FrmProdutos: TFrmProdutos
     Align = alClient
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 622
+    ExplicitHeight = 273
     object pnlCabecalho: TPanel
       Left = 1
       Top = 1
@@ -30,6 +33,7 @@ object FrmProdutos: TFrmProdutos
       Align = alTop
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 620
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1

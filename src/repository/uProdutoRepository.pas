@@ -16,13 +16,13 @@ TProdutoRepository = class (TInterfacedObject, IProdutoRepository)
   procedure AtualizarLista;
 
  public
-  constructor Create(AdmConex�o : Tdm);
+  constructor Create(AdmConexao : Tdm);
   procedure Inserir(AProduto: TProduto);
   procedure Atualizar(AProduto : TProduto);
   procedure Excluir(AId : Integer);
   function Listar: TObjectList<TProduto>;
   function BuscarPorId(AId: Integer): TProduto;
-  function PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
+  function Pesquisar(APesquisa: String): TObjectList<TProduto>;
 end;
 
 
@@ -30,10 +30,10 @@ implementation
 
 { TProdutoRepository }
 
-constructor TProdutoRepository.Create(AdmConex�o: Tdm);
+constructor TProdutoRepository.Create(AdmConexao: Tdm);
 begin
 
-FdmConexao := AdmConex�o;
+FdmConexao := AdmConexao;
 end;
 
 procedure TProdutoRepository.AtualizarLista;
@@ -158,9 +158,10 @@ begin
   Result := TObjectList<TProduto>.Create(True);
 
 try
- Qry.Connection := FdmConexao.FDConexao;
- Qry.SQL.Text:= 'SELECT ID, DESCRICAO, PRECO, SALDO FROM PRODUTOS ORDER BY ID';
- Qry.Open;
+ try
+   Qry.Connection := FdmConexao.FDConexao;
+   Qry.SQL.Text:= 'SELECT ID, DESCRICAO, PRECO, SALDO FROM PRODUTOS ORDER BY ID';
+   Qry.Open;
 
  while not Qry.Eof do
   begin
@@ -175,6 +176,11 @@ try
 
     Qry.Next;
   end;
+ except
+    FreeAndNil(Result);
+    raise;
+
+ end;
 
 finally
   Qry.Free;
@@ -182,7 +188,7 @@ finally
  end;
 end;
 
-function TProdutoRepository.PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
+function TProdutoRepository.Pesquisar(APesquisa: String): TObjectList<TProduto>;
 var
   Qry : TFDQuery;
   Produto : TProduto;
@@ -192,8 +198,9 @@ begin
   Result := TObjectList<TProduto>.Create(True);
 
   try
-   Qry.Connection := FdmConexao.FDConexao;
-   Qry.SQL.Text := 'SELECT ID, DESCRICAO, PRECO, SALDO ' +
+   try
+     Qry.Connection := FdmConexao.FDConexao;
+      Qry.SQL.Text := 'SELECT ID, DESCRICAO, PRECO, SALDO ' +
                                    'FROM PRODUTOS ' +
                                    'WHERE CAST(ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA ' +
                                    '   OR UPPER(DESCRICAO) LIKE UPPER(:VALOR_PESQUISA) ' +
@@ -217,10 +224,14 @@ begin
       Qry.Next;
     end;
 
-  except
+   except
+     FreeAndNil(Result);
+     raise;
+   end;
+
+  finally
     Qry.Free;
-    Result.Free;
-    raise;
+
   end;
 end;
 end.

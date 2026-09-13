@@ -4,7 +4,8 @@ interface
 
 uses
   uIClienteRepository, uDMConexao, uCliente,
-  System.Generics.Collections, FireDAC.Comp.Client, uTipoPessoa;
+  System.Generics.Collections, FireDAC.Comp.Client, uTipoPessoa,
+  System.SysUtils;
 type
  TClienteRepository = class(TInterfacedObject, IClienteRepository)
 
@@ -13,7 +14,7 @@ type
     procedure AtualizarLista;
 
    public
-    constructor Create(AdmConex�o : Tdm);
+    constructor Create(AdmConexao : Tdm);
     procedure Inserir(const ACliente : TCliente);
     procedure Atualizar(const ACliente: TCliente);
     procedure Excluir(AId: Integer);
@@ -29,9 +30,9 @@ implementation
 
 { TClienteRepository }
 
-constructor TClienteRepository.Create(AdmConex�o: Tdm);
+constructor TClienteRepository.Create(AdmConexao: Tdm);
 begin
-  FdmConexao := AdmConex�o;
+  FdmConexao := AdmConexao;
 end;
 
 procedure TClienteRepository.Inserir(const ACliente: TCliente);
@@ -154,10 +155,16 @@ try
    Result.Nome := Qry.FieldByName('NOME').AsString;
    Result.CPF := Qry.FieldByName('CPF').AsString;
    Result.CNPJ := Qry.FieldByName('CNPJ').AsString;
-   case Qry.FieldByName('TIPOPESSOA').AsString[1] of
-    'F': Result.TipoPessoa := tpFisica;
+
+  if Qry.FieldByName('TIPOPESSOA').IsNull then
+    Result.TipoPessoa := tpFisica
+  else
+  case Qry.FieldByName('TIPOPESSOA').AsString[1] of
     'J': Result.TipoPessoa := tpJuridica;
-   end;
+  else
+    Result.TipoPessoa := tpFisica;
+  end;
+
    Result.Telefone := Qry.FieldByName('TELEFONE').AsString;
    Result.Email := Qry.FieldByName('EMAIL').AsString;
    Result.IE := QRY.FieldByName('IE').AsString;
@@ -180,6 +187,7 @@ begin
  Result := TObjectList<TCliente>.Create(True);
 
  try
+  try
    Qry.Connection := FdmConexao.FDConexao;
    Qry.SQL.Text := 'SELECT ID, NOME, CPF, CNPJ, TELEFONE, EMAIL ' +
                    'FROM CLIENTES ORDER BY ID';
@@ -200,6 +208,10 @@ begin
 
      Qry.Next;
    end;
+  except
+    FreeAndNil(Result);
+    raise;
+  end;
 
  finally
    Qry.Free;
@@ -219,6 +231,7 @@ begin
  Result := TObjectList<TCliente>.Create(True);
 
  try
+  try
    Qry.Connection := FdmConexao.FDConexao;
    Qry.SQL.Text := 'SELECT ID, NOME,CPF, CNPJ, TELEFONE, EMAIL FROM CLIENTES ' +
                    'WHERE CAST(ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA ' +
@@ -246,11 +259,14 @@ begin
     Qry.Next
    end;
 
-
- except
-    Qry.Free;
-    Result.Free;
+  except
+    FreeAndNil(Result);
     raise;
+  end;
+
+ finally
+    Qry.Free;
+
  end;
 
 end;

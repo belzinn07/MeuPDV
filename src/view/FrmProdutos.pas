@@ -22,6 +22,7 @@ type
     edtCodigo: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
     procedure bntSalvarClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   private
     FProdutoDTO : TProdutoDTO;
@@ -56,6 +57,8 @@ end;
 
 procedure TFrmProdutos.PrepararEdicao(Aid : Integer);
 begin
+FreeAndNil(FProdutoDTO);
+
 FProdutoDTO := FProdutoService.BuscarPorId(Aid);
 edtCodigo.Text := IntToStr(FProdutoDTO.Id);
 edtDescricao.Text := FProdutoDTO.Descricao;
@@ -98,6 +101,11 @@ begin
   FProdutoService := TServiceFactory.ProdutoService;
   AplicarEstilos;
 
+end;
+
+procedure TFrmProdutos.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(FProdutoDTO)
 end;
 
 procedure TFrmProdutos.AplicarEstilos;

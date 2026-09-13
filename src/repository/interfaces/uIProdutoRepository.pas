@@ -13,7 +13,7 @@ IProdutoRepository = interface
   procedure Excluir(AId : Integer);
   function Listar: TObjectList<TProduto>;
   function BuscarPorId(AId: Integer): TProduto;
-  function PesquisarProdutos(APesquisa: String): TObjectList<TProduto>;
+  function Pesquisar(APesquisa: String): TObjectList<TProduto>;
 end;
 
 implementation

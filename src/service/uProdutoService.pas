@@ -197,7 +197,7 @@ begin
       'ProdutoService.PesquisarProdutos',
       'Pesquisando produtos por: ' + Termo);
 
-    Produtos := FRepository.PesquisarProdutos(Termo);
+    Produtos := FRepository.Pesquisar(Termo);
 
     Result := TObjectList<TProdutoDTO>.Create(True);
 
