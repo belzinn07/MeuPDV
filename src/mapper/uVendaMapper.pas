@@ -22,6 +22,9 @@ type
 implementation
 
 class function TVendaMapper.ConverterParaDto(AVenda: TVenda): TVendaDTO;
+var
+ Item: TItemVenda;
+
 begin
   Result := TVendaDTO.Create;
 
@@ -29,9 +32,15 @@ begin
   Result.IdCliente := IntToStr(AVenda.IdCliente);
   Result.Data := AVenda.Data;
   Result.Total := AVenda.Total;
+
+  for Item in AVenda.Itens do
+    Result.Itens.Add(ConverterItemParaDto(Item))
+
 end;
 
 class function TVendaMapper.ConverterParaEntidade(AVendaDto: TVendaDTO): TVenda;
+var
+ ItemDTO: TItemVendaDTO;
 begin
   Result := TVenda.Create;
 
@@ -39,6 +48,10 @@ begin
   Result.IdCliente := StrToInt(AVendaDto.IdCliente);
   Result.Data := AVendaDto.Data;
   Result.Total := AVendaDto.Total;
+
+  for ItemDTO in AVendaDto.Itens do
+    Result.Itens.Add(ConverterItemParaEntidade(ItemDTO));
+    
 end;
 
 class function TVendaMapper.ConverterItemParaDto(AItemVenda: TItemVenda): TItemVendaDTO;
