@@ -61,7 +61,7 @@ begin
 
     TLogger.Info(
       'ProdutoService.Salvar',
-      'Validação conclu�da com sucesso.'
+      'Validação concluída com sucesso.'
     );
 
     Produto := TProdutoMapper.ConverterParaEntidade(AProdutoDTO);

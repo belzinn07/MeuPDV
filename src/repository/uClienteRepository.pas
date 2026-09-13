@@ -43,7 +43,7 @@ begin
  try
 
    Qry.Connection := FdmConexao.FDConexao;
-   Qry.SQL.Text := 'INSERT INTO CLIENTES (NOME, CPF, CNPJ, uTipoPessoa, TELEFONE, EMAIL, IE)' +
+   Qry.SQL.Text := 'INSERT INTO CLIENTES (NOME, CPF, CNPJ, TIPOPESSOA, TELEFONE, EMAIL, IE)' +
                     'VALUES(:NOME, :CPF, :CNPJ, :TIPOPESSOA, :TELEFONE, :EMAIL, :IE)' +
                     'RETURNING ID';
    Qry.ParamByName('NOME').AsString := ACliente.Nome;
@@ -220,13 +220,13 @@ begin
 
  try
    Qry.Connection := FdmConexao.FDConexao;
-   Qry.SQL.Text := 'SELECT ID, NOME,CPF, CNPJ, TELEFONE, EMAIL FROM CLIENTES' +
-                   'WHERE CAST(ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA' +
-                   'OR UPPER(NOME) LIKE UPPER (:VALOR_PESQUISA)' +
-                   'OR CPF LIKE :VALOR_PESQUISA' +
-                   'OR CNPJ LIKE :VALOR_PESQUISA' +
-                   'OR TELEFONE LIKE :VALOR_PESQUISA' +
-                   'OR EMAIL LIKE :VALOR_PESQUISA' +
+   Qry.SQL.Text := 'SELECT ID, NOME,CPF, CNPJ, TELEFONE, EMAIL FROM CLIENTES ' +
+                   'WHERE CAST(ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA ' +
+                   'OR UPPER(NOME) LIKE UPPER (:VALOR_PESQUISA) ' +
+                   'OR CPF LIKE :VALOR_PESQUISA ' +
+                   'OR CNPJ LIKE :VALOR_PESQUISA ' +
+                   'OR TELEFONE LIKE :VALOR_PESQUISA ' +
+                   'OR EMAIL LIKE :VALOR_PESQUISA ' +
                    'ORDER BY ID ';
    Qry.ParamByName('VALOR_PESQUISA').AsString := '%' + APesquisa + '%';
    Qry.Open;
