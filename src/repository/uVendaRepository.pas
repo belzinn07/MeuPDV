@@ -17,12 +17,31 @@ uses
    public
     constructor Create(ADmConexao: Tdm);
     procedure SalvarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
+    function BuscarProximaFatura: Integer;
 
   end;
 
 implementation
 
 { TVendaRepository }
+
+function TVendaRepository.BuscarProximaFatura: Integer;
+var
+ Qry: TFDQuery;
+
+begin
+ Qry := TFDQuery.Create(nil);
+
+ try
+   Qry.Connection := FDmConexao.FDConexao;
+   Qry.SQL.Text := 'SELECT COALESCE(MAX(ID),0) + 1 AS ProximoId FROM VENDAS';
+   Qry.Open;
+
+   Result := Qry.FieldByName('ProximoId').AsInteger;
+ finally
+   Qry.Free;
+ end;
+end;
 
 constructor TVendaRepository.Create(ADmConexao: Tdm);
 begin

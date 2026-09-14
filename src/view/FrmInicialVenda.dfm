@@ -11,7 +11,11 @@ object FormInicialVenda: TFormInicialVenda
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poMainFormCenter
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  OnShow = FormShow
   TextHeight = 15
   object pnlContainer: TPanel
     AlignWithMargins = True
@@ -25,10 +29,8 @@ object FormInicialVenda: TFormInicialVenda
     Margins.Bottom = 100
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 923
-    ExplicitTop = 440
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 706
+    ExplicitHeight = 302
     object pnlBox: TPanel
       Left = 1
       Top = 1
@@ -45,8 +47,23 @@ object FormInicialVenda: TFormInicialVenda
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      object Label1: TLabel
+      ExplicitWidth = 704
+      ExplicitHeight = 300
+      object lblCodigoCliente: TLabel
         Left = 160
+        Top = 157
+        Width = 55
+        Height = 21
+        Caption = 'C'#243'digo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblCliente: TLabel
+        Left = 256
         Top = 157
         Width = 54
         Height = 21
@@ -75,12 +92,12 @@ object FormInicialVenda: TFormInicialVenda
         ParentBackground = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 681
+        ExplicitWidth = 704
       end
       object cbxSelecionarCliente: TComboBox
-        Left = 160
+        Left = 256
         Top = 184
-        Width = 417
+        Width = 321
         Height = 29
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -89,6 +106,7 @@ object FormInicialVenda: TFormInicialVenda
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnChange = cbxSelecionarClienteChange
       end
       object edtFatura: TLabeledEdit
         Left = 160
@@ -119,7 +137,7 @@ object FormInicialVenda: TFormInicialVenda
         Width = 120
         Height = 40
         Caption = '&Confirmar'
-        Kind = bkYes
+        ModalResult = 6
         NumGlyphs = 2
         TabOrder = 3
         OnClick = btnConfirmarClick
@@ -134,6 +152,21 @@ object FormInicialVenda: TFormInicialVenda
         NumGlyphs = 2
         TabOrder = 4
         OnClick = btnCancelarClick
+      end
+      object edtIdCliente: TEdit
+        Left = 160
+        Top = 184
+        Width = 81
+        Height = 29
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+        OnExit = edtIdClienteExit
+        OnKeyDown = edtIdClienteKeyDown
       end
     end
   end

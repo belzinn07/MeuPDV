@@ -23,6 +23,8 @@ type
   public
     constructor Create(ARepository: IVendaRepository);
     procedure Salvar(const AVendaDTO: TVendaDTO);
+    function BuscarProximaFatura: Integer;
+
   end;
 
 implementation
@@ -41,6 +43,11 @@ constructor TVendaService.Create(ARepository: IVendaRepository);
 begin
   FRepository := ARepository;
   FValidadorVenda := TVendaValidador.Create;
+end;
+
+function TVendaService.BuscarProximaFatura: Integer;
+begin
+  FRepository.BuscarProximaFatura;
 end;
 
 procedure TVendaService.Salvar(const AVendaDTO: TVendaDTO);
@@ -107,8 +114,9 @@ begin
     try
       ItemValidador.Validar(Local_ItemDTO);
     except
-      raise Exception.CreateFmt('Item %d da venda inválido: %s', [ItemAtual, Exception(ExceptObject).Message]);
-    end;
+      on E: Exception do
+      raise Exception.CreateFmt('Item %d da venda inválido: %s', [ItemAtual, E.Message]);
+end;
   end;
 end;
 

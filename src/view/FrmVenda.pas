@@ -5,16 +5,19 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  uDMConexao, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  uDMConexao, Data.DB, Vcl.Grids, Vcl.DBGrids, uClienteDTO, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, uIVendaService, uServiceFactory, uIProdutoService;
 
 type
   TFormVendas = class(TForm)
     pnlContainer: TPanel;
     pnlCabecalho: TPanel;
     pnlRodape: TPanel;
-    Label1: TLabel;
+    lblTitulo: TLabel;
     pnlLateral: TPanel;
-    DBGrid1: TDBGrid;
+    dbgItensVenda: TDBGrid;
     pnlTotalCompra: TPanel;
     Shape4: TShape;
     lblTotalCompra: TLabel;
@@ -49,10 +52,19 @@ type
     pnlConfirmarProduto: TPanel;
     Shape8: TShape;
     btnConfirmarProduto: TSpeedButton;
+    dsItens: TDataSource;
+    mtItens: TFDMemTable;
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    FProximaFaturaVenda: Integer;
+    FClienteSelecionado: TClienteDTO;
+    FVendaService: IVendaService;
+    FProdutoService: IProdutoService;
+
   public
-    { Public declarations }
+    property ProximaFaturaVenda: Integer read FProximaFaturaVenda write FProximaFaturaVenda;
+    property ClienteSelecionado: TClienteDTO read FClienteSelecionado write FClienteSelecionado;
+
   end;
 
 var
@@ -61,5 +73,23 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormVendas.FormCreate(Sender: TObject);
+begin
+ FVendaService := TServiceFactory.VendaService;
+ FProdutoService := TServiceFactory.ProdutoService;
+
+ mtItens.Close;
+ mtItens.FieldDefs.Clear;
+
+ mtItens.FieldDefs.Add('CODIGO', ftInteger);
+ mtItens.FieldDefs.Add('DESCRICAO',ftString, 100);
+ mtItens.FieldDefs.Add('QUANTIDADE', ftInteger);
+ mtItens.FieldDefs.Add('PRECO', ftCurrency);
+ mtItens.FieldDefs.Add('TOTAL', ftCurrency);
+
+ mtItens.CreateDataSet;
+
+end;
 
 end.

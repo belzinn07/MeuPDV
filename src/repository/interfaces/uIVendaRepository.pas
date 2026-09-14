@@ -10,6 +10,7 @@ type
    ['{F219FBF0-5374-4D17-ADE6-AA28F9B75F82}']
 
   procedure SalvarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
+  function BuscarProximaFatura: Integer;
 
  end;
 

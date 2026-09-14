@@ -39,8 +39,8 @@ end;
 
 destructor TVenda.Destroy;
 begin
-  inherited;
   FItens.Free;
+  inherited;
 end;
 
 end.

@@ -33,7 +33,7 @@ end;
 
 procedure TProdutoValidador.Validar(AProduto : TProdutoDTO);
 begin
- ValidarCampo(PrecoValido(AProduto.Preco), 'Preço inválido ou não informado');
+ ValidarCampo(PrecoValido(AProduto.Preco), 'Preço invlido ou não informado');
  ValidarCampo(Trim(AProduto.Descricao)<>'', 'Descrição é obrigatória');
  ValidarCampo(Trim(AProduto.Saldo)<>'', 'Saldo não informado');
  ValidarCampo(StrToFloat(AProduto.Saldo) > 0, 'Saldo Inválido' )
