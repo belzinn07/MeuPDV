@@ -13,6 +13,8 @@ object FormVendas: TFormVendas
   Position = poDesktopCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnResize = FormResize
+  OnShow = FormShow
   TextHeight = 15
   object pnlContainer: TPanel
     Left = 0
@@ -24,6 +26,8 @@ object FormVendas: TFormVendas
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1122
+    ExplicitHeight = 722
     object pnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -34,6 +38,7 @@ object FormVendas: TFormVendas
       Color = 9063714
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 1122
       object lblTitulo: TLabel
         AlignWithMargins = True
         Left = 3
@@ -68,6 +73,8 @@ object FormVendas: TFormVendas
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 640
+      ExplicitWidth = 1122
       object pnlFecharVenda: TPanel
         AlignWithMargins = True
         Left = 60
@@ -206,6 +213,7 @@ object FormVendas: TFormVendas
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
+          OnClick = btnConfirmarProdutoClick
           ExplicitLeft = 40
           ExplicitTop = 24
           ExplicitWidth = 23
@@ -231,6 +239,8 @@ object FormVendas: TFormVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
+      ExplicitLeft = 722
+      ExplicitHeight = 559
       object pnlTotalCompra: TPanel
         AlignWithMargins = True
         Left = 3
@@ -242,6 +252,7 @@ object FormVendas: TFormVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 0
+        ExplicitTop = 466
         object Shape4: TShape
           Left = 0
           Top = 19
@@ -294,14 +305,13 @@ object FormVendas: TFormVendas
             Height = 39
             Align = alClient
             Alignment = taCenter
-            Caption = 'R$ 0,0'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -24
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitWidth = 65
+            ExplicitWidth = 7
             ExplicitHeight = 32
           end
         end
@@ -317,6 +327,7 @@ object FormVendas: TFormVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 390
         object Shape2: TShape
           Left = 0
           Top = 19
@@ -369,14 +380,13 @@ object FormVendas: TFormVendas
             Height = 39
             Align = alClient
             Alignment = taCenter
-            Caption = 'R$ 0,0'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -24
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitWidth = 65
+            ExplicitWidth = 7
             ExplicitHeight = 32
           end
         end
@@ -392,6 +402,7 @@ object FormVendas: TFormVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 2
+        ExplicitTop = 314
         object Shape3: TShape
           Left = 0
           Top = 19
@@ -436,7 +447,7 @@ object FormVendas: TFormVendas
           Color = 9063714
           ParentBackground = False
           TabOrder = 0
-          object Edit1: TEdit
+          object edtQuantidade: TEdit
             AlignWithMargins = True
             Left = 3
             Top = 3
@@ -468,6 +479,7 @@ object FormVendas: TFormVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 3
+        ExplicitTop = 238
         object Shape5: TShape
           Left = 0
           Top = 19
@@ -544,6 +556,7 @@ object FormVendas: TFormVendas
         Color = 16513528
         ParentBackground = False
         TabOrder = 4
+        ExplicitTop = 162
         object Shape6: TShape
           Left = 0
           Top = 19
@@ -606,6 +619,7 @@ object FormVendas: TFormVendas
             ParentFont = False
             TabOrder = 0
             Text = '00000'
+            OnKeyDown = edtProdutoKeyDown
           end
         end
       end
@@ -632,28 +646,22 @@ object FormVendas: TFormVendas
       Columns = <
         item
           Expanded = False
-          FieldName = 'c'
-          Title.Caption = 'C'#243'digo'
           Visible = True
         end
         item
           Expanded = False
-          Title.Caption = 'Descri'#231#227'o'
           Visible = True
         end
         item
           Expanded = False
-          Title.Caption = 'Quantidade'
           Visible = True
         end
         item
           Expanded = False
-          Title.Caption = 'Pre'#231'o'
           Visible = True
         end
         item
           Expanded = False
-          Title.Caption = 'Total'
           Visible = True
         end>
     end

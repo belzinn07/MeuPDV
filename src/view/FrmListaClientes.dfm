@@ -6,7 +6,6 @@ inherited FormListaClientes: TFormListaClientes
   OnDestroy = FormDestroy
   OnResize = FormResize
   ExplicitWidth = 1124
-  ExplicitHeight = 639
   TextHeight = 15
   inherited pnlContainer: TPanel
     Width = 1108

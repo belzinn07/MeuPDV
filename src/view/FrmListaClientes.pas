@@ -230,9 +230,9 @@ begin
   ConfigurarMemTable;
   AjustarColunas;
   FListaDeClientes := FClienteService.Listar;
-
   CarregarClientesNaMemtable;
   AplicarEstilo;
+
 end;
 
 procedure TFormListaClientes.FormDestroy(Sender: TObject);

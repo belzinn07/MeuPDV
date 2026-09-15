@@ -8,7 +8,8 @@ uses
   uDMConexao, Data.DB, Vcl.Grids, Vcl.DBGrids, uClienteDTO, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uIVendaService, uServiceFactory, uIProdutoService;
+  FireDAC.Comp.Client, uIVendaService, uServiceFactory, uIProdutoService,
+  uProdutoDTO;
 
 type
   TFormVendas = class(TForm)
@@ -32,7 +33,7 @@ type
     Shape3: TShape;
     lblQuantidade: TLabel;
     pnledtQuantidade: TPanel;
-    Edit1: TEdit;
+    edtQuantidade: TEdit;
     pnlPreco: TPanel;
     Shape5: TShape;
     lblPreco: TLabel;
@@ -55,11 +56,21 @@ type
     dsItens: TDataSource;
     mtItens: TFDMemTable;
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure edtProdutoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnConfirmarProdutoClick(Sender: TObject);
   private
     FProximaFaturaVenda: Integer;
     FClienteSelecionado: TClienteDTO;
     FVendaService: IVendaService;
     FProdutoService: IProdutoService;
+    FIdProduto: Integer;
+    FDescricao: string;
+    procedure ConfiguraMemtable;
+    procedure AjustarColunas;
+    procedure CarregarTotal;
 
   public
     property ProximaFaturaVenda: Integer read FProximaFaturaVenda write FProximaFaturaVenda;
@@ -75,21 +86,161 @@ implementation
 {$R *.dfm}
 
 procedure TFormVendas.FormCreate(Sender: TObject);
+var
+    W: Integer;
 begin
  FVendaService := TServiceFactory.VendaService;
  FProdutoService := TServiceFactory.ProdutoService;
+ ConfiguraMemtable;
+ AjustarColunas;
 
- mtItens.Close;
- mtItens.FieldDefs.Clear;
 
- mtItens.FieldDefs.Add('CODIGO', ftInteger);
- mtItens.FieldDefs.Add('DESCRICAO',ftString, 100);
- mtItens.FieldDefs.Add('QUANTIDADE', ftInteger);
- mtItens.FieldDefs.Add('PRECO', ftCurrency);
- mtItens.FieldDefs.Add('TOTAL', ftCurrency);
+end;
 
- mtItens.CreateDataSet;
+procedure TFormVendas.FormResize(Sender: TObject);
+begin
+ AjustarColunas;
+end;
 
+procedure TFormVendas.FormShow(Sender: TObject);
+begin
+ Caption := Format('Venda nº %d - Cliente: %s',
+                    [FProximaFaturaVenda, FClienteSelecionado.Nome]);
+ edtProduto.Clear;
+ edtPreco.Clear;
+ edtQuantidade.Clear;
+ CarregarTotal;
+ edtProduto.SetFocus;
+
+
+end;
+
+procedure TFormVendas.AjustarColunas;
+var
+  W: integer;
+begin
+  if dbgItensVenda.Columns.Count = 0 then
+    Exit;
+
+  W := dbgItensVenda.ClientWidth - 20;
+
+dbgItensVenda.Columns[0].Width := Round(W * 0.10);
+dbgItensVenda.Columns[1].Width := Round(W * 0.50);
+dbgItensVenda.Columns[2].Width := Round(W * 0.10);
+dbgItensVenda.Columns[3].Width := Round(W * 0.15);
+dbgItensVenda.Columns[4].Width := Round(W * 0.15);
+
+end;
+
+procedure TFormVendas.ConfiguraMemtable;
+begin
+  mtItens.Close;
+  mtItens.FieldDefs.Clear;
+  dbgItensVenda.Columns.Clear;
+  mtItens.FieldDefs.Add('CODIGO', ftInteger);
+  mtItens.FieldDefs.Add('DESCRICAO', ftString, 100);
+  mtItens.FieldDefs.Add('QUANTIDADE', ftInteger);
+  mtItens.FieldDefs.Add('PRECO', ftCurrency);
+  mtItens.FieldDefs.Add('TOTAL', ftCurrency);
+  mtItens.CreateDataSet;
+  mtItens.FieldByName('CODIGO').DisplayLabel := 'Código';
+  mtItens.FieldByName('DESCRICAO').DisplayLabel := 'Descrição';
+  mtItens.FieldByName('QUANTIDADE').DisplayLabel := 'Quantidade';
+  mtItens.FieldByName('PRECO').DisplayLabel := 'Preço';
+  mtItens.FieldByName('TOTAL').DisplayLabel := 'Total';
+end;
+
+procedure TFormVendas.edtProdutoKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+ Produto : TProdutoDTO;
+begin
+ if Key <>  VK_RETURN then  Exit;
+ Key := 0;
+
+ FIdProduto := StrToIntDef(Trim(edtProduto.Text), -1);
+ if FIdProduto <= 0 then
+ begin
+   ShowMessage('Código do produto inválido');
+   Exit;
+ end;
+
+ Produto := FProdutoService.BuscarPorId(FIdProduto);
+ try
+   if Produto = nil then
+   begin
+     ShowMessage('Produto não encontrado');
+     edtProduto.Clear;
+     Exit;
+   end;
+
+   edtPreco.Text := FormatFloat('0.00', StrToFloatDef(Produto.Preco, 0));
+   edtQuantidade.Text := '1';
+   edtQuantidade.SetFocus;
+
+   FDescricao := Produto.Descricao;
+
+ finally
+   Produto.Free;
+ end;
+
+end;
+
+procedure TFormVendas.btnConfirmarProdutoClick(Sender: TObject);
+var
+  Quantidade: Integer;
+  Preco: Currency;
+  TotalItem: Currency;
+
+begin
+  if not TryStrToInt(Trim(edtQuantidade.Text), Quantidade)   or (Quantidade <= 0) then
+  begin
+    ShowMessage('Quantidade Inválida');
+    edtQuantidade.SetFocus;
+    Exit;
+  end;
+
+    if not TryStrToCurr(Trim(edtPreco.Text), Preco) or (Preco <= 0) then
+  begin
+    ShowMessage('Preço inválido.');
+    edtPreco.SetFocus;
+    Exit;
+  end;
+
+  TotalItem := Quantidade * Preco;
+
+  mtItens.Append;
+  mtItens.FieldByName('CODIGO').AsInteger := FIdProduto;
+  mtItens.FieldByName('DESCRICAO').AsString := FDescricao;
+  mtItens.FieldByName('QUANTIDADE').AsInteger :=  Quantidade;
+  mtItens.FieldByName('PRECO').AsCurrency := Preco;
+  mtItens.FieldByName('TOTAL').AsCurrency := TotalItem;
+  mtItens.Post;
+
+  CarregarTotal;
+  edtProduto.Clear;
+  edtPreco.Clear;
+  edtQuantidade.Clear;
+  edtPreco.SetFocus;
+
+end;
+
+procedure TFormVendas.CarregarTotal;
+var
+  Total: Currency;
+
+begin
+  Total := 0;
+  mtItens.First;
+
+  while not mtItens.Eof do
+  begin
+    Total:= Total + mtItens.FieldByName('TOTAL').AsCurrency;
+    mtItens.Next;
+  end;
+
+  lblPrecoSubTotal.Caption := FormatCurr('R$ 0.00', Total);
+  lblPrecoTotalCompra.Caption := FormatCurr('R$ 0.00', Total);
 end;
 
 end.
