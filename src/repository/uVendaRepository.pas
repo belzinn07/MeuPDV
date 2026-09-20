@@ -13,11 +13,14 @@ uses
     FDmConexao: Tdm;
     procedure InserirVenda(AVenda: TVenda);
     procedure InserirItensVendas(AIdVenda: Integer; AItens: TObjectList<TItemVenda>);
+    procedure AtualizarVenda(AVenda :TVenda);
 
    public
     constructor Create(ADmConexao: Tdm);
     procedure SalvarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
     function BuscarProximaFatura: Integer;
+    function BuscarPorId(AId: Integer): TVenda;
+    procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
 
   end;
 
@@ -105,6 +108,102 @@ begin
     FDmConexao.FDTransacao.Rollback;
     raise;
   end;
+end;
+
+function TVendaRepository.BuscarPorId(AId: Integer): TVenda;
+var
+  Qry: TFDQuery;
+  Item : TItemVenda;
+
+begin
+  Result := nil;
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDmConexao.FDConexao;
+
+    Qry.SQL.Text := 'SELECT * FROM VENDAS WHERE ID = :ID';
+    Qry.ParamByName('ID').AsInteger := AId;
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+    begin
+      Result := TVenda.Create;
+      Result.Id := Qry.FieldByName('ID').AsInteger;
+      Result.IdCliente := Qry.FieldByName('ID_CLIENTE').AsInteger;
+      Result.Data := Qry.FieldByName('DATA').AsDateTime;
+      Result.Total := Qry.FieldByName('TOTAL').AsCurrency;
+    end;
+
+    if Result = nil then
+      Exit;
+
+    Qry.Close;
+    Qry.SQL.Text := 'SELECT * FROM ITENS_VENDAS WHERE ID_VENDA = :ID';
+    Qry.ParamByName('ID').AsInteger := AId;
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      Item := TItemVenda.Create;
+      Item.Id := Qry.FieldByName('ID').AsInteger;
+      Item.IdVenda := Qry.FieldByName('ID_VENDA').AsInteger;
+      Item.IdProduto := Qry.FieldByName('ID_PRODUTO').AsInteger;
+      Item.Quantidade := Qry.FieldByName('QUANTIDADE').AsInteger;
+      Item.ValorUnitario := Qry.FieldByName('VALOR_UNITARIO').AsCurrency;
+      Result.Itens.Add(Item);
+
+      Qry.Next;
+    end;
+  finally
+    Qry.Free;
+  end;
+
+end;
+
+procedure TVendaRepository.AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
+var
+  Qry : TFDQuery;
+begin
+  FDmConexao.FDTransacao.StartTransaction;
+  Qry := TFDQuery.Create(nil);
+  try
+    try
+      Qry.Connection := FDmConexao.FDConexao;
+      AtualizarVenda(AVenda);
+      Qry.SQL.Text := 'DELETE FROM ITENS_VENDAS WHERE ID_VENDA = :ID';
+      Qry.ParamByName('ID').AsInteger := AVenda.Id;
+      Qry.ExecSQL;
+      InserirItensVendas(AVenda.Id, AItens);
+      FDmConexao.FDTransacao.Commit;
+    except
+      FDmConexao.FDTransacao.Rollback;
+      raise;
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TVendaRepository.AtualizarVenda(AVenda: TVenda);
+var
+ Qry: TFDQuery;
+
+begin
+ Qry := TFDQuery.Create(nil);
+
+ try
+  Qry.Connection := FDmConexao.FDConexao;
+
+  Qry.SQL.Text := ' UPDATE VENDAS SET ID_CLIENTE = :ID_CLIENTE, TOTAL = :TOTAL WHERE ID = :ID';
+  Qry.ParamByName('ID').AsInteger := AVenda.Id;
+  Qry.ParamByName('ID_CLIENTE').AsInteger := AVenda.IdCliente;
+  Qry.ParamByName('TOTAL').AsCurrency := AVenda.Total;
+  Qry.ExecSQL;
+
+ finally
+  Qry.Free;
+ end;
 end;
 
 end.

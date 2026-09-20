@@ -11,6 +11,8 @@ type
 
   procedure SalvarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
   function BuscarProximaFatura: Integer;
+  function BuscarPorId(AId: Integer): TVenda;
+  procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
 
  end;
 
