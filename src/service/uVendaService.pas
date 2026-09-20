@@ -9,7 +9,13 @@ uses
   uIVendaRepository,
   uIValidador,
   System.Generics.Collections,
-  System.SysUtils;
+  System.SysUtils,
+  uVendaRepository,
+  uVenda,
+  uItemVenda,
+  uVendaMapper,
+  uVendaValidador,
+  uItemVendaValidador;
 
 type
   TVendaService = class(TInterfacedObject, IVendaService)
@@ -24,18 +30,11 @@ type
     constructor Create(ARepository: IVendaRepository);
     procedure Salvar(AVendaDTO: TVendaDTO);
     function BuscarProximaFatura: Integer;
+    function BuscarPorId(AId: Integer): TVendaDTO;
 
   end;
 
 implementation
-
-uses
-  uVendaRepository,
-  uVenda,
-  uItemVenda,
-  uVendaMapper,
-  uVendaValidador,
-  uItemVendaValidador;
 
 { TVendaService }
 
@@ -53,7 +52,6 @@ end;
 procedure TVendaService.Salvar( AVendaDTO: TVendaDTO);
 var
   ItemDTO : TItemVendaDTO;
-  Item : TItemVenda;
   Itens : TObjectList<TItemVenda>;
   Venda : TVenda;
   Total : Currency;
@@ -62,12 +60,12 @@ begin
   FValidadorVenda.Validar(AVendaDTO);
   ValidarItens(AVendaDTO, ItemDTO);
   CalcularTotal(AVendaDTO, ItemDTO, Total);
-
-  AVendaDTO.Data := Now;
   AVendaDTO.Total := Total;
 
-  Venda := TVendaMapper.ConverterParaEntidade(AVendaDTO);
+  if AVendaDTO.Id = 0 then
+    AVendaDTO.Data := Now;
 
+  Venda := TVendaMapper.ConverterParaEntidade(AVendaDTO);
   try
     try
       Itens := TObjectList<TItemVenda>.Create(True);
@@ -75,8 +73,13 @@ begin
         for ItemDTO in AVendaDTO.Itens do
           Itens.Add(TVendaMapper.ConverterItemParaEntidade(ItemDTO));
 
-        FRepository.SalvarVendaComItens(Venda, Itens);
-        AVendaDTO.Id := Venda.Id;
+        if AVendaDTO.Id = 0 then
+        begin
+          FRepository.SalvarVendaComItens(Venda, Itens);
+          AVendaDTO.Id := Venda.Id;
+        end
+        else
+          FRepository.AtualizarVendaComItens(Venda, Itens);
 
       finally
         Itens.Free;
@@ -86,10 +89,7 @@ begin
     end;
   except
     on E: Exception do
-    begin
-      raise Exception.CreateFmt(
-        'Erro ao salvar venda, nenhum dado foi gravado: %s', [E.Message]);
-    end;
+      raise Exception.CreateFmt('Erro ao salvar venda, nenhum dado foi gravado: %s', [E.Message]);
   end;
 end;
 
@@ -122,4 +122,20 @@ end;
   end;
 end;
 
+function TVendaService.BuscarPorId(AId: Integer): TVendaDTO;
+var
+  Venda: TVenda;
+begin
+  Result := nil;
+
+  Venda := FRepository.BuscarPorId(AId);
+  if Venda = nil then
+    Exit;
+
+  try
+    Result := TVendaMapper.ConverterParaDto(Venda);
+  finally
+    Venda.Free;
+  end;
+end;
 end.

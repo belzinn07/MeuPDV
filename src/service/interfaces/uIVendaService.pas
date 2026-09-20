@@ -11,6 +11,7 @@ type
 
     procedure Salvar(AVendaDTO: TVendaDTO);
     function BuscarProximaFatura: Integer;
+    function BuscarPorId(AId: Integer): TVendaDTO;
 
   end;
 
