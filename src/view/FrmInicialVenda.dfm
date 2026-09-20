@@ -130,6 +130,8 @@ object FormInicialVenda: TFormInicialVenda
         ParentFont = False
         TabOrder = 2
         Text = ''
+        OnExit = edtFaturaExit
+        OnKeyDown = edtFaturaKeyDown
       end
       object btnConfirmar: TBitBtn
         Left = 199

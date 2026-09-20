@@ -175,7 +175,7 @@ object FormVendas: TFormVendas
       end
       object pnlConfirmarProduto: TPanel
         AlignWithMargins = True
-        Left = 326
+        Left = 459
         Top = 10
         Width = 120
         Height = 62
@@ -187,6 +187,7 @@ object FormVendas: TFormVendas
         Color = 9063714
         ParentBackground = False
         TabOrder = 2
+        ExplicitLeft = 326
         object Shape8: TShape
           Left = 0
           Top = 0
@@ -216,10 +217,55 @@ object FormVendas: TFormVendas
           Font.Style = []
           ParentFont = False
           OnClick = btnConfirmarProdutoClick
-          ExplicitLeft = 40
-          ExplicitTop = 24
-          ExplicitWidth = 23
-          ExplicitHeight = 22
+          ExplicitLeft = -56
+          ExplicitTop = -16
+        end
+      end
+      object pnlCancelarProduto: TPanel
+        AlignWithMargins = True
+        Left = 326
+        Top = 10
+        Width = 120
+        Height = 62
+        Margins.Left = 10
+        Margins.Top = 0
+        Margins.Bottom = 0
+        Align = alLeft
+        BevelOuter = bvNone
+        Color = 9063714
+        ParentBackground = False
+        TabOrder = 3
+        object Shape9: TShape
+          Left = 0
+          Top = 0
+          Width = 120
+          Height = 62
+          Align = alClient
+          Brush.Color = 16513528
+          Pen.Style = psClear
+          Shape = stRoundRect
+          ExplicitLeft = 296
+          ExplicitTop = 16
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object btnCancelarProduto: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 120
+          Height = 62
+          Align = alClient
+          Caption = 'Cancelar Produto'
+          Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = -1
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnCancelarProdutoClick
+          ExplicitLeft = 56
+          ExplicitTop = -4
         end
       end
     end

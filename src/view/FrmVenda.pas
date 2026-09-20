@@ -55,6 +55,9 @@ type
     btnConfirmarProduto: TSpeedButton;
     dsItens: TDataSource;
     mtItens: TFDMemTable;
+    pnlCancelarProduto: TPanel;
+    Shape9: TShape;
+    btnCancelarProduto: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -63,8 +66,10 @@ type
     procedure btnConfirmarProdutoClick(Sender: TObject);
     procedure btnFecharVendaClick(Sender: TObject);
     procedure btnCancelarVendaClick(Sender: TObject);
+    procedure btnCancelarProdutoClick(Sender: TObject);
   private
     FProximaFaturaVenda: Integer;
+    FIdVendaEmEdicao: Integer;
     FClienteSelecionado: TClienteDTO;
     FVendaService: IVendaService;
     FProdutoService: IProdutoService;
@@ -73,10 +78,12 @@ type
     procedure ConfiguraMemtable;
     procedure AjustarColunas;
     procedure CarregarTotal;
+    procedure CarregarItensFaturaEmEdicao;
 
   public
     property ProximaFaturaVenda: Integer read FProximaFaturaVenda write FProximaFaturaVenda;
     property ClienteSelecionado: TClienteDTO read FClienteSelecionado write FClienteSelecionado;
+    property IdVendaEmEdicao: Integer read FIdVendaEmEdicao write FIdVendaEmEdicao;
 
   end;
 
@@ -106,14 +113,20 @@ end;
 
 procedure TFormVendas.FormShow(Sender: TObject);
 begin
- lblTitulo.Caption := Format('Venda nº %d - Cliente: %s',
-                    [FProximaFaturaVenda, FClienteSelecionado.Nome]);
+ if FIdVendaEmEdicao > 0 then
+    lblTitulo.Caption := Format('Venda nº %d (Edição) - Cliente: %s',
+                        [FIdVendaEmEdicao, FClienteSelecionado.Nome])
+ else
+    lblTitulo.Caption := Format('Venda nº %d - Cliente: %s',
+                        [FProximaFaturaVenda, FClienteSelecionado.Nome]);
+
+ CarregarItensFaturaEmEdicao;
+
  edtProduto.Clear;
  edtPreco.Clear;
  edtQuantidade.Clear;
  CarregarTotal;
  edtProduto.SetFocus;
-
 
 end;
 
@@ -260,6 +273,7 @@ begin
   VendaDTO := TVendaDTO.Create;
   try
     try
+      VendaDTO.Id := FIdVendaEmEdicao;
       VendaDTO.IdCliente := IntToStr(FClienteSelecionado.Id);
 
       mtItens.First;
@@ -274,7 +288,11 @@ begin
       end;
 
       FVendaService.Salvar(VendaDTO);
-      ShowMessage('Venda n° ' + IntToStr(VendaDTO.Id) + ' salva com sucesso!');
+      if FIdVendaEmEdicao > 0 then
+        ShowMessage(Format('Venda (fatura) nº %d atualizada com sucesso!', [VendaDTO.Id]))
+      else
+        ShowMessage('Venda n° ' + IntToStr(VendaDTO.Id) + ' salva com sucesso!');
+
       dm.qryVendas.Close;
       dm.qryVendas.Open;
       FProximaFaturaVenda := VendaDTO.Id + 1;
@@ -290,6 +308,25 @@ begin
 
 end;
 
+procedure TFormVendas.btnCancelarProdutoClick(Sender: TObject);
+var
+  Item: TItemVendaDTO;
+
+begin
+ Item := TItemVendaDTO.Create;
+ try
+  if not mtItens.IsEmpty then
+  begin
+   if mrYes = MessageDlg('Deseja excluir o item ' + mtItens.FieldByName('DESCRICAO').AsString + ' da venda?',
+                        mtConfirmation, [mbYes, mbNo], 0) then
+    mtItens.Delete;
+    CarregarTotal;
+  end;
+ finally
+   Item.Free;
+ end;
+end;
+
 procedure TFormVendas.btnCancelarVendaClick(Sender: TObject);
 begin
     if mrYes = MessageDlg('Cancelar a venda? Os itens serão descartados.',
@@ -298,5 +335,46 @@ begin
 
 end;
 
+procedure TFormVendas.CarregarItensFaturaEmEdicao;
+var
+  Venda: TVendaDTO;
+  Item: TItemVendaDTO;
+  Produto: TProdutoDTO;
+  Quantidade: Integer;
+  Preco: Currency;
+begin
+  if FIdVendaEmEdicao = 0 then
+    Exit;
 
+  Venda := FVendaService.BuscarPorId(FIdVendaEmEdicao);
+  if Venda = nil then
+    Exit;
+
+  try
+    for Item in Venda.Itens do
+    begin
+      Produto := FProdutoService.BuscarPorId(StrToInt(Item.IdProduto));
+      try
+        if Produto = nil then
+          Continue;
+
+        Quantidade := StrToInt(Item.Quantidade);
+        Preco := StrToCurr(Item.ValorUnitario);
+
+        mtItens.Append;
+        mtItens.FieldByName('CODIGO').AsInteger := StrToInt(Item.IdProduto);
+        mtItens.FieldByName('DESCRICAO').AsString := Produto.Descricao;
+        mtItens.FieldByName('QUANTIDADE').AsInteger := Quantidade;
+        mtItens.FieldByName('PRECO').AsCurrency := Preco;
+        mtItens.FieldByName('TOTAL').AsCurrency := Quantidade * Preco;
+        mtItens.Post;
+      finally
+        Produto.Free;
+      end;
+    end;
+
+  finally
+    Venda.Free;
+  end;
+end;
 end.

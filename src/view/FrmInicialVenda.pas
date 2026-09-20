@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
   Vcl.Buttons, FrmVenda, uIVendaService, uServiceFactory, uIClienteService,
-  uClienteDTO, System.Generics.Collections;
+  uClienteDTO, System.Generics.Collections, uVendaDTO;
 
 type
   TFormInicialVenda = class(TForm)
@@ -29,10 +29,17 @@ type
     procedure edtIdClienteKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure edtFaturaExit(Sender: TObject);
+    procedure edtFaturaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     FService : IVendaService;
     FClienteService: IClienteService;
+    FIdFaturaEmEdicao: Integer;
+    procedure SincronizarClienteSelecionado(const AIdCliente: Integer);
+    function BuscarFatura: Boolean;
+    procedure ResetarParaNovaVenda(const AProxima: Integer);
     procedure CarregarClientes;
 
   public
@@ -56,14 +63,12 @@ end;
 procedure TFormInicialVenda.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
-  begin
-    Key := #0;
-    edtIdClienteExit(edtIdCliente);
-  end;
+    Key := #0;   // Enter é tratado no OnKeyDown de cada campo
 end;
 
 procedure TFormInicialVenda.FormShow(Sender: TObject);
 begin
+  FIdFaturaEmEdicao := 0;
   edtFatura.Text := IntToStr(FService.BuscarProximaFatura);
 
   cbxSelecionarCliente.Items.Clear;
@@ -97,24 +102,19 @@ end;
 procedure TFormInicialVenda.edtIdClienteExit(Sender: TObject);
 var
   IdDigitado: Integer;
-  I: Integer;
 begin
   if Trim(edtIdCliente.Text) = '' then
     Exit;
 
   IdDigitado := StrToIntDef(edtIdCliente.Text, -1);
+  SincronizarClienteSelecionado(IdDigitado);
 
-  for I := 0 to cbxSelecionarCliente.Items.Count - 1 do
+  if cbxSelecionarCliente.ItemIndex = -1 then
   begin
-    if Integer(cbxSelecionarCliente.Items.Objects[I]) = IdDigitado then
-    begin
-      cbxSelecionarCliente.ItemIndex := I;
-      Exit;
-    end;
+    ShowMessage('Cliente não encontrado.');
+    cbxSelecionarCliente.ItemIndex := -1;
   end;
 
-  ShowMessage('Cliente não encontrado.');
-  cbxSelecionarCliente.ItemIndex := -1;
 end;
 
 
@@ -125,6 +125,7 @@ begin
   begin
     Key := 0;
     edtIdClienteExit(Sender);
+    btnConfirmar.SetFocus;
   end;
 end;
 
@@ -146,6 +147,7 @@ begin
     Exit;
   end;
 
+  if not BuscarFatura then Exit;
 
   IdCliente := StrToIntDef(edtIdCliente.Text, -1);
   if IdCliente = -1 then
@@ -164,6 +166,7 @@ begin
 
   FormVendas := TFormVendas.Create(Self);
   try
+    FormVendas.IdVendaEmEdicao   := FIdFaturaEmEdicao;
     FormVendas.ClienteSelecionado  := ClienteDto;
     FormVendas.ProximaFaturaVenda  := StrToIntDef(edtFatura.Text, FService.BuscarProximaFatura);
     FormVendas.ShowModal;
@@ -173,9 +176,103 @@ begin
   finally
     FormVendas.Free;
     ClienteDto.Free;
+    FIdFaturaEmEdicao := 0;
   end;
 end;
 
 
+procedure TFormInicialVenda.SincronizarClienteSelecionado(const AIdCliente: Integer);
+var
+  I: Integer;
+begin
+  for I := 0 to cbxSelecionarCliente.Items.Count - 1 do
+    if Integer(cbxSelecionarCliente.Items.Objects[I]) = AIdCliente then
+    begin
+      cbxSelecionarCliente.ItemIndex := I;
+      Exit;
+    end;
+
+end;
+
+function TFormInicialVenda.BuscarFatura: Boolean;
+var
+  Numero: Integer;
+  Proxima: Integer;
+  Venda: TVendaDTO;
+
+begin
+  Result := False;
+  Numero := StrToIntDef(Trim(edtFatura.Text), -1);
+  Proxima := FService.BuscarProximaFatura;
+
+  if Numero = -1 then
+  begin
+    ShowMessage('Fatura Inválida');
+    ResetarParaNovaVenda(Proxima);
+    Exit;
+  end;
+
+  if Numero > Proxima then
+  begin
+    ShowMessage('Fatura ou venda não encontrada!');
+    ResetarParaNovaVenda(Proxima);
+    Exit;
+  end;
+
+  if Numero = Proxima then
+  begin
+    ResetarParaNovaVenda(Proxima);
+    Result := True;
+    Exit;
+  end;
+
+  Venda := FService.BuscarPorId(Numero);
+  try
+    if Venda = nil then
+    begin
+      ShowMessage('Fatura ou venda não encontrada');
+      ResetarParaNovaVenda(Proxima);
+      Exit;
+    end;
+
+    FIdFaturaEmEdicao := Numero;
+    edtIdCliente.Text := Venda.IdCliente;
+    SincronizarClienteSelecionado(StrToInt(Venda.IdCliente));
+    Result := true;
+
+  finally
+    Venda.Free;
+  end;
+
+end;
+
+procedure TFormInicialVenda.ResetarParaNovaVenda(const AProxima: Integer);
+begin
+  if FIdFaturaEmEdicao > 0 then
+  begin
+    edtIdCliente.Text := '';
+    cbxSelecionarCliente.ItemIndex := -1;
+  end;
+
+  FIdFaturaEmEdicao := 0;
+  edtFatura.Text := IntToStr(AProxima);
+end;
+
+procedure TFormInicialVenda.edtFaturaExit(Sender: TObject);
+begin
+  BuscarFatura;
+end;
+
+procedure TFormInicialVenda.edtFaturaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_RETURN then
+  begin
+    Key := 0;
+    BuscarFatura;
+    edtIdCliente.SetFocus;
+  end;
+
+end;
 
 end.
