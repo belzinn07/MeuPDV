@@ -139,14 +139,14 @@ var
   ClienteDto: TClienteDTO;
   IdCliente: Integer;
 begin
-  // Proteção contra campo vazio
+
   if Trim(edtIdCliente.Text) = '' then
   begin
     ShowMessage('Informe o código do cliente ou selecione um cliente.');
     Exit;
   end;
 
-  // Proteção contra valores inválidos
+
   IdCliente := StrToIntDef(edtIdCliente.Text, -1);
   if IdCliente = -1 then
   begin
@@ -154,7 +154,6 @@ begin
     Exit;
   end;
 
-  // Busca o cliente
   ClienteDto := FClienteService.BuscarPorId(IdCliente);
 
   if ClienteDto = nil then
@@ -163,12 +162,14 @@ begin
     Exit;
   end;
 
-  // Abre o form de vendas
   FormVendas := TFormVendas.Create(Self);
   try
-    FormVendas.ProximaFaturaVenda := StrToInt(edtFatura.Text);
-    FormVendas.ClienteSelecionado := ClienteDto;
+    FormVendas.ClienteSelecionado  := ClienteDto;
+    FormVendas.ProximaFaturaVenda  := StrToIntDef(edtFatura.Text, FService.BuscarProximaFatura);
     FormVendas.ShowModal;
+    if FormVendas.ModalResult = mrOk then
+      edtFatura.Text := IntToStr(FService.BuscarProximaFatura);
+
   finally
     FormVendas.Free;
     ClienteDto.Free;

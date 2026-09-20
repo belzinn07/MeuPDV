@@ -117,6 +117,7 @@ object FormVendas: TFormVendas
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
+          OnClick = btnFecharVendaClick
           ExplicitLeft = 40
           ExplicitTop = 24
           ExplicitWidth = 23
@@ -165,6 +166,7 @@ object FormVendas: TFormVendas
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
+          OnClick = btnCancelarVendaClick
           ExplicitLeft = 40
           ExplicitTop = 24
           ExplicitWidth = 23

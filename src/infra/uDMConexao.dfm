@@ -34,6 +34,8 @@ object dm: Tdm
   end
   object qryVendas: TFDQuery
     Connection = FDConexao
+    SQL.Strings = (
+      'SELECT * FROM VENDAS')
     Left = 313
     Top = 176
   end

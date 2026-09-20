@@ -22,7 +22,7 @@ type
 
   public
     constructor Create(ARepository: IVendaRepository);
-    procedure Salvar(const AVendaDTO: TVendaDTO);
+    procedure Salvar(AVendaDTO: TVendaDTO);
     function BuscarProximaFatura: Integer;
 
   end;
@@ -47,10 +47,10 @@ end;
 
 function TVendaService.BuscarProximaFatura: Integer;
 begin
-  FRepository.BuscarProximaFatura;
+  Result := FRepository.BuscarProximaFatura;
 end;
 
-procedure TVendaService.Salvar(const AVendaDTO: TVendaDTO);
+procedure TVendaService.Salvar( AVendaDTO: TVendaDTO);
 var
   ItemDTO : TItemVendaDTO;
   Item : TItemVenda;
@@ -76,6 +76,8 @@ begin
           Itens.Add(TVendaMapper.ConverterItemParaEntidade(ItemDTO));
 
         FRepository.SalvarVendaComItens(Venda, Itens);
+        AVendaDTO.Id := Venda.Id;
+
       finally
         Itens.Free;
       end;

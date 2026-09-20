@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uIVendaService, uServiceFactory, uIProdutoService,
-  uProdutoDTO;
+  uProdutoDTO, uVendaDTO, uItemVendaDTO;
 
 type
   TFormVendas = class(TForm)
@@ -61,6 +61,8 @@ type
     procedure edtProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnConfirmarProdutoClick(Sender: TObject);
+    procedure btnFecharVendaClick(Sender: TObject);
+    procedure btnCancelarVendaClick(Sender: TObject);
   private
     FProximaFaturaVenda: Integer;
     FClienteSelecionado: TClienteDTO;
@@ -104,7 +106,7 @@ end;
 
 procedure TFormVendas.FormShow(Sender: TObject);
 begin
- Caption := Format('Venda nº %d - Cliente: %s',
+ lblTitulo.Caption := Format('Venda nº %d - Cliente: %s',
                     [FProximaFaturaVenda, FClienteSelecionado.Nome]);
  edtProduto.Clear;
  edtPreco.Clear;
@@ -221,7 +223,7 @@ begin
   edtProduto.Clear;
   edtPreco.Clear;
   edtQuantidade.Clear;
-  edtPreco.SetFocus;
+  edtProduto.SetFocus;
 
 end;
 
@@ -242,5 +244,59 @@ begin
   lblPrecoSubTotal.Caption := FormatCurr('R$ 0.00', Total);
   lblPrecoTotalCompra.Caption := FormatCurr('R$ 0.00', Total);
 end;
+
+procedure TFormVendas.btnFecharVendaClick(Sender: TObject);
+var
+  VendaDTO : TVendaDTO;
+  Item: TItemVendaDTO;
+
+begin
+  if mtItens.IsEmpty then
+  begin
+    ShowMessage('Adicione ao menos um produto à venda.');
+    Exit;
+  end;
+
+  VendaDTO := TVendaDTO.Create;
+  try
+    try
+      VendaDTO.IdCliente := IntToStr(FClienteSelecionado.Id);
+
+      mtItens.First;
+      while not mtItens.Eof do
+      begin
+        Item := TItemVendaDTO.Create;
+        Item.IdProduto := mtItens.FieldByName('CODIGO').AsString;
+        item.Quantidade := mtItens.FieldByName('QUANTIDADE').AsString;
+        Item.ValorUnitario := CurrToStr(mtItens.FieldByName('PRECO').AsCurrency);
+        VendaDTO.Itens.Add(Item);
+        mtItens.Next;
+      end;
+
+      FVendaService.Salvar(VendaDTO);
+      ShowMessage('Venda n° ' + IntToStr(VendaDTO.Id) + ' salva com sucesso!');
+      dm.qryVendas.Close;
+      dm.qryVendas.Open;
+      FProximaFaturaVenda := VendaDTO.Id + 1;
+      ModalResult := mrOk;
+
+    except
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
+  finally
+    VendaDTO.Free;
+  end;
+
+end;
+
+procedure TFormVendas.btnCancelarVendaClick(Sender: TObject);
+begin
+    if mrYes = MessageDlg('Cancelar a venda? Os itens serão descartados.',
+                        mtConfirmation, [mbYes, mbNo], 0) then
+    ModalResult := mrCancel;
+
+end;
+
 
 end.
