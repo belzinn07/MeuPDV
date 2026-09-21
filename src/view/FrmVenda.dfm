@@ -187,7 +187,6 @@ object FormVendas: TFormVendas
         Color = 9063714
         ParentBackground = False
         TabOrder = 2
-        ExplicitLeft = 326
         object Shape8: TShape
           Left = 0
           Top = 0

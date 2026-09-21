@@ -3,7 +3,7 @@ unit uVendaDTO;
 interface
 
 uses
-  System.Generics.Collections, uItemVendaDTO;
+  System.Generics.Collections, uItemVendaDTO, uVendaStatus;
 
 type
  TVendaDTO = class
@@ -13,6 +13,7 @@ type
   IdCliente: string;
   Data : TDateTime;
   Total : Currency;
+  Status: TVendaStatus;
   Itens: TObjectList<TItemVendaDTO>;
   constructor Create;
   destructor Destroy;

@@ -199,6 +199,7 @@
         <DCCReference Include="src\repository\uVendaRepository.pas"/>
         <DCCReference Include="src\service\interfaces\uIVendaService.pas"/>
         <DCCReference Include="src\service\uVendaService.pas"/>
+        <DCCReference Include="src\domain\model\enums\uVendaStatus.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

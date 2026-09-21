@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
   Vcl.Buttons, FrmVenda, uIVendaService, uServiceFactory, uIClienteService,
-  uClienteDTO, System.Generics.Collections, uVendaDTO;
+  uClienteDTO, System.Generics.Collections, uVendaDTO, uVendaStatus;
 
 type
   TFormInicialVenda = class(TForm)
@@ -63,7 +63,7 @@ end;
 procedure TFormInicialVenda.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
-    Key := #0;   // Enter é tratado no OnKeyDown de cada campo
+    Key := #0;
 end;
 
 procedure TFormInicialVenda.FormShow(Sender: TObject);
@@ -171,7 +171,9 @@ begin
     FormVendas.ProximaFaturaVenda  := StrToIntDef(edtFatura.Text, FService.BuscarProximaFatura);
     FormVendas.ShowModal;
     if FormVendas.ModalResult = mrOk then
-      edtFatura.Text := IntToStr(FService.BuscarProximaFatura);
+      edtFatura.Text := IntToStr(FService.BuscarProximaFatura)
+    else if FormVendas.ModalResult = mrCancel then
+      ResetarParaNovaVenda(FService.BuscarProximaFatura);
 
   finally
     FormVendas.Free;
@@ -199,7 +201,6 @@ var
   Numero: Integer;
   Proxima: Integer;
   Venda: TVendaDTO;
-
 begin
   Result := False;
   Numero := StrToIntDef(Trim(edtFatura.Text), -1);
@@ -207,7 +208,7 @@ begin
 
   if Numero = -1 then
   begin
-    ShowMessage('Fatura Inválida');
+    ShowMessage('Fatura inválida.');
     ResetarParaNovaVenda(Proxima);
     Exit;
   end;
@@ -219,18 +220,28 @@ begin
     Exit;
   end;
 
-  if Numero = Proxima then
+  Venda := FService.BuscarPorId(Numero);
+
+  if Venda = nil then
   begin
-    ResetarParaNovaVenda(Proxima);
-    Result := True;
+    if Numero = Proxima then
+    begin
+      ResetarParaNovaVenda(Proxima);
+      Result := True;
+    end
+    else
+    begin
+      ShowMessage(Format('Fatura %d não encontrada.', [Numero]));
+      ResetarParaNovaVenda(Proxima);
+    end;
     Exit;
   end;
 
-  Venda := FService.BuscarPorId(Numero);
   try
-    if Venda = nil then
+
+    if Venda.Status = vsCancelada then
     begin
-      ShowMessage('Fatura ou venda não encontrada');
+      ShowMessage('Esta venda está cancelada.');
       ResetarParaNovaVenda(Proxima);
       Exit;
     end;
@@ -238,13 +249,14 @@ begin
     FIdFaturaEmEdicao := Numero;
     edtIdCliente.Text := Venda.IdCliente;
     SincronizarClienteSelecionado(StrToInt(Venda.IdCliente));
-    Result := true;
+    Result := True;
 
   finally
     Venda.Free;
   end;
-
 end;
+
+
 
 procedure TFormInicialVenda.ResetarParaNovaVenda(const AProxima: Integer);
 begin

@@ -31,6 +31,7 @@ type
     procedure Salvar(AVendaDTO: TVendaDTO);
     function BuscarProximaFatura: Integer;
     function BuscarPorId(AId: Integer): TVendaDTO;
+    procedure ExcluirVenda(AId: Integer);
 
   end;
 
@@ -138,4 +139,15 @@ begin
     Venda.Free;
   end;
 end;
+
+procedure TVendaService.ExcluirVenda(AId: Integer);
+begin
+  if AId <= 0 then
+  begin
+    raise Exception.Create('ID inválido');
+  end;
+
+  FRepository.ExcluirVenda(AId);
+end;
+
 end.

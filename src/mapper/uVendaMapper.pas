@@ -32,6 +32,7 @@ begin
   Result.IdCliente := IntToStr(AVenda.IdCliente);
   Result.Data := AVenda.Data;
   Result.Total := AVenda.Total;
+  Result.Status := AVenda.Status;
 
   for Item in AVenda.Itens do
     Result.Itens.Add(ConverterItemParaDto(Item))
@@ -48,10 +49,11 @@ begin
   Result.IdCliente := StrToInt(AVendaDto.IdCliente);
   Result.Data := AVendaDto.Data;
   Result.Total := AVendaDto.Total;
+  Result.Status := AVendaDto.Status;
 
   for ItemDTO in AVendaDto.Itens do
     Result.Itens.Add(ConverterItemParaEntidade(ItemDTO));
-    
+
 end;
 
 class function TVendaMapper.ConverterItemParaDto(AItemVenda: TItemVenda): TItemVendaDTO;

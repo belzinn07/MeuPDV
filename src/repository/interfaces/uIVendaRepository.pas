@@ -13,6 +13,7 @@ type
   function BuscarProximaFatura: Integer;
   function BuscarPorId(AId: Integer): TVenda;
   procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
+  procedure ExcluirVenda(AId: Integer);
 
  end;
 

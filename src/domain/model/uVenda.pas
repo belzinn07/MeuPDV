@@ -3,7 +3,7 @@ unit uVenda;
 interface
 
 uses
-  System.Generics.Collections, uItemVenda;
+  System.Generics.Collections, uItemVenda, uVendaStatus;
 
 type
  TVenda = class
@@ -14,6 +14,7 @@ type
    FData : TDateTime;
    FTotal : Currency;
    FItens: TObjectList<TItemVenda>;
+   FStatus: TVendaStatus;
 
 
   public
@@ -24,6 +25,7 @@ type
    property IdCliente: Integer read FIdCliente write FIdCliente;
    property Data: TDateTime read FData write FData;
    property Total : Currency read FTotal write FTotal;
+   property Status: TVendaStatus read FStatus write FStatus;
    property Itens: TObjectList<TItemVenda> read FItens;
 
  end;

@@ -328,12 +328,24 @@ begin
 end;
 
 procedure TFormVendas.btnCancelarVendaClick(Sender: TObject);
+var
+  VendaDTO: TVendaDTO;
 begin
+  VendaDTO := TVendaDTO.Create;
+  try
     if mrYes = MessageDlg('Cancelar a venda? Os itens serão descartados.',
-                        mtConfirmation, [mbYes, mbNo], 0) then
-    ModalResult := mrCancel;
+                          mtConfirmation, [mbYes, mbNo], 0) then
+    begin
+      VendaDTO.Id := FIdVendaEmEdicao;
+      FVendaService.ExcluirVenda(VendaDTO.Id);
+      ModalResult := mrCancel;
+    end;
 
+  finally
+    VendaDTO.Free;
+  end;
 end;
+
 
 procedure TFormVendas.CarregarItensFaturaEmEdicao;
 var

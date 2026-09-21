@@ -4,7 +4,7 @@ interface
 
 uses
   uIVendaRepository, uDMConexao, uVenda, uItemVenda, FireDAC.Comp.Client,
-  System.Generics.Collections;
+  System.Generics.Collections, uVendaStatus;
 
  type
   TVendaRepository = class(TInterfacedObject, IVendaRepository)
@@ -21,6 +21,7 @@ uses
     function BuscarProximaFatura: Integer;
     function BuscarPorId(AId: Integer): TVenda;
     procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
+    procedure ExcluirVenda(AId: Integer);
 
   end;
 
@@ -37,7 +38,7 @@ begin
 
  try
    Qry.Connection := FDmConexao.FDConexao;
-   Qry.SQL.Text := 'SELECT COALESCE(MAX(ID),0) + 1 AS ProximoId FROM VENDAS';
+   Qry.SQL.Text := 'SELECT GEN_ID(SEQ_PEDIDO, 0) + 1 AS ProximoId FROM RDB$DATABASE';
    Qry.Open;
 
    Result := Qry.FieldByName('ProximoId').AsInteger;
@@ -58,11 +59,12 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FDmConexao.FDConexao;
-    Qry.SQL.Text := 'INSERT INTO VENDAS (ID_CLIENTE, DATA, TOTAL)' +
-                    'VALUES (:ID_CLIENTE, :DATA, :TOTAL) RETURNING ID';
+    Qry.SQL.Text := 'INSERT INTO VENDAS (ID, ID_CLIENTE, DATA, TOTAL, STATUS)' +
+                    'VALUES (NEXT VALUE FOR SEQ_PEDIDO, :ID_CLIENTE, :DATA, :TOTAL, :STATUS) RETURNING ID';
     Qry.ParamByName('ID_CLIENTE').AsInteger := AVenda.IdCliente;
     Qry.ParamByName('DATA').AsDate := AVenda.Data;
     Qry.ParamByName('TOTAL').AsCurrency := AVenda.Total;
+    Qry.ParamByName('STATUS').AsString := VendaStatusToStr(vsFechada);
     Qry.Open;
 
     AVenda.Id := Qry.FieldByName('ID').AsInteger;
@@ -133,6 +135,7 @@ begin
       Result.IdCliente := Qry.FieldByName('ID_CLIENTE').AsInteger;
       Result.Data := Qry.FieldByName('DATA').AsDateTime;
       Result.Total := Qry.FieldByName('TOTAL').AsCurrency;
+      Result.Status := StrToVendaStatus(Qry.FieldByName('STATUS').AsString);
     end;
 
     if Result = nil then
@@ -187,23 +190,49 @@ end;
 
 procedure TVendaRepository.AtualizarVenda(AVenda: TVenda);
 var
- Qry: TFDQuery;
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDmConexao.FDConexao;
+
+    Qry.SQL.Text :=
+      'UPDATE VENDAS SET ID_CLIENTE = :ID_CLIENTE, TOTAL = :TOTAL, STATUS = :STATUS WHERE ID = :ID';
+
+    Qry.ParamByName('ID').AsInteger := AVenda.Id;
+    Qry.ParamByName('ID_CLIENTE').AsInteger := AVenda.IdCliente;
+    Qry.ParamByName('TOTAL').AsCurrency := AVenda.Total;
+    Qry.ParamByName('STATUS').AsString := VendaStatusToStr(AVenda.Status);
+
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+
+procedure TVendaRepository.ExcluirVenda(AId: Integer);
+var
+  Qry: TFDQuery;
 
 begin
- Qry := TFDQuery.Create(nil);
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDmConexao.FDConexao;
 
- try
-  Qry.Connection := FDmConexao.FDConexao;
+    Qry.SQL.Text := 'DELETE FROM ITENS_VENDAS WHERE ID_VENDA = :ID';
+    Qry.ParamByName('ID').AsInteger := AId;
+    Qry.ExecSQL;
 
-  Qry.SQL.Text := ' UPDATE VENDAS SET ID_CLIENTE = :ID_CLIENTE, TOTAL = :TOTAL WHERE ID = :ID';
-  Qry.ParamByName('ID').AsInteger := AVenda.Id;
-  Qry.ParamByName('ID_CLIENTE').AsInteger := AVenda.IdCliente;
-  Qry.ParamByName('TOTAL').AsCurrency := AVenda.Total;
-  Qry.ExecSQL;
+    Qry.Close;
+    Qry.SQL.Text := 'UPDATE VENDAS SET STATUS = :STATUS WHERE ID = :ID';
+    Qry.ParamByName('ID').AsInteger := AId;
+    Qry.ParamByName('STATUS').AsString := VendaStatusToStr(vsCancelada);
+    Qry.ExecSQL;
 
- finally
-  Qry.Free;
- end;
+  finally
+    Qry.Free;
+  end;
 end;
 
 end.
