@@ -1,4 +1,4 @@
-unit uItemVendaDTO;
+﻿unit uItemVendaDTO;
 
 interface
 
@@ -8,9 +8,9 @@ type
   public
    Id : Integer;
    IdVenda : Integer;
-   IdProduto : string;
-   Quantidade: string;
-   ValorUnitario: string;
+   IdProduto : Integer;
+   Quantidade: Integer;
+   ValorUnitario: Currency;
 
  end;
 

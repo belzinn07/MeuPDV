@@ -1,4 +1,4 @@
-unit uVendaStatus;
+﻿unit uVendaStatus;
 
 interface
 
@@ -16,6 +16,7 @@ implementation
 function VendaStatusToStr(Status: TVendaStatus): string;
 begin
   case Status of
+    vsAberta:    Result := 'ABERTA';
     vsFechada:   Result := 'FECHADA';
     vsCancelada: Result := 'CANCELADA';
   end;
@@ -28,7 +29,7 @@ begin
   else if SameText(S, 'CANCELADA') then
     Result := vsCancelada
   else
-    raise Exception.Create('Status de venda inv�lido: ' + S);
+    raise Exception.Create('Status de venda inválido: ' + S);
 end;
 
 end.

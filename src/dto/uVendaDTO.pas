@@ -1,4 +1,4 @@
-unit uVendaDTO;
+﻿unit uVendaDTO;
 
 interface
 
@@ -10,7 +10,7 @@ type
 
  public
   Id: Integer;
-  IdCliente: string;
+  IdCliente: Integer;
   Data : TDateTime;
   Total : Currency;
   Status: TVendaStatus;

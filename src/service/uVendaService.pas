@@ -100,7 +100,7 @@ var
 begin
   Total := 0;
   for Local_ItemDTO in AVendaDTO.Itens do
-    Total := Total + (StrToInt(Local_ItemDTO.Quantidade) * StrToFloat(Local_ItemDTO.ValorUnitario));
+    Total := Total + (Local_ItemDTO.Quantidade * Local_ItemDTO.ValorUnitario);
 end;
 
 procedure TVendaService.ValidarItens(const AVendaDTO: TVendaDTO; var ItemDTO: TItemVendaDTO);

@@ -247,8 +247,8 @@ begin
     end;
 
     FIdFaturaEmEdicao := Numero;
-    edtIdCliente.Text := Venda.IdCliente;
-    SincronizarClienteSelecionado(StrToInt(Venda.IdCliente));
+    edtIdCliente.Text := IntToStr(Venda.IdCliente);
+    SincronizarClienteSelecionado(Venda.IdCliente);
     Result := True;
 
   finally

@@ -1,4 +1,4 @@
-unit uItemVendaValidador;
+Ôªøunit uItemVendaValidador;
 
 interface
 
@@ -9,8 +9,8 @@ type
  TItemVendaValidador = class(TInterfacedObject, IValidador<TItemVendaDTO>)
 
   private
-   function PrecoValido(const AValorUnitario : string) : Boolean;
-   function ValorValido(const AQuantidade : string) : Boolean;
+   function PrecoValido(const AValorUnitario: Currency): Boolean;
+   function ValorValido(const AQuantidade: Integer): Boolean;
 
   public
    procedure Validar(AItemVendaDTO : TItemVendaDTO);
@@ -20,28 +20,22 @@ implementation
 
 { TItemVendaValidator }
 
-function TItemVendaValidador.PrecoValido(const AValorUnitario: string): Boolean;
-var
- ValorUnitario : Currency;
-
+function TItemVendaValidador.PrecoValido(const AValorUnitario: Currency): Boolean;
 begin
-  Result := TryStrToCurr(AValorUnitario, ValorUnitario) and (ValorUnitario > 0);
+  Result := AValorUnitario > 0;
 end;
 
-function TItemVendaValidador.ValorValido(const AQuantidade: string): Boolean;
-var
- Quantidade : Integer;
-
+function TItemVendaValidador.ValorValido(const AQuantidade: Integer): Boolean;
 begin
- Result := TryStrToInt(AQuantidade, Quantidade) and (Quantidade > 0);
+  Result := AQuantidade > 0;
 end;
 
 procedure TItemVendaValidador.Validar(AItemVendaDTO: TItemVendaDTO);
 begin
 
- ValidarCampo(ValorValido(AItemVendaDTO.IdProduto), 'Produto inv·lido' );
- ValidarCampo(PrecoValido(AItemVendaDTO.ValorUnitario), 'PreÁo inv·lido');
- ValidarCampo(ValorValido(AItemVendaDTO.Quantidade), 'Quantidade inv·lida');
+ ValidarCampo(ValorValido(AItemVendaDTO.IdProduto), 'Produto inv√°lido' );
+ ValidarCampo(PrecoValido(AItemVendaDTO.ValorUnitario), 'Pre√ßo inv√°lido');
+ ValidarCampo(ValorValido(AItemVendaDTO.Quantidade), 'Quantidade inv√°lida');
 
 end;
 

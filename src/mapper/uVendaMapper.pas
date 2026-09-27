@@ -1,4 +1,4 @@
-unit uVendaMapper;
+﻿unit uVendaMapper;
 
 interface
 
@@ -29,7 +29,7 @@ begin
   Result := TVendaDTO.Create;
 
   Result.Id := AVenda.Id;
-  Result.IdCliente := IntToStr(AVenda.IdCliente);
+  Result.IdCliente := AVenda.IdCliente;
   Result.Data := AVenda.Data;
   Result.Total := AVenda.Total;
   Result.Status := AVenda.Status;
@@ -46,7 +46,7 @@ begin
   Result := TVenda.Create;
 
   Result.Id := AVendaDto.Id;
-  Result.IdCliente := StrToInt(AVendaDto.IdCliente);
+  Result.IdCliente := AVendaDto.IdCliente;
   Result.Data := AVendaDto.Data;
   Result.Total := AVendaDto.Total;
   Result.Status := AVendaDto.Status;
@@ -62,9 +62,9 @@ begin
 
   Result.Id := AItemVenda.Id;
   Result.IdVenda := AItemVenda.IdVenda;
-  Result.IdProduto := IntToStr(AItemVenda.IdProduto);
-  Result.Quantidade := IntToStr(AItemVenda.Quantidade);
-  Result.ValorUnitario := CurrToStr(AItemVenda.ValorUnitario);
+  Result.IdProduto := AItemVenda.IdProduto;
+  Result.Quantidade := AItemVenda.Quantidade;
+  Result.ValorUnitario := AItemVenda.ValorUnitario;
 end;
 
 class function TVendaMapper.ConverterItemParaEntidade(AItemVendaDto: TItemVendaDTO): TItemVenda;
@@ -73,9 +73,9 @@ begin
 
   Result.Id := AItemVendaDto.Id;
   Result.IdVenda := AItemVendaDto.IdVenda;
-  Result.IdProduto := StrToInt(AItemVendaDto.IdProduto);
-  Result.Quantidade := StrToInt(AItemVendaDto.Quantidade);
-  Result.ValorUnitario := StrToCurr(AItemVendaDto.ValorUnitario);
+  Result.IdProduto := AItemVendaDto.IdProduto;
+  Result.Quantidade := AItemVendaDto.Quantidade;
+  Result.ValorUnitario := AItemVendaDto.ValorUnitario;
 end;
 
 end.

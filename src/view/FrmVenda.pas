@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uIVendaService, uServiceFactory, uIProdutoService,
-  uProdutoDTO, uVendaDTO, uItemVendaDTO;
+  uProdutoDTO, uVendaDTO, uItemVendaDTO, uVendaStatus;
 
 type
   TFormVendas = class(TForm)
@@ -274,15 +274,16 @@ begin
   try
     try
       VendaDTO.Id := FIdVendaEmEdicao;
-      VendaDTO.IdCliente := IntToStr(FClienteSelecionado.Id);
+      VendaDTO.IdCliente := FClienteSelecionado.Id;
+      VendaDTO.Status := vsFechada;
 
       mtItens.First;
       while not mtItens.Eof do
       begin
         Item := TItemVendaDTO.Create;
-        Item.IdProduto := mtItens.FieldByName('CODIGO').AsString;
-        item.Quantidade := mtItens.FieldByName('QUANTIDADE').AsString;
-        Item.ValorUnitario := CurrToStr(mtItens.FieldByName('PRECO').AsCurrency);
+        Item.IdProduto := mtItens.FieldByName('CODIGO').AsInteger;
+        item.Quantidade := mtItens.FieldByName('QUANTIDADE').AsInteger;
+        Item.ValorUnitario := mtItens.FieldByName('PRECO').AsCurrency;
         VendaDTO.Itens.Add(Item);
         mtItens.Next;
       end;
@@ -365,16 +366,16 @@ begin
   try
     for Item in Venda.Itens do
     begin
-      Produto := FProdutoService.BuscarPorId(StrToInt(Item.IdProduto));
+      Produto := FProdutoService.BuscarPorId(Item.IdProduto);
       try
         if Produto = nil then
           Continue;
 
-        Quantidade := StrToInt(Item.Quantidade);
-        Preco := StrToCurr(Item.ValorUnitario);
+        Quantidade := Item.Quantidade;
+        Preco := Item.ValorUnitario;
 
         mtItens.Append;
-        mtItens.FieldByName('CODIGO').AsInteger := StrToInt(Item.IdProduto);
+        mtItens.FieldByName('CODIGO').AsInteger := Item.IdProduto;
         mtItens.FieldByName('DESCRICAO').AsString := Produto.Descricao;
         mtItens.FieldByName('QUANTIDADE').AsInteger := Quantidade;
         mtItens.FieldByName('PRECO').AsCurrency := Preco;
