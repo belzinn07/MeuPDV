@@ -1,4 +1,4 @@
-unit uVenda;
+﻿unit uVenda;
 
 interface
 
@@ -15,6 +15,7 @@ type
    FTotal : Currency;
    FItens: TObjectList<TItemVenda>;
    FStatus: TVendaStatus;
+   FNomeCliente: string;
 
 
   public
@@ -26,6 +27,7 @@ type
    property Data: TDateTime read FData write FData;
    property Total : Currency read FTotal write FTotal;
    property Status: TVendaStatus read FStatus write FStatus;
+   property NomeCliente: string read FNomeCliente write FNomeCliente;
    property Itens: TObjectList<TItemVenda> read FItens;
 
  end;

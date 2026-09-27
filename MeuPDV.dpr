@@ -10,6 +10,7 @@ uses
   FrmBaseListagem in 'src\view\FrmBaseListagem.pas' {frmBaseListagem: TfrmBaseListagem},
   FrmListaClientes in 'src\view\FrmListaClientes.pas' {FormListaClientes: TfrmListaClientes},
   FrmListaProdutos in 'src\view\FrmListaProdutos.pas' {FormListaProdutos: TfrmListaProdutos},
+  FrmListaVendas in 'src\view\FrmListaVendas.pas' {FormListaVendas: TFormListaVendas},
   FrmVenda in 'src\view\FrmVenda.pas' {FormVendas: TfrmVendas},
   FrmInicialVenda in 'src\view\FrmInicialVenda.pas' {FormInicialVenda: TFormInicialVenda},
   uProduto in 'src\domain\model\uProduto.pas',

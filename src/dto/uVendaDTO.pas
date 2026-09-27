@@ -14,6 +14,7 @@ type
   Data : TDateTime;
   Total : Currency;
   Status: TVendaStatus;
+  NomeCliente: string;
   Itens: TObjectList<TItemVendaDTO>;
   constructor Create;
   destructor Destroy;

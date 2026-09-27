@@ -33,6 +33,7 @@ begin
   Result.Data := AVenda.Data;
   Result.Total := AVenda.Total;
   Result.Status := AVenda.Status;
+  Result.NomeCliente := AVenda.NomeCliente;
 
   for Item in AVenda.Itens do
     Result.Itens.Add(ConverterItemParaDto(Item))
@@ -50,6 +51,7 @@ begin
   Result.Data := AVendaDto.Data;
   Result.Total := AVendaDto.Total;
   Result.Status := AVendaDto.Status;
+  Result.NomeCliente := AVendaDto.NomeCliente;
 
   for ItemDTO in AVendaDto.Itens do
     Result.Itens.Add(ConverterItemParaEntidade(ItemDTO));

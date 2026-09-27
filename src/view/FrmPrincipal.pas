@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.Buttons, Vcl.ExtCtrls, uEstilos, Vcl.Imaging.pngimage,
   FrmListaProdutos, FrmListaClientes, FrmVenda, FrmBaseListagem,
-  FrmInicialVenda;
+  FrmInicialVenda, FrmListaVendas;
 
 type
   TFormPrincipal = class(TForm)
@@ -17,17 +17,18 @@ type
     ImageList1: TImageList;
     btnProdutos: TSpeedButton;
     btnVendas: TSpeedButton;
+    btnListaVendas: TSpeedButton;
     pnlContainer: TPanel;
     Bevel1: TBevel;
     procedure FormCreate(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
     procedure btnVendasClick(Sender: TObject);
+    procedure btnListaVendasClick(Sender: TObject);
   private
-    procedure AbrirForm(FormClass: TFormClass);
     procedure AplicarEstilos;
   public
-    { Public declarations }
+    procedure AbrirForm(FormClass: TFormClass);
   end;
 
 var
@@ -58,6 +59,7 @@ begin
   btnClientes.Font.Color := COR_TEXTO_BRANCO;
   btnProdutos.Font.Color := COR_TEXTO_BRANCO;
   btnVendas.Font.Color := COR_TEXTO_BRANCO;
+  btnListaVendas.Font.Color := COR_TEXTO_BRANCO;
 end;
 
 procedure TFormPrincipal.btnClientesClick(Sender: TObject);
@@ -78,6 +80,12 @@ end;
 procedure TFormPrincipal.btnVendasClick(Sender: TObject);
 begin
  AbrirForm(TFormInicialVenda);
+
+end;
+
+procedure TFormPrincipal.btnListaVendasClick(Sender: TObject);
+begin
+ AbrirForm(TFormListaVendas);
 
 end;
 

@@ -1,4 +1,4 @@
-unit uIVendaRepository;
+﻿unit uIVendaRepository;
 
 interface
 
@@ -14,6 +14,8 @@ type
   function BuscarPorId(AId: Integer): TVenda;
   procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
   procedure ExcluirVenda(AId: Integer);
+  function Listar: TObjectList<TVenda>;
+  function Pesquisar(const APesquisa: string): TObjectList<TVenda>;
 
  end;
 

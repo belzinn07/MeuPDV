@@ -1,10 +1,10 @@
-unit uVendaRepository;
+﻿unit uVendaRepository;
 
 interface
 
 uses
   uIVendaRepository, uDMConexao, uVenda, uItemVenda, FireDAC.Comp.Client,
-  System.Generics.Collections, uVendaStatus;
+  System.Generics.Collections, uVendaStatus, System.SysUtils;
 
  type
   TVendaRepository = class(TInterfacedObject, IVendaRepository)
@@ -22,6 +22,8 @@ uses
     function BuscarPorId(AId: Integer): TVenda;
     procedure AtualizarVendaComItens(AVenda: TVenda; AItens: TObjectList<TItemVenda>);
     procedure ExcluirVenda(AId: Integer);
+    function Listar: TObjectList<TVenda>;
+    function Pesquisar(const APesquisa: string): TObjectList<TVenda>;
 
   end;
 
@@ -232,6 +234,99 @@ begin
 
   finally
     Qry.Free;
+  end;
+end;
+
+function TVendaRepository.Listar: TObjectList<TVenda>;
+var
+  Qry: TFDQuery;
+  Venda: TVenda;
+
+begin
+  Qry := TFDQuery.Create(nil);
+  Result := TObjectList<TVenda>.Create(True);
+
+  try
+    try
+      Qry.Connection := FDmConexao.FDConexao;
+      Qry.SQL.Text := 'SELECT V.ID, V.ID_CLIENTE, V.DATA, V.TOTAL, V.STATUS, ' +
+                      'COALESCE(C.NOME, '''') AS NOME_CLIENTE ' +
+                      'FROM VENDAS V LEFT JOIN CLIENTES C ON C.ID = V.ID_CLIENTE ' +
+                      'ORDER BY V.ID';
+      Qry.Open;
+
+      while not Qry.Eof do
+      begin
+        Venda := TVenda.Create;
+
+        Venda.Id := Qry.FieldByName('ID').AsInteger;
+        Venda.IdCliente := Qry.FieldByName('ID_CLIENTE').AsInteger;
+        Venda.Data := Qry.FieldByName('DATA').AsDateTime;
+        Venda.Total := Qry.FieldByName('TOTAL').AsCurrency;
+        Venda.Status := StrToVendaStatus(Qry.FieldByName('STATUS').AsString);
+        Venda.NomeCliente := Qry.FieldByName('NOME_CLIENTE').AsString;
+
+        Result.Add(Venda);
+
+        Qry.Next;
+      end;
+    except
+      FreeAndNil(Result);
+      raise;
+    end;
+
+  finally
+    Qry.Free;
+
+  end;
+end;
+
+function TVendaRepository.Pesquisar(
+  const APesquisa: string): TObjectList<TVenda>;
+var
+  Qry: TFDQuery;
+  Venda: TVenda;
+
+begin
+  Qry := TFDQuery.Create(nil);
+  Result := TObjectList<TVenda>.Create(True);
+
+  try
+    try
+      Qry.Connection := FDmConexao.FDConexao;
+      Qry.SQL.Text := 'SELECT V.ID, V.ID_CLIENTE, V.DATA, V.TOTAL, V.STATUS, ' +
+                      'COALESCE(C.NOME, '''') AS NOME_CLIENTE ' +
+                      'FROM VENDAS V LEFT JOIN CLIENTES C ON C.ID = V.ID_CLIENTE ' +
+                      'WHERE CAST(V.ID AS VARCHAR(20)) LIKE :VALOR_PESQUISA ' +
+                      'OR UPPER(C.NOME) LIKE UPPER(:VALOR_PESQUISA) ' +
+                      'OR UPPER(V.STATUS) LIKE UPPER(:VALOR_PESQUISA) ' +
+                      'ORDER BY V.ID';
+      Qry.ParamByName('VALOR_PESQUISA').AsString := '%' + APesquisa + '%';
+      Qry.Open;
+
+      while not Qry.Eof do
+      begin
+        Venda := TVenda.Create;
+
+        Venda.Id := Qry.FieldByName('ID').AsInteger;
+        Venda.IdCliente := Qry.FieldByName('ID_CLIENTE').AsInteger;
+        Venda.Data := Qry.FieldByName('DATA').AsDateTime;
+        Venda.Total := Qry.FieldByName('TOTAL').AsCurrency;
+        Venda.Status := StrToVendaStatus(Qry.FieldByName('STATUS').AsString);
+        Venda.NomeCliente := Qry.FieldByName('NOME_CLIENTE').AsString;
+
+        Result.Add(Venda);
+
+        Qry.Next;
+      end;
+    except
+      FreeAndNil(Result);
+      raise;
+    end;
+
+  finally
+    Qry.Free;
+
   end;
 end;
 

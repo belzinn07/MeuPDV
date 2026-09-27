@@ -131,7 +131,7 @@ end;
 
 procedure TFormInicialVenda.btnCancelarClick(Sender: TObject);
 begin
- Release;
+ Self.ModalResult := mrCancel;
 end;
 
 procedure TFormInicialVenda.btnConfirmarClick(Sender: TObject);

@@ -1,9 +1,9 @@
-unit uIVendaService;
+﻿unit uIVendaService;
 
 interface
 
 uses
-  uVendaDTO;
+  System.Generics.Collections, uVendaDTO;
 
 type
   IVendaService = interface
@@ -13,6 +13,8 @@ type
     function BuscarProximaFatura: Integer;
     function BuscarPorId(AId: Integer): TVendaDTO;
     procedure ExcluirVenda(AId: Integer);
+    function Listar: TObjectList<TVendaDTO>;
+    function Pesquisar(const APesquisa: string): TObjectList<TVendaDTO>;
 
   end;
 

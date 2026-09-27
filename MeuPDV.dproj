@@ -156,6 +156,10 @@
             <Form>FormListaProdutos</Form>
             <DesignClass>TfrmListaProdutos</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\view\FrmListaVendas.pas">
+            <Form>FormListaVendas</Form>
+            <DesignClass>TFormListaVendas</DesignClass>
+        </DCCReference>
         <DCCReference Include="src\view\FrmVenda.pas">
             <Form>FormVendas</Form>
             <DesignClass>TfrmVendas</DesignClass>

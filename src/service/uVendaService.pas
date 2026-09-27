@@ -32,6 +32,8 @@ type
     function BuscarProximaFatura: Integer;
     function BuscarPorId(AId: Integer): TVendaDTO;
     procedure ExcluirVenda(AId: Integer);
+    function Listar: TObjectList<TVendaDTO>;
+    function Pesquisar(const APesquisa: string): TObjectList<TVendaDTO>;
 
   end;
 
@@ -148,6 +150,44 @@ begin
   end;
 
   FRepository.ExcluirVenda(AId);
+end;
+
+function TVendaService.Listar: TObjectList<TVendaDTO>;
+var
+  Vendas: TObjectList<TVenda>;
+  Venda: TVenda;
+begin
+  Vendas := FRepository.Listar;
+
+  Result := TObjectList<TVendaDTO>.Create(True);
+
+  try
+    for Venda in Vendas do
+      Result.Add(TVendaMapper.ConverterParaDto(Venda));
+  finally
+    Vendas.Free;
+  end;
+end;
+
+function TVendaService.Pesquisar(
+  const APesquisa: string): TObjectList<TVendaDTO>;
+var
+  Vendas: TObjectList<TVenda>;
+  Venda: TVenda;
+begin
+  if APesquisa.Trim.IsEmpty then
+    raise Exception.Create('Digite algo para pesquisar');
+
+  Vendas := FRepository.Pesquisar(APesquisa);
+
+  Result := TObjectList<TVendaDTO>.Create(True);
+
+  try
+    for Venda in Vendas do
+      Result.Add(TVendaMapper.ConverterParaDto(Venda));
+  finally
+    Vendas.Free;
+  end;
 end;
 
 end.
